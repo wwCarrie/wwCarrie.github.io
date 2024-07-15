@@ -30,20 +30,29 @@
 
 
   
-  <title>Carrie</title>
+  <title>收发硬件配置 | Carrie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Carrie">
-<meta property="og:url" content="https://wwcarrie.github.io/index.html">
+  <meta name="description" content="想起我之前和朋友留下的誓言，昨天开完会确定了一些东西后，我也开始认真去做了（不过这点不能让老师知道，我是现在才开始想好好认真对待emm哈哈）。估计是个人性格和思想，总有些莫名的叛逆哈哈，只想做自己想做的，不想的都很拖拉，也就难以开始。但是不管是项目组还是这学期的javaweb，我都能感觉到逃避不是一个很好的解决方式，特别是对于你之后一定会要去做的事情上面，这样累积起来的疲惫会成倍，不如踏实好好做完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="收发硬件配置">
+<meta property="og:url" content="https://wwcarrie.github.io/2024/07/15/part06/index.html">
 <meta property="og:site_name" content="Carrie">
+<meta property="og:description" content="想起我之前和朋友留下的誓言，昨天开完会确定了一些东西后，我也开始认真去做了（不过这点不能让老师知道，我是现在才开始想好好认真对待emm哈哈）。估计是个人性格和思想，总有些莫名的叛逆哈哈，只想做自己想做的，不想的都很拖拉，也就难以开始。但是不管是项目组还是这学期的javaweb，我都能感觉到逃避不是一个很好的解决方式，特别是对于你之后一定会要去做的事情上面，这样累积起来的疲惫会成倍，不如踏实好好做完">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/15/part06/3a40205b6ceefd9e4db538f37930058.jpg">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/15/part06/962172b9b7094b39022cd28b71f22df.jpg">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/15/part06/image.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/15/part06/858ae31e87e7ea1a88c0dd72d2b7a4e.jpg">
+<meta property="article:published_time" content="2024-07-15T11:46:14.000Z">
+<meta property="article:modified_time" content="2024-07-15T11:46:14.705Z">
 <meta property="article:author" content="Carrie">
-<meta property="article:tag" content="Carrie,Blog">
+<meta property="article:tag" content="WIFI感知">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wwcarrie.github.io/2024/07/15/part06/3a40205b6ceefd9e4db538f37930058.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Carrie" type="application/atom+xml">
   
@@ -66,14 +75,14 @@
   
   
     
-<div id="banner" class=" is_home ">
+<div id="banner" class="">
   <img src="/background.jpg" itemprop="image">
   <div id="banner-dim"></div>
 </div>
  
    
   <div id="main-grid" class="  ">
-    <div id="nav" class=" is_home "  >
+    <div id="nav" class=""  >
       <navbar id="navbar">
   <nav id="title-nav">
     <a href="/">
@@ -239,11 +248,12 @@
 </sidebar>
     </div>
     <div id="content-body">
-      
-   
+       
 
 
 <article id="post-part06" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
    
   <div class="article-inner">
     <div class="article-main">
@@ -253,8 +263,8 @@
   <div class="main-title-dot"></div>
   
     
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/15/part06/">收发硬件配置</a>
+      <h1 class="p-name article-title" itemprop="headline name">
+        收发硬件配置
       </h1>
     
   
@@ -282,17 +292,144 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <div class="truncate-text">
-            
-              想起我之前和朋友留下的誓言，昨天开完会确定了一些东西后，我也开始认真去做了（不过这点不能让老师知道，我是现在才开始想好好认真对待emm哈哈）。估计是个人性格和思想，总有些莫名的叛逆哈哈，只想做自己想做的，不想的都很拖拉，也就难以开始。但是不管是项目组还是这学期的javaweb，我都能感觉到逃避不是一个很好的解决方式，特别是对于你之后一定会要去做的事情上面，这样累积起来的疲惫会成倍，不如踏实好好做完，再毫无负担地开始些新的东西。所以呢，咳咳，我的总结就是：对于不想且之后一定不做的，一丁点心思也不花；对于不想但之后还是要做的（这种事嘛，多半是还蛮重要的）就去按部就班做完。
-ok，不想说这么多了，开始正文。主要讲kernel的配置和安装。
-搭建硬件平台搭建的是Ubuntu version of Atheros CSI tool，主要用于收发CSI信号，用于后续实验收集数据做支撑来使用。
-购买网卡安装网卡和Ubuntu由于这步的内容是组内其他伙伴做的，所以我不了解，可自行网上查找资料。如有需要我再去请教他们作为补充。
-Ubuntu系统：14.04
-配置和安装kernel参考文献：
-英文官...
-            
-          </div>
+          <p>想起我之前和朋友留下的<strong>誓言</strong>，昨天开完会确定了一些东西后，我也开始认真去做了（不过这点不能让老师知道，我是现在才开始想好好认真对待emm哈哈）。估计是个人性格和思想，总有些莫名的叛逆哈哈，只想做自己想做的，不想的都很拖拉，也就难以开始。但是不管是项目组还是这学期的javaweb，我都能感觉到逃避不是一个很好的解决方式，特别是对于你之后一定会要去做的事情上面，这样累积起来的疲惫会成倍，不如踏实好好做完，再毫无负担地开始些新的东西。所以呢，咳咳，我的总结就是：对于不想且之后一定不做的，一丁点心思也不花；对于不想但之后还是要做的（这种事嘛，多半是还蛮重要的）就去按部就班做完。</p>
+<p>ok，不想说这么多了，开始正文。主要讲kernel的配置和安装。</p>
+<h1 id="搭建硬件平台"><a href="#搭建硬件平台" class="headerlink" title="搭建硬件平台"></a>搭建硬件平台</h1><p>搭建的是Ubuntu version of Atheros CSI tool，主要用于收发CSI信号，用于后续实验收集数据做支撑来使用。</p>
+<h2 id="购买网卡"><a href="#购买网卡" class="headerlink" title="购买网卡"></a>购买网卡</h2><h2 id="安装网卡和Ubuntu"><a href="#安装网卡和Ubuntu" class="headerlink" title="安装网卡和Ubuntu"></a>安装网卡和Ubuntu</h2><p>由于这步的内容是组内其他伙伴做的，所以我不了解，可自行网上查找资料。如有需要我再去请教他们作为补充。</p>
+<h2 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h2><p>系统：14.04</p>
+<h2 id="配置和安装kernel"><a href="#配置和安装kernel" class="headerlink" title="配置和安装kernel"></a>配置和安装kernel</h2><p>参考文献：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xieyaxiongfly/Atheros_CSI_tool_OpenWRT_src/wiki/Install-Ubuntu-version-of-Atheros-CSI-tool">英文官方文件github</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhoubao_z/article/details/107180837?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522172102551916800215076862%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=172102551916800215076862&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-107180837-null-null.142%5Ev100%5Epc_search_result_base4&utm_term=ubuntu%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85atheros%20csi%20tool&spm=1018.2226.3001.4187">中文CSDN</a></p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>Ubuntu里打开终端的操作：<br>        ctrl+alt+t</p>
+<p>首先，安装若干前期准备</p>
+<ol>
+<li><p>Git用于下载最新的Atheros-CSI-Tool</p>
+<pre><code>  $ sudo apt-get install git
+</code></pre>
+</li>
+<li><p>用于后续能成功执行”make menuconfig”</p>
+<pre><code>  $ sudo apt-get install libncurses5-dev libncursesw5-dev 
+</code></pre>
+</li>
+<li><p>配置Hostapd</p>
+<pre><code>  $ sudo apt-get install libnl-dev libssl-dev
+</code></pre>
+</li>
+</ol>
+<h3 id="从Github上克隆源码"><a href="#从Github上克隆源码" class="headerlink" title="从Github上克隆源码"></a>从Github上克隆源码</h3><pre><code>     $ git clone https://github.com/xieyaxiongfly/Atheros-CSI-Tool.git
+</code></pre>
+<h3 id="配置和安装"><a href="#配置和安装" class="headerlink" title="配置和安装"></a>配置和安装</h3><p>首先，一定要 cd 进入Atheros-CSI-Tool 文件夹下，否则会出现 <em><strong>make: 没有规则可制作目标”defconfig-iwlwifi-public”</strong></em> 报错<br><strong>在该文件下</strong>，来执行以下指令</p>
+<ol>
+<li><p>配置内核</p>
+<pre><code>   $ make menuconfig
+</code></pre>
+</li>
+</ol>
+<p>默认配置即可。如何默认配置呢？</p>
+<p>刚进入时候显示的是菜单页面，通过键盘右键，移动光标到<strong>Save</strong>上，按键盘Enter，看到.config的配置提示，按Enter。</p>
+<p>接下来，就又返回到了菜单页面，再键盘右键，移动光标到<strong>Exit</strong>上，按键盘Enter，结束。</p>
+<ol start="2">
+<li><p>使用下列命令，配置和安装kernel moudles</p>
+<pre><code>   $ make -j16
+   $ make modules
+   $ sudo make modules_install
+   $ sudo make install
+</code></pre>
+</li>
+</ol>
+<p>为啥是-j16呢，16代表什么，能不能换成其他的？大家看英文官方文件内容即可，这里不做解释，只教安装。</p>
+<ol start="3">
+<li><p>重启</p>
+<pre><code>   $ sudo reboot
+</code></pre>
+</li>
+<li><p>查看当前版本</p>
+<pre><code>   $ uname -r
+</code></pre>
+</li>
+</ol>
+<p>如果显示是” 4.1.10+ “，证明安装成功啦！</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>在安装过程中，并不如官方文件这样直接就成功了。</p>
+<p>遇到的若干问题：</p>
+<ol>
+<li>显示不存在该软件包</li>
+</ol>
+<p><img src="/2024/07/15/part06/3a40205b6ceefd9e4db538f37930058.jpg" alt="alt text"></p>
+<ol start="2">
+<li>查看当前版本时候，版本不正确</li>
+</ol>
+<p><img src="/2024/07/15/part06/962172b9b7094b39022cd28b71f22df.jpg" alt="alt text"></p>
+<p>这里做出解释，希望能帮到大家：</p>
+<h4 id="不存在该软件包"><a href="#不存在该软件包" class="headerlink" title="不存在该软件包"></a>不存在该软件包</h4><p>命令行更新一下：</p>
+<p>记得需要联网哈哈哈，因为我下午第一次时候忘记联网，结果失败。</p>
+<pre><code>     $ sudo apt update
+</code></pre>
+<p>接下来就可以正常安装了。</p>
+<h4 id="版本不同"><a href="#版本不同" class="headerlink" title="版本不同"></a>版本不同</h4><p>首先，我们有两种可能：（1）没安装好 （2）内核切换失败</p>
+<p>这里，我们就要对他做一个检验。</p>
+<h5 id="检验"><a href="#检验" class="headerlink" title="检验"></a>检验</h5><p>这步我是请教gpt的，唉总之，但是暂时它应该是取代不了我的，因为我可以操作，但它只能给出一些可能的方法，我有手 更胜一筹吧。</p>
+<p>方法1：用于检验当前版本</p>
+<pre><code>     $ uname -r
+</code></pre>
+<p>方法2：用于列出自己安装得到的内核包（一般只有从官网上下载、解压、安装配置的才会显现。比如，我们这次这个它不会显现）</p>
+<pre><code>     $ dpkg --list | grep linux-image
+</code></pre>
+<p>方法3：用于检查 &#x2F;boot 目录下的内核文件，可以检查所有</p>
+<pre><code>     $ ls /boot | grep vmlinuz
+</code></pre>
+<p>方法4：检查 &#x2F;lib&#x2F;modules 目录下的文件，好像也可以检查所有，我忘记了</p>
+<pre><code>     $ ls /lib/modules
+</code></pre>
+<p>这里，我们的检验就是看输入指令：方法3和4后，有没有要的4.1.10+存在。只要按照之前的配置和安装步骤，那么一般都是有的。</p>
+<p>ok</p>
+<h5 id="更改GRUB配置"><a href="#更改GRUB配置" class="headerlink" title="更改GRUB配置"></a>更改GRUB配置</h5><p>这个是用于，当Ubuntu启动后的情况，目前我只知道两种方式，一种是默认去启动所要的内核，第二种是弹出选项自己选择。</p>
+<p>可以参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36393978/article/details/118391685">Linux编译并更新内核</a>，写的真的很好，给我很大帮助，感谢！</p>
+<p>这里 我只写出第二种方式，第一种可以自己看上述的链接</p>
+<ol>
+<li><p>进入grub下</p>
+<pre><code>  $ sudo nano /etc/default/grub
+</code></pre>
+</li>
+</ol>
+<p>我们的电脑是需要输入密码的。</p>
+<ol start="2">
+<li>更改</li>
+</ol>
+<p>按照下面的这个，改动一下原本内容。</p>
+<pre><code>    # 2. 开机进入grub菜单可以主动选择以哪个内核进入系统
+    GRUB_DEFAULT=0
+    #************* Display grub *************
+    GRUB_HIDDEN_TIMEOUT_QUIET=true
+    GRUB_TIMEOUT=10
+    #************** End Display *************
+    GRUB_DISTRIBUTOR=`lsb_release -i -s 2&gt; /dev/null || echo Debian`
+    GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash&quot;
+    GRUB_CMDLINE_LINUX=&quot;&quot;
+</code></pre>
+<p>关掉，退出终端。</p>
+<p>打开终端，重新更新下grub。</p>
+<pre><code>     $ sudo update-grub
+</code></pre>
+<p>输入密码。</p>
+<p>关掉，退出终端。</p>
+<p>打开终端，更新Ubuntu，重启。</p>
+<pre><code>     $ sudo reboot
+</code></pre>
+<p>这下，电脑重启后，不会直接进入Ubuntu，而是出现GRUB菜单选择页面</p>
+<p>选第二个：高级选项</p>
+<p><img src="/2024/07/15/part06/image.png" alt="alt text"></p>
+<p>选择我们要的版本：4.1.10+</p>
+<p>ok</p>
+<p>进入后，再次输入</p>
+<pre><code>     $ uname -r
+</code></pre>
+<p>这次显现的是我们要的版本啦</p>
+<p>如图：</p>
+<p><img src="/2024/07/15/part06/858ae31e87e7ea1a88c0dd72d2b7a4e.jpg" alt="alt text"></p>
+<p>大获全胜！</p>
+<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>其实通过这一次安装，我了解到了Ubuntu的一些部件或命令使用，真的真的比课堂上Linux课程来的实用多。理论真的不够，需要实操来加持。<br>以及，因为网上资料真的很少，在安装Atheos-CSI-Tool这一块，但却可以细分为每一小块问题去搜素。我弄到很烦的时候，也有点不想弄了，那边又热又闷又痒。<br>不过呢，还是坚持下来，查清楚安装好了哈哈。毕竟我是谁呢，鼎鼎有名的Carrie（臭屁下）。</p>
+<p>这周再找时间去把后续的收集CSI的配置下，emm明天去不去再说吧hh</p>
+
         
       </div>
 
@@ -300,449 +437,57 @@ Ubuntu系统：14.04
     </div>
     
      
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/15/part06/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
   </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/07/13/part03/"
+      title="分析思维"
+     >
+
+    <p class="title-text">
+      
+        分析思维
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
   
 </article>
 
 
 
 
-
-
-   
-
-
-<article id="post-part03" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/13/part03/">分析思维</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-13T13:12:38.000Z" itemprop="datePublished">2024-07-13</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.1k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              数据分析思维
-数据分析过程
-观测
- （1）采集数据
-
-解析系统日志
-埋点获取新数据
-通过传感器采集
-爬虫解析网站
-API获取数据
-
- （2）存储数据
-
-数据库
-连接数据库取数
-
- （3）展示数据
-
-可视化高效传达信息
-
-
-测量
-
-设定标准
-发现异常
-
-
-应用数据创造价值
-
-数据不断迭代产品和业务策略
-明确目标
-拆解目标
-得到标准值
-
-
-
-MECE：满足相互独立、且能够穷尽。
-比较常见的拆解方法：
-
-时间流程法
-
-漏斗模型：AARRR，用户的流程
-
-
-
-
-- PDCA：质量管理，先规划再进行，定期检查过程问题
-
-- 精益创业：根据想法快速建产品，并根据数据快速更改想法
-
-
-模型框架法
-
-优劣势比较
-
-投入产出比
-
-SWOT
-
-
-
-量化公式法
-
-穷尽要素法
-
-
-整体分为各部分
-是什么-为什么-怎么做-做什么
-
-拆解方法的记录拆解方法：
-
-首先，需要符合MECE（无重复，无遗漏）
-
-流程拆解法：流程分析进行拆解，适用于流程较长，环节较多，随着环节的进行，留存率越来越少的场景。
-二分法：把事物分成A和非A两个部分。
-象限拆解法：（1）可用于找到问题的共性原因，将有相同特征的事件进行归因分...
-            
-          </div>
-        
-      </div>
-
-         
+  <script src="https://cdn.staticfile.org/twikoo/1.6.26/twikoo.all.min.js"></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
     </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/13/part03/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
+    <div id="tcomment"></div>
   </div>
+  <script>
+      twikoo.init({
+          envId: 'https://sucarrie.netlify.app/.netlify/functions/twikoo',
+          el: '#tcomment',
+          region: 'ap-guangzhou',
+          path: 'location.pathname',
+          lang: 'zh-CN',
+      })
+  </script>
   
-</article>
-
-
-
-
-
-
-   
-
-
-<article id="post-part02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/13/part02/">总路线</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-13T07:42:11.000Z" itemprop="datePublished">2024-07-13</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            249 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              写在这里今天是2024年7月11日，准备继续开始学习数据分析的必要知识。
-未接触的时候，我以为Python处理就算可以了甚至加分项，后来发现市面上更多使用Excel和MySql，看似很简单很枯燥是不是，但是当我前几天尝试学习Excel高级知识时候发现它的潜力远不止平常所用的功能。
-该暑假学习完整个内容，如果能花时间做几个项目就更好了。
-总路线接下来将根据该学习路线，先试着进行：戴师兄数据分析自学路线
-特此鸣谢！
-
-建立数据分析思维
-Excel 功能学习
-BI 工具
-SQL
-其他了解：数仓、统计学知识、高数等
-实操做项目
-
-
-
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/13/part02/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-   
-
-
-<article id="post-part01" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/11/part01/">制作专属博客</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-11T03:39:30.000Z" itemprop="datePublished">2024-07-11</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.9k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag">日常</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              制作专属博客用到的
-hexo
-Twikoo
-MongoDB Atlas
-vscode
-
-由于最近一直在值班，没太多时间学些东西，第一篇就写写这篇博客的制作。
-这里，主要是讲hexo的使用和后续基于Twikoo论坛的使用，由于前期所需工具大部分还未做博客之前就已经下载好了，具体如何安装已不太记得，大家自行网上查找相关教程。前期工具安装不在本节博客范围内。
-需要的前期工具PowerShell其实就类似电脑终端，忘记是电脑自带的还是需要自己下载的。
-Node.js中文官网
-大家网上自行搜素安装教程即可
-检查是否安装完成
-打开powershell
-
-输入指令
- 显示如上，则已经按照完成。
-
-安装目录下（即Node.js安装在的地方）
-
-
-
-建立图上所框取的两个文件夹
-
-Powershell里输入指令
-
-环境变量配置
- 这一步一定不可缺少，否则将造成后续一些ERROR（亲测结果qwq）
- 我的电脑—右键属性—高级系统设置–环境变量
-
-
-
-系统变量
-  （1）先新建一个Nodepath，如下图
-  
-  （2）添加到path中  
-  
-  注意：有些路径需要改为自己的
-
-
-Git主要用于代...
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/11/part01/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-   
-
-
-<article id="post-try" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/10/try/">序章</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-10T14:17:28.000Z" itemprop="datePublished">2024-07-10</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            616 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/README/" rel="tag">README</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              欢迎大家来到我的博客序言首先，十分感谢大家愿意点进我的博客。这是最近制作的个人博客，采用hexo的方式，本身是没有包含太多个人技术含量之说。但我很高兴，这样的开源时代，让一切都有迹可循和可以star、folk。
-初心这个博客主要是用于记录我的个人学习历程，包括但不限于：课程学习、项目研究、个人爱好琢磨。大部分是和编程计算机相关的学习内容。以及记录一些日常生活。
-如果你们愿意的话，很希望你们可以和我留言，如果你们也想创建个人的博客，十分乐意与你们进行交流，也期待你们将博客与我分享。
-注意请遵守约定：务必不要告知除你们以外的其他人此博客网站。由于上大学以来，加的好友太多，朋友圈有时候感觉不是属于我个人的小空间。而有些学习的笔记，这些成长的历程，我更希望是自己慢慢来的，等到有成果的那一刻再让大家知道，毕竟有时候成长的鲜花和掌声并不会那么多。我也是一个比较喜欢看结果的人。
-当然，大家也可以因此知道，如果你能来到这里看到我的博客，证明我们是很好的朋友啦！请一定一定要遵守我们的约定。
-互勉
-愿我们成为自己想成为的人。
-
-成为天才的方法是什么？一以贯之的努力，不敢懈怠的人生，每天的微小积累会决...
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/10/try/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-
 
     </div>
     <div id="footer-wrapper">

@@ -74,7 +74,7 @@
 <meta property="og:image" content="https://wwcarrie.github.io/2024/07/11/part01/image-31.png">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/07/11/part01/image-hexo.png">
 <meta property="article:published_time" content="2024-07-11T03:39:30.000Z">
-<meta property="article:modified_time" content="2024-07-30T05:05:18.252Z">
+<meta property="article:modified_time" content="2024-07-30T05:11:24.969Z">
 <meta property="article:author" content="Carrie">
 <meta property="article:tag" content="日常">
 <meta name="twitter:card" content="summary">
@@ -492,7 +492,7 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">vivia 主题（github仓库）</a></p>
 <p>特此鸣谢！</p>
 <hr>
-<p>打开博客目录，打开博客目录下的<code>node_modules\hexo-generator-index\lib</code>目录，其中的<code>generator.js</code>文件就是我们所要修改的文件。</p>
+<h2 id="手动添加置顶功能"><a href="#手动添加置顶功能" class="headerlink" title="手动添加置顶功能"></a>手动添加置顶功能</h2><p>打开博客目录，打开博客目录下的<code>node_modules\hexo-generator-index\lib</code>目录，其中的<code>generator.js</code>文件就是我们所要修改的文件。</p>
 <p>实现该功能需要在 <code>const posts = locals.posts.sort(config.index_generator.order_by);</code></p>
 <p>放入下面的代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  posts.data = posts.data.sort(function(a, b) &#123;</span><br><span class="line">    if(a.top &amp;&amp; b.top) &#123; // 两篇文章都有top，top大的在前</span><br><span class="line">        if(a.top == b.top)</span><br><span class="line">			return b.date - a.date; // 若top值一样，最新的文章在前面</span><br><span class="line">        else</span><br><span class="line">			return b.top - a.top; // top大的在前面</span><br><span class="line">    &#125;</span><br><span class="line">    else if(a.top &amp;&amp; !b.top) &#123; // 以下是只有一篇文章top有定义，那么将有top的排在前面</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    else if(!a.top &amp;&amp; b.top) &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    else return b.date - a.date; 	//都没有top标签，最新的文章在前面</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>

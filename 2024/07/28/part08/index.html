@@ -36,15 +36,15 @@
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="查缺补漏 刷题 从第三行数据开始，只取一行 SELECT * FROM employees ORDER BY hire_date DESC  LIMIT 1 OFFSET 2">
+  <meta name="description" content="查缺补漏 刷题 从第三行数据开始，只取一行12SELECT * FROM employees ORDER BY hire_date DESCLIMIT 1 OFFSET 2  左连接1234select last_name,first_name,dept_nofrom employees sleft join dept_emp don s.emp_no &#x3D; d.emp_no  获取每个部门中当前员">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL">
 <meta property="og:url" content="https://wwcarrie.github.io/2024/07/28/part08/index.html">
 <meta property="og:site_name" content="Carrie">
-<meta property="og:description" content="查缺补漏 刷题 从第三行数据开始，只取一行 SELECT * FROM employees ORDER BY hire_date DESC  LIMIT 1 OFFSET 2">
+<meta property="og:description" content="查缺补漏 刷题 从第三行数据开始，只取一行12SELECT * FROM employees ORDER BY hire_date DESCLIMIT 1 OFFSET 2  左连接1234select last_name,first_name,dept_nofrom employees sleft join dept_emp don s.emp_no &#x3D; d.emp_no  获取每个部门中当前员">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-28T01:18:16.000Z">
-<meta property="article:modified_time" content="2024-07-28T03:22:00.689Z">
+<meta property="article:modified_time" content="2024-08-01T06:03:37.578Z">
 <meta property="article:author" content="Carrie">
 <meta property="article:tag" content="数据分析">
 <meta name="twitter:card" content="summary">
@@ -278,7 +278,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            72 词 
+            1.3k 词 
           </div>
         </div>
         
@@ -289,10 +289,30 @@
         
           <p><a target="_blank" rel="noopener" href="https://www.runoob.com/sql/sql-tutorial.html">查缺补漏</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/exam/oj?page=1&tab=SQL%E7%AF%87&topicId=82">刷题</a></p>
-<h5 id="从第三行数据开始，只取一行"><a href="#从第三行数据开始，只取一行" class="headerlink" title="从第三行数据开始，只取一行"></a>从第三行数据开始，只取一行</h5><pre><code> SELECT * FROM employees ORDER BY hire_date DESC
- LIMIT 1 OFFSET 2
-</code></pre>
-<h5 id><a href="#" class="headerlink" title></a></h5>
+<h5 id="从第三行数据开始，只取一行"><a href="#从第三行数据开始，只取一行" class="headerlink" title="从第三行数据开始，只取一行"></a>从第三行数据开始，只取一行</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM employees ORDER BY hire_date DESC</span><br><span class="line">LIMIT 1 OFFSET 2</span><br></pre></td></tr></table></figure>
+
+<h5 id="左连接"><a href="#左连接" class="headerlink" title="左连接"></a>左连接</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select last_name,first_name,dept_no</span><br><span class="line">from employees s</span><br><span class="line">left join dept_emp d</span><br><span class="line">on s.emp_no = d.emp_no</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取每个部门中当前员工薪水最高的相关信息，给出dept_no, emp_no以及其对应的salary，按照部门编号dept_no升序排列<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT d.dept_no, d.emp_no, s.salary</span><br><span class="line">FROM dept_emp d</span><br><span class="line">JOIN salaries s ON d.emp_no = s.emp_no</span><br><span class="line">WHERE s.salary = (</span><br><span class="line">    SELECT MAX(s1.salary)</span><br><span class="line">    FROM dept_emp d1</span><br><span class="line">    JOIN salaries s1 ON d1.emp_no = s1.emp_no</span><br><span class="line">    WHERE d1.dept_no = d.dept_no</span><br><span class="line">)</span><br><span class="line">ORDER BY d.dept_no ASC;</span><br></pre></td></tr></table></figure></li>
+<li>可以连续<code>left join</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT e.last_name, e.first_name, d.dept_name</span><br><span class="line">FROM employees e</span><br><span class="line">LEFT JOIN dept_emp de ON e.emp_no = de.emp_no</span><br><span class="line">LEFT JOIN departments d ON de.dept_no = d.dept_no;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="获取第二多"><a href="#获取第二多" class="headerlink" title="获取第二多"></a>获取第二多</h5><ul>
+<li><p>用avg之类的函数，需要聚类</p>
+</li>
+<li><p>请你获取薪水第二多的员工的emp_no以及其对应的薪水salary，若有多个员工的薪水为第二多的薪水，则将对应的员工的emp_no和salary全部输出，并按emp_no升序排序。</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- 一个要小心的点就是：可能第一个有多个，所以要先聚合分组</span><br><span class="line"></span><br><span class="line">select emp_no,salary</span><br><span class="line">from salaries</span><br><span class="line">where salary = </span><br><span class="line">(</span><br><span class="line">select salary</span><br><span class="line">from salaries</span><br><span class="line">group by salary</span><br><span class="line">order by salary desc</span><br><span class="line">limit 1 offset 1</span><br><span class="line">)</span><br><span class="line">order by emp_no asc</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不能使用order by的情况下思路：先选出小于最大值的，再在其中选出最大值进行匹配</li>
+</ul>
+<h5 id="mysql窗口函数"><a href="#mysql窗口函数" class="headerlink" title="mysql窗口函数"></a>mysql窗口函数</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/CoderSharry/article/details/135063960">参考CSDN</a></p>
+<p>注意：窗口函数在mysql8.0以上支持</p>
+<ul>
+<li>对所有员工的薪水按照salary降序先进行1-N的排名，如果salary相同，再按照emp_no升序排列<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- 使用窗口函数</span><br><span class="line"></span><br><span class="line">select </span><br><span class="line">    emp_no,</span><br><span class="line">    salary,</span><br><span class="line">    DENSE_RANK() over(order by salary desc) t_rank</span><br><span class="line">from salaries</span><br><span class="line">order by t_rank asc,emp_no asc</span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- 不使用窗口函数</span><br><span class="line"></span><br><span class="line">SELECT </span><br><span class="line">    s1.emp_no, </span><br><span class="line">    s1.salary,</span><br><span class="line">    (</span><br><span class="line">        SELECT COUNT(DISTINCT s2.salary)</span><br><span class="line">        FROM salaries s2</span><br><span class="line">        WHERE s2.salary &gt;= s1.salary</span><br><span class="line">    ) AS t_rank</span><br><span class="line">FROM salaries s1</span><br><span class="line">ORDER BY s1.salary DESC, s1.emp_no ASC;</span><br></pre></td></tr></table></figure>
         
       </div>
 

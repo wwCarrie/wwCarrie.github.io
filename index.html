@@ -436,7 +436,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            72 词 
+            1.3k 词 
           </div>
         </div>
         
@@ -449,10 +449,11 @@
             
               查缺补漏
 刷题
-从第三行数据开始，只取一行 SELECT * FROM employees ORDER BY hire_date DESC
- LIMIT 1 OFFSET 2
+从第三行数据开始，只取一行12SELECT * FROM employees ORDER BY hire_date DESCLIMIT 1 OFFSET 2
 
+左连接1234select last_name,first_name,dept_nofrom employees sleft join dept_emp don s.emp_no = d.emp_no
 
+获取每个部门中当前员工薪水最高的相关信息，给出dept_no, emp_no以及其对应的salary，按照部门编号dept_no升序排列12345678910SELECT d.dept_no, d.emp_no, s.salaryFROM dept_emp dJOIN salaries s ON d.emp_no = s.emp_noWHERE s.salary = (    SELECT MAX(s1.salary)    FROM dept_emp d1    JOIN salaries s1 ON d1.emp_no = s1.emp_no    WHERE d1.dept_no = d.dept_n...
             
           </div>
         

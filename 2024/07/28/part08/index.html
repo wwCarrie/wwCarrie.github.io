@@ -44,10 +44,11 @@
 <meta property="og:description" content="查缺补漏 刷题 从第三行数据开始，只取一行12SELECT * FROM employees ORDER BY hire_date DESCLIMIT 1 OFFSET 2  左连接1234select last_name,first_name,dept_nofrom employees sleft join dept_emp don s.emp_no &#x3D; d.emp_no  获取每个部门中当前员">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/part08/image.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/part08/image-3.png">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/part08/image-1.png">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/part08/image-2.png">
 <meta property="article:published_time" content="2024-07-28T01:18:16.000Z">
-<meta property="article:modified_time" content="2024-08-04T05:59:19.204Z">
+<meta property="article:modified_time" content="2024-08-04T09:16:40.784Z">
 <meta property="article:author" content="Carrie">
 <meta property="article:tag" content="数据分析">
 <meta name="twitter:card" content="summary">
@@ -282,7 +283,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.2k 词 
+            4k 词 
           </div>
         </div>
         
@@ -342,12 +343,32 @@
 <h5 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h5><p>我的天 一直忘记</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE actor</span><br><span class="line">(</span><br><span class="line">    actor_id smallint(5) not null PRIMARY KEY,</span><br><span class="line">    first_name varchar(45) not null,</span><br><span class="line">    last_name varchar(45) not null,</span><br><span class="line">    last_update date not null</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">-- 判断有无表，防止报错</span><br><span class="line">CREATE TABLE IF NOT EXISTS actor</span><br></pre></td></tr></table></figure>
 
+<h5 id="修改（ALTER）"><a href="#修改（ALTER）" class="headerlink" title="修改（ALTER）"></a>修改（ALTER）</h5><p>详见</p>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/alter-table.html">alter table</a></p>
+<p>略见</p>
+<p><img src="/2024/07/28/part08/image-3.png" alt="alt text"></p>
+<h5 id="建表和修改默认值（DEFAULT）"><a href="#建表和修改默认值（DEFAULT）" class="headerlink" title="建表和修改默认值（DEFAULT）"></a>建表和修改默认值（DEFAULT）</h5><ul>
+<li><p>default 用于没有指定数值的情况下，设置默认值。ALTER 和 CREATE 都可以用，SELECT 不能用。<br><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_16213384/7646841#:~:text=MySQL%E4%B8%ADDEFAULT%E7%9A%84%E6%84%8F%E4%B9%89%201%201.%20%E6%A6%82%E8%BF%B0%20%E5%9C%A8MySQL%E4%B8%AD%EF%BC%8CDEFAULT%E6%98%AF%E4%B8%80%E4%B8%AA%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%8C%E5%AE%83%E7%94%A8%E4%BA%8E%E6%8C%87%E5%AE%9A%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5%E5%9C%A8%E6%B2%A1%E6%9C%89%E6%98%8E%E7%A1%AE%E8%B5%8B%E5%80%BC%E6%97%B6%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC%E3%80%82%20%E5%BD%93%E6%88%91%E4%BB%AC%E5%88%9B%E5%BB%BA%E8%A1%A8%E6%97%B6%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%B8%BA%E6%AF%8F%E4%B8%AA%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E5%80%BC%EF%BC%8C%E8%BF%99%E6%A0%B7%E5%9C%A8%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E6%97%B6%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E6%98%BE%E5%BC%8F%E5%9C%B0%E6%8C%87%E5%AE%9A%E8%AF%A5%E5%AD%97%E6%AE%B5%E7%9A%84%E5%80%BC%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%B0%B1%E4%BC%9A%E8%87%AA%E5%8A%A8%E4%BD%BF%E7%94%A8%E9%BB%98%E8%AE%A4%E5%80%BC%E3%80%82%20...%202,%E5%9C%A8%E4%BD%BF%E7%94%A8DEFAULT%E5%85%B3%E9%94%AE%E5%AD%97%E8%AE%BE%E7%BD%AE%E5%AD%97%E6%AE%B5%E9%BB%98%E8%AE%A4%E5%80%BC%E6%97%B6%EF%BC%8C%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%A5%E4%B8%8B%E5%87%A0%E7%82%B9%EF%BC%9A%20DEFAULT%E5%85%B3%E9%94%AE%E5%AD%97%E5%8F%AA%E8%83%BD%E7%94%A8%E4%BA%8E%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E6%97%B6%EF%BC%8C%E5%A6%82%E6%9E%9C%E5%9C%A8UPDATE%E8%AF%AD%E5%8F%A5%E4%B8%AD%E6%8C%87%E5%AE%9A%E4%BA%86%E8%A6%81%E6%9B%B4%E6%96%B0%E7%9A%84%E5%AD%97%E6%AE%B5%EF%BC%8CDEFAULT%E5%85%B3%E9%94%AE%E5%AD%97%E5%B0%86%E4%B8%8D%E8%B5%B7%E4%BD%9C%E7%94%A8%E3%80%82%20...%205%205.%20%E6%80%BB%E7%BB%93%20%E5%9C%A8%E6%9C%AC%E6%96%87%E4%B8%AD%EF%BC%8C%E6%88%91%E4%BB%AC%E4%BB%8B%E7%BB%8D%E4%BA%86MySQL%E4%B8%ADDEFAULT%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E3%80%82%20">参考示例</a></p>
+</li>
+<li><p>after 用于指定在某个后面</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table actor</span><br><span class="line">add column create_date datetime not null </span><br><span class="line">default &#x27;2020-10-01 00:00:00&#x27; after last_update</span><br></pre></td></tr></table></figure>
+
 <h5 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h5><p><img src="/2024/07/28/part08/image-1.png" alt="alt text"></p>
 <p><code>DATETIME</code>、 <code>TIMESTAMP</code>、<code>DATE</code>、<code>TIME</code>、<code>YEAR</code></p>
 <p><code>DATETIME</code>：表示年月日时分秒，记录年份长，DATE和TIME的组合<br><code>TIMESTAMP</code>：表示年月日时分秒，记录年份短；会根据所在时区进行切换，表中新插入的日期自动设置为当前系统时间，第二个列默认值为0000-00-00 00:00:00<br><code>DATE</code>：表示年月日<br><code>TIME</code>：表示时分秒<br><code>YEAR</code>：年份，默认四位，用1bytes足够。</p>
-<h5 id="mysql一些莫名的规范"><a href="#mysql一些莫名的规范" class="headerlink" title="mysql一些莫名的规范"></a>mysql一些莫名的规范</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 需要有分号</span><br><span class="line"></span><br><span class="line">insert into actor values(1,&#x27;PENELOPE&#x27;,&#x27;GUINESS&#x27;,&#x27;2006-02-15 12:34:33&#x27;);</span><br><span class="line">insert into actor values(2,&#x27;NICK&#x27;,&#x27;WAHLBERG&#x27;,&#x27;2006-02-15 12:34:33&#x27;)</span><br></pre></td></tr></table></figure>
+<h5 id="mysql一些莫名的规范"><a href="#mysql一些莫名的规范" class="headerlink" title="mysql一些莫名的规范"></a>mysql一些莫名的规范</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 需要有分号</span><br><span class="line"></span><br><span class="line">insert into actor values(1,&#x27;PENELOPE&#x27;,&#x27;GUINESS&#x27;,&#x27;2006-02-15 12:34:33&#x27;);</span><br><span class="line">insert into actor values(2,&#x27;NICK&#x27;,&#x27;WAHLBERG&#x27;,&#x27;2006-02-15 12:34:33&#x27;);</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>转义字符 <code>\</code></li>
+</ul>
 <h5 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># mysql中常用的三种插入数据的语句: </span><br><span class="line"># insert into表示插入数据，数据库会检查主键，如果出现重复会报错； </span><br><span class="line"># replace into表示插入替换数据，需求表中有PrimaryKey，</span><br><span class="line">#             或者unique索引，如果数据库已经存在数据，则用新数据替换，如果没有数据效果则和insert into一样； </span><br><span class="line"># insert ignore表示，如果中已经存在相同的记录，则忽略当前新数据；</span><br><span class="line"></span><br><span class="line">insert ignore into actor values(&quot;3&quot;,&quot;ED&quot;,&quot;CHASE&quot;,&quot;2006-02-15 12:34:33&quot;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h5><ul>
+<li>删除emp_no重复的记录，只保留最小的id对应的记录</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM titles_test</span><br><span class="line">WHERE id NOT IN (</span><br><span class="line">SELECT * FROM</span><br><span class="line">(</span><br><span class="line">    SELECT</span><br><span class="line">    MIN(id)</span><br><span class="line">    FROM titles_test</span><br><span class="line">    GROUP BY emp_no</span><br><span class="line">) as temp);</span><br></pre></td></tr></table></figure>
 
 <h5 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h5><p><a target="_blank" rel="noopener" href="https://www.runoob.com/mysql/mysql-index.html">索引</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE UNIQUE INDEX uniq_idx_firstname ON actor (`first_name`);</span><br><span class="line">CREATE INDEX idx_lastname ON actor (`last_name`);</span><br></pre></td></tr></table></figure>
@@ -362,6 +383,9 @@
 <p><a target="_blank" rel="noopener" href="https://www.yangdx.com/2020/05/151.html#comments">示例文档</a></p>
 <h5 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h5><p>视图创建后，可以像操作表一样操作视图，主要是查询操作。对应的表被称作基表。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW actor_name_view AS</span><br><span class="line">SELECT first_name first_name_v,last_name last_name_v</span><br><span class="line">FROM actor</span><br></pre></td></tr></table></figure>
+
+<h5 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h5><p>我服了，全忘光了。。真是的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-- mysql的触发器创建方式略微不同</span><br><span class="line"></span><br><span class="line">CREATE TRIGGER audit_log</span><br><span class="line">AFTER INSERT ON employees_test</span><br><span class="line">FOR EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">    INSERT INTO audit (EMP_no, NAME)</span><br><span class="line">    VALUES (NEW.ID, NEW.NAME);</span><br><span class="line">END;</span><br><span class="line"></span><br><span class="line"># 具体地：</span><br><span class="line"></span><br><span class="line"># 在 INSERT 型触发器中，NEW 用来表示将要（BEFORE）或已经（AFTER）插入的新数据；</span><br><span class="line"># 在 UPDATE 型触发器中，OLD 用来表示将要或已经被修改的原数据，NEW 用来表示将要或已经修改为的新数据；</span><br><span class="line"># 在 DELETE 型触发器中，OLD 用来表示将要或已经被删除的原数据；</span><br><span class="line"># 使用方法： NEW.columnName （columnName 为相应数据表某一列名）</span><br><span class="line"></span><br><span class="line"># 触发器有三种：INSERT、UPDATE、DELETE，还分为BEFORE和AFTER</span><br></pre></td></tr></table></figure>
         
       </div>
 

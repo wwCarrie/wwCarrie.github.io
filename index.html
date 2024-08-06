@@ -184,6 +184,11 @@
       <h3 class="widget-title">归档</h3>
       
       
+        <a class="archive-link" href="/archives/2024/08 ">
+          八月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
         <a class="archive-link" href="/archives/2024/07 ">
           七月 2024 
           <div class="archive-count">10 </div>
@@ -200,6 +205,18 @@
       <h3 class="widget-title">最新文章</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/08/06/part11/" title="demo_1" >
+            <div class="recent-link-text">
+              demo_1
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/05/part10/" title="基础" >
+            <div class="recent-link-text">
+              基础
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/07/28/part09/" title="基于MySQL和Tableau的电商数据分析" >
             <div class="recent-link-text">
               基于MySQL和Tableau的电商数据分析
@@ -215,18 +232,6 @@
           <a class="recent-link" href="/2024/07/25/part07/" title="Tableau" >
             <div class="recent-link-text">
               Tableau
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/07/22/part04/" title="Excel学习" >
-            <div class="recent-link-text">
-              Excel学习
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/07/20/part05/" title="笔记" >
-            <div class="recent-link-text">
-              笔记
             </div>
           </a>
         
@@ -307,6 +312,170 @@
     <a class="right-panel  non-pic  "
       
       href="/2024/07/10/try/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+   
+
+
+<article id="post-part11" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/06/part11/">demo_1</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-06T07:12:33.000Z" itemprop="datePublished">2024-08-06</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            141 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          简单demo
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/06/part11/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+   
+
+
+<article id="post-part10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/05/part10/">基础</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-05T06:14:22.000Z" itemprop="datePublished">2024-08-05</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            454 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              这篇主要是WIFI感知（包括CSI）相关知识的一个梳理
+入门
+软硬件平台：基础至少需要一个发送设备+一个接收设备，各设备2-3个外接天线。
+CSI测量工具：Linux Ubuntu系统安装，Atheros CSI tool、Intel 5300 NIC CSI tool，Nexus 5（不同测量工具对网卡版本均有要求）
+CSI处理
+
+进阶
+感知算法设计
+感知系统可视化
+
+案例实践
+Widar 3.0 http://tns.thss.tsinghua.edu.cn/widar3.0/
+
+Wi-Fi感知，顾名思义，就是利用Wi-Fi信号实现对周围环境以及环境中的人体、物体状态的感知。现有Wi-Fi感知方法主要通过分析从Wi-Fi信号采集到信道状态信息（Channel State Information，CSI）实现
+Atheros CSI Tool官方网站
+指引文件
+开源地址
+Intel 5300官方网站
+哈哈哈哈哈，懒得引用我们的工具..为什么网易翻译出来这么搞笑hh
+
+Nexus 5官方网站
+CSI基础处理CSI测量值解析出来为a+bj的复数形式
+相关理论
+相关工作及代码
+
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/05/part10/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
@@ -1033,217 +1202,19 @@ SWOT
 
 
 
-   
 
-
-<article id="post-part02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/13/part02/">总路线</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-13T07:42:11.000Z" itemprop="datePublished">2024-07-13</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            434 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              写在这里今天是2024年7月11日，准备继续开始学习数据分析的必要知识。
-未接触的时候，我以为Python处理就算可以了甚至加分项，后来发现市面上更多使用Excel和MySql，看似很简单很枯燥是不是，但是当我前几天尝试学习Excel高级知识时候发现它的潜力远不止平常所用的功能。
-该暑假学习完整个内容，如果能花时间做几个项目就更好了。
-总路线接下来将根据该学习路线，先试着进行：戴师兄数据分析自学路线
-
-2024&#x2F;7&#x2F;28 修改路线
-① 处理数据：Excel、Python、SQL② BI工具：Tableau、PowerBI③ 分析思维④ 大数据知识⑤ Python进阶⑥ 数学知识
-决定根据个人的学习情况，适当修改学习路线和进度：
-
-已完成：
-
-
-Excel
-Tableau
-SQL
-
-改为先学FinBI，然后就先不用学习更多BI工具的使用，而是就Tableau和FinBI来更熟练掌握。
-
-特此鸣谢！
-
-建立数据分析思维
-Excel 功能学习
-BI 工具
-SQL
-其他了解：数仓、统计学知识、高数等
-实操做项目
-
-
-
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/13/part02/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
+  <nav id="page-nav">
+    <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
+    <a id="prev-btn" class="page-nav-btn disabled" href=" /  ">
+      <i class="fa-solid fa-angle-left"></i>
     </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-   
-
-
-<article id="post-part01" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/11/part01/">制作专属博客</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-11T03:39:30.000Z" itemprop="datePublished">2024-07-11</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.5k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag">日常</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              制作专属博客用到的
-hexo
-Twikoo
-MongoDB Atlas
-vscode
-
-由于最近一直在值班，没太多时间学些东西，第一篇就写写这篇博客的制作。
-这里，主要是讲hexo的使用和后续基于Twikoo论坛的使用，由于前期所需工具大部分还未做博客之前就已经下载好了，具体如何安装已不太记得，大家自行网上查找相关教程。前期工具安装不在本节博客范围内。
-需要的前期工具PowerShell其实就类似电脑终端，忘记是电脑自带的还是需要自己下载的。
-Node.js中文官网
-大家网上自行搜素安装教程即可
-检查是否安装完成
-打开powershell
-
-输入指令
- 显示如上，则已经按照完成。
-
-安装目录下（即Node.js安装在的地方）
-
-
-
-建立图上所框取的两个文件夹
-
-Powershell里输入指令
-
-环境变量配置
- 这一步一定不可缺少，否则将造成后续一些ERROR（亲测结果qwq）
- 我的电脑—右键属性—高级系统设置–环境变量
-
-
-
-系统变量
-  （1）先新建一个Nodepath，如下图
-  
-  （2）添加到path中  
-  
-  注意：有些路径需要改为自己的
-
-
-Git主要用于代...
-            
-          </div>
-        
-      </div>
-
-         
+    <div id="num-bar">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a>  
     </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/11/part01/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
+    <a id="next-btn" class="page-nav-btn " href="/page/2/">
+      <i class="fa-solid fa-angle-right"></i>
     </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
+  </nav>
 
 
     </div>

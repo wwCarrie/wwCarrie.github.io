@@ -30,28 +30,26 @@
 
 
   
-  <title>总路线 | Carrie</title>
+  <title>note_1 | Carrie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="写在这里今天是2024年7月11日，准备继续开始学习数据分析的必要知识。 未接触的时候，我以为Python处理就算可以了甚至加分项，后来发现市面上更多使用Excel和MySql，看似很简单很枯燥是不是，但是当我前几天尝试学习Excel高级知识时候发现它的潜力远不止平常所用的功能。 该暑假学习完整个内容，如果能花时间做几个项目就更好了。 总路线接下来将根据该学习路线，先试着进行：戴师兄数据分析自学路">
+  <meta name="description" content="公式推导RSS：接收信号强度，计算公式：R&#x3D;10lgp(p：接收端接收到的信息强度 &#x2F; 发射端的信号强度)。一般是负值，-50dbm~0dbm则信号很好，理想状态下0。RSSI：（MAC层信息）接收信号强度指示，人为处理得到的信号强度，RSS通过变换转为正值RSSI（无单位）。 CSI：（物理层信息）信号状态信息（通信链路的信道属性），描述信号在每条传输路径的衰弱因子：信号散射">
 <meta property="og:type" content="article">
-<meta property="og:title" content="总路线">
-<meta property="og:url" content="https://wwcarrie.github.io/2024/07/13/part02/index.html">
+<meta property="og:title" content="note_1">
+<meta property="og:url" content="https://wwcarrie.github.io/2024/08/08/part12/index.html">
 <meta property="og:site_name" content="Carrie">
-<meta property="og:description" content="写在这里今天是2024年7月11日，准备继续开始学习数据分析的必要知识。 未接触的时候，我以为Python处理就算可以了甚至加分项，后来发现市面上更多使用Excel和MySql，看似很简单很枯燥是不是，但是当我前几天尝试学习Excel高级知识时候发现它的潜力远不止平常所用的功能。 该暑假学习完整个内容，如果能花时间做几个项目就更好了。 总路线接下来将根据该学习路线，先试着进行：戴师兄数据分析自学路">
+<meta property="og:description" content="公式推导RSS：接收信号强度，计算公式：R&#x3D;10lgp(p：接收端接收到的信息强度 &#x2F; 发射端的信号强度)。一般是负值，-50dbm~0dbm则信号很好，理想状态下0。RSSI：（MAC层信息）接收信号强度指示，人为处理得到的信号强度，RSS通过变换转为正值RSSI（无单位）。 CSI：（物理层信息）信号状态信息（通信链路的信道属性），描述信号在每条传输路径的衰弱因子：信号散射">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/07/13/part02/image.png">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/07/13/part02/image-1.png">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/07/13/part02/image-2.png">
-<meta property="article:published_time" content="2024-07-13T07:42:11.000Z">
-<meta property="article:modified_time" content="2024-07-28T02:03:57.456Z">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/part12/image.png">
+<meta property="article:published_time" content="2024-08-07T16:36:04.000Z">
+<meta property="article:modified_time" content="2024-08-07T16:36:56.638Z">
 <meta property="article:author" content="Carrie">
-<meta property="article:tag" content="数据分析">
+<meta property="article:tag" content="WIFI感知">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wwcarrie.github.io/2024/07/13/part02/image.png">
+<meta name="twitter:image" content="https://wwcarrie.github.io/2024/08/08/part12/image.png">
   
     <link rel="alternate" href="/atom.xml" title="Carrie" type="application/atom+xml">
   
@@ -255,7 +253,7 @@
        
 
 
-<article id="post-part02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-part12" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -268,7 +266,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        总路线
+        note_1
       </h1>
     
   
@@ -276,7 +274,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-13T07:42:11.000Z" itemprop="datePublished">2024-07-13</time>
+  <time class="dt-published" datetime="2024-08-07T16:36:04.000Z" itemprop="datePublished">2024-08-08</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -287,43 +285,21 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            434 词 
+            281 词 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h3 id="写在这里"><a href="#写在这里" class="headerlink" title="写在这里"></a>写在这里</h3><p>今天是2024年7月11日，准备继续开始学习数据分析的必要知识。</p>
-<p>未接触的时候，我以为Python处理就算可以了甚至加分项，后来发现市面上更多使用Excel和MySql，看似很简单很枯燥是不是，但是当我前几天尝试学习Excel高级知识时候发现它的潜力远不止平常所用的功能。</p>
-<p><strong>该暑假学习完整个内容</strong>，如果能花时间做几个项目就更好了。</p>
-<h2 id="总路线"><a href="#总路线" class="headerlink" title="总路线"></a>总路线</h2><p>接下来将根据该学习路线，先试着进行：<a target="_blank" rel="noopener" href="https://yrzu9y4st8.feishu.cn/docs/doccnzwzLDGEnGoVsF6YT9Sh2Zd">戴师兄数据分析自学路线</a></p>
-<hr>
-<p>2024&#x2F;7&#x2F;28 修改路线</p>
-<p>① 处理数据：Excel、Python、SQL<br>② BI工具：Tableau、PowerBI<br>③ 分析思维<br>④ 大数据知识<br>⑤ Python进阶<br>⑥ 数学知识</p>
-<p>决定根据个人的学习情况，适当修改学习路线和进度：</p>
-<ul>
-<li>已完成：</li>
-</ul>
-<ol>
-<li>Excel</li>
-<li>Tableau</li>
-<li>SQL</li>
-</ol>
-<p>改为先学FinBI，然后就先不用学习更多BI工具的使用，而是就Tableau和FinBI来更熟练掌握。</p>
-<hr>
-<p>特此鸣谢！</p>
-<ol>
-<li>建立数据分析思维</li>
-<li>Excel 功能学习</li>
-<li>BI 工具</li>
-<li>SQL</li>
-<li>其他了解：数仓、统计学知识、高数等</li>
-<li>实操做项目</li>
-</ol>
-<p><img src="/2024/07/13/part02/image.png" alt="数据分析"><br><img src="/2024/07/13/part02/image-1.png" alt="数据分析2"><br><img src="/2024/07/13/part02/image-2.png" alt="数据分析3"></p>
+          <h5 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h5><p>RSS：接收信号强度，计算公式：R&#x3D;10lgp(p：接收端接收到的信息强度 &#x2F; 发射端的信号强度)。一般是负值，-50dbm~0dbm则信号很好，理想状态下0。<br>RSSI：（MAC层信息）接收信号强度指示，人为处理得到的信号强度，RSS通过变换转为正值RSSI（无单位）。</p>
+<p>CSI：（物理层信息）信号状态信息（通信链路的信道属性），描述信号在每条传输路径的衰弱因子：信号散射、环境衰弱、距离衰减等。</p>
+<h5 id="自由空间损耗模型——弗里斯传输公式"><a href="#自由空间损耗模型——弗里斯传输公式" class="headerlink" title="自由空间损耗模型——弗里斯传输公式"></a>自由空间损耗模型——弗里斯传输公式</h5><p><img src="/2024/08/08/part12/image.png" alt="alt text"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wordwarwordwar/article/details/80494899">公式推导</a></p>
+<p>以上两个推导过程结合来看</p>
+<p>自由空间的路径损耗：RSS，是PL&#x3D;10lg(Pt&#x2F;Pr)</p>
 
         
       </div>
@@ -336,27 +312,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2024/07/13/part03/"
-      title="分析思维"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        分析思维
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2024/07/11/part01/"
-      title="制作专属博客"
+      href="/2024/08/06/part11/"
+      title="demo"
      >
 
     <p class="title-text">
       
-        制作专属博客
+        demo
         
     </p>
     <i class="fa-solid fa-angle-right"></i>

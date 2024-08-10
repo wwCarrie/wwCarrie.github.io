@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+<!-- Gaug.es Analytics -->
+<script>
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', 'true');
+    t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
+    t.src = 'https://d36ee2fcip1434.cloudfront.net/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+<!-- End Gaug.es Analytics -->
+
+
+  
+  <title>基于MySQL和Tableau的电商数据分析 | Carrie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="数据集 这份数据集的内容包括第一列用户id，第二列商品id，第三列类别id（比如冰箱属于家电类），第四列用户行为类型（包括pv：浏览&#x2F;fav：收藏&#x2F;cart：加入购物车&#x2F;buy：购买），第五列时间戳。 数据导入首先，使用Navicat将csv格式的数据集导入Mysql。由于数据集过大，这里仅导入前300w行数据，并以此进行分析。 数据处理 更改数据列名  123456">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于MySQL和Tableau的电商数据分析">
+<meta property="og:url" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/index.html">
+<meta property="og:site_name" content="Carrie">
+<meta property="og:description" content="数据集 这份数据集的内容包括第一列用户id，第二列商品id，第三列类别id（比如冰箱属于家电类），第四列用户行为类型（包括pv：浏览&#x2F;fav：收藏&#x2F;cart：加入购物车&#x2F;buy：购买），第五列时间戳。 数据导入首先，使用Navicat将csv格式的数据集导入Mysql。由于数据集过大，这里仅导入前300w行数据，并以此进行分析。 数据处理 更改数据列名  123456">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-1.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-2.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-3.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-4.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-17.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-12.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-11.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-10.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-13.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-14.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-15.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-16.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-19.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-20.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/%E4%BB%AA%E8%A1%A8%E6%9D%BF%201.png">
+<meta property="article:published_time" content="2024-07-28T02:07:40.000Z">
+<meta property="article:modified_time" content="2024-07-30T10:11:34.555Z">
+<meta property="article:author" content="Carrie">
+<meta property="article:tag" content="数分项目实战">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wwcarrie.github.io/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Carrie" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/background.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="  ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Carrie </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M198-120q-25.846 0-44.23-18.384-18.384-18.385-18.384-44.23 0-25.846 18.384-44.23 18.384-18.385 44.23-18.385 25.846 0 44.23 18.385 18.384 18.384 18.384 44.23 0 25.845-18.384 44.23Q223.846-120 198-120Zm538.385 0q-18.846 0-32.923-13.769-14.076-13.769-15.922-33.23-8.692-100.616-51.077-188.654-42.385-88.039-109.885-155.539-67.5-67.501-155.539-109.885Q283-663.462 182.385-672.154q-19.461-1.846-33.23-16.23-13.769-14.385-13.769-33.846t14.076-32.922q14.077-13.461 32.923-12.23 120.076 8.692 226.038 58.768 105.961 50.077 185.73 129.846 79.769 79.769 129.846 185.731 50.077 105.961 58.769 226.038 1.231 18.846-12.538 32.922Q756.461-120 736.385-120Zm-252 0q-18.231 0-32.423-13.461t-18.653-33.538Q418.155-264.23 348.886-333.5q-69.27-69.27-166.501-84.423-20.077-4.462-33.538-18.961-13.461-14.5-13.461-33.346 0-19.076 13.884-33.23 13.884-14.153 33.115-10.922 136.769 15.384 234.384 112.999 97.615 97.615 112.999 234.384 3.231 19.23-10.538 33.115Q505.461-120 484.385-120Z"/></svg>
+      </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/myself1.jpg></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Carrie </div>
+      <div class="dot"></div>
+      <div class="subtitle">看世界 找自己 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://store.steampowered.com" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/wwCarrie" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/README/" rel="tag">README</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%88%86%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" rel="tag">数分项目实战</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag">日常</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          八月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          七月 2024 
+          <div class="archive-count">10 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/08/10/WIFI%E6%84%9F%E7%9F%A5-note-2/" title="note_2 特征" >
+            <div class="recent-link-text">
+              note_2 特征
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/10/WIFI%E6%84%9F%E7%9F%A5-demo-2/" title="demo_2 特征" >
+            <div class="recent-link-text">
+              demo_2 特征
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/" title="note_1 概念" >
+            <div class="recent-link-text">
+              note_1 概念
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/06/WIFI%E6%84%9F%E7%9F%A5-demo_1/" title="demo_1 速率" >
+            <div class="recent-link-text">
+              demo_1 速率
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/05/WIFI%E6%84%9F%E7%9F%A5-need/" title="Some need" >
+            <div class="recent-link-text">
+              Some need
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+
+<article id="post-数分-实战1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        基于MySQL和Tableau的电商数据分析
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-28T02:07:40.000Z" itemprop="datePublished">2024-07-28</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            10k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%88%86%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" rel="tag">数分项目实战</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p><a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/dataset/649">数据集</a></p>
+<p>这份数据集的内容包括第一列用户id，第二列商品id，第三列类别id（比如冰箱属于家电类），第四列用户行为类型（包括pv：浏览&#x2F;fav：收藏&#x2F;cart：加入购物车&#x2F;buy：购买），第五列时间戳。</p>
+<h2 id="数据导入"><a href="#数据导入" class="headerlink" title="数据导入"></a>数据导入</h2><p>首先，使用Navicat将csv格式的数据集导入Mysql。<br>由于数据集过大，这里仅导入前300w行数据，并以此进行分析。</p>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><ol>
+<li>更改数据列名</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">alter table userbehavior    </span><br><span class="line">    change f1 user_id int,    </span><br><span class="line">    change f2 item_id int,    </span><br><span class="line">    change f3 category_id int,    </span><br><span class="line">    change f4 behavior_type varchar(5),    </span><br><span class="line">    change f5 time_stamp int;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查找空值</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select *    </span><br><span class="line">from    </span><br><span class="line">    userbehavior    </span><br><span class="line">where    </span><br><span class="line">    user_id is null    </span><br><span class="line">    or item_id is null    </span><br><span class="line">    or category_id is null    </span><br><span class="line">    or behavior_type is null    </span><br><span class="line">    or time_stamp is null;</span><br></pre></td></tr></table></figure>
+
+<p>返回空值，证明该数据集无空值。</p>
+<ol start="3">
+<li>查找重复值</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select    </span><br><span class="line">    user_id,    </span><br><span class="line">    item_id,    </span><br><span class="line">    time_stamp    </span><br><span class="line">from    </span><br><span class="line">    userbehavior    </span><br><span class="line">group by    </span><br><span class="line">    user_id,    </span><br><span class="line">    item_id,    </span><br><span class="line">    time_stamp    </span><br><span class="line">having    </span><br><span class="line">    count(*) &gt; 1</span><br></pre></td></tr></table></figure>
+<p>找到一行数据为重复</p>
+<p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image.png" alt="alt text"></p>
+<p>检验</p>
+<p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-1.png" alt="alt text"></p>
+<p>重复属实，需要做处理</p>
+<ol start="4">
+<li>去重</li>
+</ol>
+<p>思路：增加一列id，设置为自增的主键，重复的id保留最大的即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/* 增加一列 */</span><br><span class="line"></span><br><span class="line">ALTER TABLE userbehavior add id int first;</span><br><span class="line">ALTER TABLE userbehavior MODIFY id int PRIMARY KEY auto_increment;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/* 删除重复的当中，除最大id外的其他（即只留一个） */</span><br><span class="line"></span><br><span class="line">delete userbehavior    </span><br><span class="line">from    </span><br><span class="line">    userbehavior,    </span><br><span class="line">    (    </span><br><span class="line">        select    </span><br><span class="line">            user_id,    </span><br><span class="line">            item_id,    </span><br><span class="line">            time_stamp,    </span><br><span class="line">            max(id) as max_id    </span><br><span class="line">        from    </span><br><span class="line">            userbehavior    </span><br><span class="line">        group by    </span><br><span class="line">            user_id,    </span><br><span class="line">            item_id,    </span><br><span class="line">            time_stamp    </span><br><span class="line">        having    </span><br><span class="line">            count(*) &gt; 1    </span><br><span class="line">    ) as df1    </span><br><span class="line">where    </span><br><span class="line">    userbehavior.user_id = df1.user_id    </span><br><span class="line">    and userbehavior.item_id = df1.item_id    </span><br><span class="line">    and userbehavior.time_stamp = df1.time_stamp    </span><br><span class="line">    and userbehavior.id &lt; df1.max_id;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>删除异常值</li>
+</ol>
+<p>只保留2017-11-25 00:00:00至2017-12-03 23:59:59的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/* 对日期进行修改，同时分割出天和时 */</span><br><span class="line"></span><br><span class="line">alter table userbehavior add datetimes timestamp(0); -- 0 到s为止</span><br><span class="line">update userbehavior</span><br><span class="line">set datetimes = from_unixtime(time_stamp);</span><br><span class="line"></span><br><span class="line">-- from_unixtime() 有两个参数</span><br><span class="line">-- 将 UNIX 时间戳转换为默认日期时间格式</span><br><span class="line">-- 空默认会使用%Y-%m-%d %H:%i:%s的格式</span><br><span class="line">	</span><br><span class="line">delete </span><br><span class="line">from</span><br><span class="line">	userbehavior</span><br><span class="line">where</span><br><span class="line">	datetimes &gt; &#x27;2017-12-03 23:59:59&#x27;</span><br><span class="line">	or datetimes &lt; &#x27;2017-11-25 00:00:00&#x27;</span><br><span class="line">	</span><br><span class="line">ALTER TABLE userbehavior ADD dates CHAR(10);</span><br><span class="line">alter table userbehavior add hours CHAR(2);</span><br><span class="line"></span><br><span class="line">update userbehavior</span><br><span class="line">set    </span><br><span class="line">    dates = substring(datetimes,1,10),    </span><br><span class="line">    hours = substring(datetimes,12,2);</span><br><span class="line">		</span><br><span class="line">-- SUBSTRING(原,起始,终止)</span><br></pre></td></tr></table></figure>
+
+<h2 id="分析思路"><a href="#分析思路" class="headerlink" title="分析思路"></a>分析思路</h2><p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-2.png" alt="alt text"></p>
+<h3 id="用户获取分析"><a href="#用户获取分析" class="headerlink" title="用户获取分析"></a>用户获取分析</h3><p>PV是浏览量，UV是浏览人数（去重），PV&#x2F;UV称为浏览深度，统计单位：每天</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">create table df_pv_uv</span><br><span class="line">(</span><br><span class="line">	dates char(10),</span><br><span class="line">	PV int(9),</span><br><span class="line">	UV int(9),</span><br><span class="line">	PVUV decimal(10,2)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">INSERT into df_pv_uv</span><br><span class="line">select</span><br><span class="line">	dates,</span><br><span class="line">	count(if(behavior_type=&#x27;pv&#x27;,1,null)) as PV,</span><br><span class="line">	count(DISTINCT user_id) as UV,</span><br><span class="line">	round(count(if(behavior_type=&#x27;pv&#x27;,1,null))/count(DISTINCT user_id),2) as PVUV</span><br><span class="line">from userbehavior</span><br><span class="line">GROUP BY dates;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户留存分析"><a href="#用户留存分析" class="headerlink" title="用户留存分析"></a>用户留存分析</h3><p>次日留存率问题，计算次日留存率和三日留存率</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/* 次日留存率 */</span><br><span class="line"></span><br><span class="line">CREATE TABLE df_retention_1 ( dates CHAR ( 10 ), retention_1 FLOAT );</span><br><span class="line"></span><br><span class="line">insert into df_retention_1    </span><br><span class="line">select    </span><br><span class="line">   ub1.dates,    </span><br><span class="line">   count(ub2.user_id)/count(ub1.user_id) as retention_1    </span><br><span class="line">from    </span><br><span class="line">  (    </span><br><span class="line">  select    </span><br><span class="line">     distinct user_id,    </span><br><span class="line">     dates    </span><br><span class="line">  from    </span><br><span class="line">     userbehavior    </span><br><span class="line">  ) as ub1    </span><br><span class="line">left join    </span><br><span class="line">   (    </span><br><span class="line">  select    </span><br><span class="line">     distinct user_id,    </span><br><span class="line">     dates    </span><br><span class="line">  from    </span><br><span class="line">     userbehavior    </span><br><span class="line">  ) as ub2 on ub2.user_id = ub1.user_id    </span><br><span class="line">  and ub2.dates = date_add(ub1.dates,interval 1 day)    </span><br><span class="line">group by    </span><br><span class="line">   ub1.dates;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/* 三日留存率 */</span><br><span class="line"></span><br><span class="line">CREATE TABLE df_retention_3</span><br><span class="line">(</span><br><span class="line">	dates char(10),</span><br><span class="line">	retetion_3 FLOAT</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into df_retention_3</span><br><span class="line">select</span><br><span class="line">	ub1.dates,</span><br><span class="line">	count(ub2.user_id)/count(ub1.user_id) as retetion_3</span><br><span class="line">from</span><br><span class="line">(</span><br><span class="line">	select</span><br><span class="line">		DISTINCT user_id,</span><br><span class="line">		dates</span><br><span class="line">	from userbehavior</span><br><span class="line">) as ub1</span><br><span class="line">left join</span><br><span class="line">(</span><br><span class="line">	select</span><br><span class="line">		DISTINCT user_id,</span><br><span class="line">		dates</span><br><span class="line">	from userbehavior</span><br><span class="line">) as ub2 </span><br><span class="line">on ub2.user_id = ub1.user_id</span><br><span class="line">and ub2.dates = DATE_ADD(ub1.dates,INTERVAL 3 day)</span><br><span class="line">GROUP BY ub1.dates;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户行为分析"><a href="#用户行为分析" class="headerlink" title="用户行为分析"></a>用户行为分析</h3><p>统计每天每时用户群体的各种行为（其实是时间序列分析），因此以dates和hours分组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE df_timeseries</span><br><span class="line">(</span><br><span class="line">	dates char(10),</span><br><span class="line">	hours int(9),</span><br><span class="line">	PV int(9),</span><br><span class="line">	CART int(9),</span><br><span class="line">	FAV int(9),</span><br><span class="line">	BUY int(9)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into df_timeseries    </span><br><span class="line">select    </span><br><span class="line">  dates,    </span><br><span class="line">  hours,    </span><br><span class="line">  count(if(behavior_type = &#x27;pv&#x27;,1,null)) as PV,    </span><br><span class="line">  count(if(behavior_type = &#x27;cart&#x27;,1,null)) as CART,    </span><br><span class="line">  count(if(behavior_type = &#x27;fav&#x27;,1,null)) as FAV,    </span><br><span class="line">  count(if(behavior_type = &#x27;buy&#x27;,1,null)) as BUY    </span><br><span class="line">from    </span><br><span class="line">  userbehavior    </span><br><span class="line">group by    </span><br><span class="line">  dates,    </span><br><span class="line">  hours    </span><br><span class="line">order by    </span><br><span class="line">  dates asc,    </span><br><span class="line">  hours asc;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户转化率分析"><a href="#用户转化率分析" class="headerlink" title="用户转化率分析"></a>用户转化率分析</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">/* 计算总的各自有多少 */</span><br><span class="line"></span><br><span class="line">CREATE VIEW user_behavior_total AS SELECT</span><br><span class="line">user_id,</span><br><span class="line">item_id,</span><br><span class="line">count( IF ( behavior_type = &#x27;pv&#x27;, 1, NULL ) ) AS PV,</span><br><span class="line">count( IF ( behavior_type = &#x27;cart&#x27;, 1, NULL ) ) AS CART,</span><br><span class="line">count( IF ( behavior_type = &#x27;fav&#x27;, 1, NULL ) ) AS FAV,</span><br><span class="line">count( IF ( behavior_type = &#x27;buy&#x27;, 1, NULL ) ) AS BUY </span><br><span class="line">FROM</span><br><span class="line">	userbehavior </span><br><span class="line">GROUP BY</span><br><span class="line">	user_id,</span><br><span class="line">	item_id;</span><br><span class="line"></span><br><span class="line">/* 不关心次数，只关心有无 */</span><br><span class="line"></span><br><span class="line">CREATE VIEW user_behavior_total_standard AS SELECT</span><br><span class="line">user_id,</span><br><span class="line">item_id,</span><br><span class="line">IF</span><br><span class="line">	( PV &gt; 0, 1, 0 ) AS ifpv,</span><br><span class="line">IF</span><br><span class="line">	( CART &gt; 0, 1, 0 ) AS ifcart,</span><br><span class="line">IF</span><br><span class="line">	( FAV &gt; 0, 1, 0 ) AS iffav,</span><br><span class="line">IF</span><br><span class="line">	( BUY &gt; 0, 1, 0 ) AS ifbuy </span><br><span class="line">FROM</span><br><span class="line">	user_behavior_total </span><br><span class="line">GROUP BY</span><br><span class="line">	user_id,</span><br><span class="line">	item_id;</span><br><span class="line"></span><br><span class="line">/* 连接成一个 */</span><br><span class="line"></span><br><span class="line">CREATE VIEW user_path AS SELECT</span><br><span class="line">user_id,</span><br><span class="line">item_id,</span><br><span class="line">CONCAT( ifpv, ifcart, iffav, ifbuy ) AS path </span><br><span class="line">FROM</span><br><span class="line">	user_behavior_total_standard;</span><br><span class="line"></span><br><span class="line">/* 筛选 正则表达式 分类 */</span><br><span class="line"></span><br><span class="line">CREATE VIEW user_path_num AS SELECT</span><br><span class="line">path,</span><br><span class="line">CASE</span><br><span class="line">	</span><br><span class="line">	WHEN path = 1001 THEN</span><br><span class="line">	&#x27;浏览-/-/-购买&#x27; </span><br><span class="line">	WHEN path = 1010 THEN</span><br><span class="line">	&#x27;浏览-/-加购-/&#x27; </span><br><span class="line">	WHEN path = 1011 THEN</span><br><span class="line">	&#x27;浏览-/-加购-购买&#x27; </span><br><span class="line">	WHEN path = 1100 THEN</span><br><span class="line">	&#x27;浏览-收藏-/-/&#x27; </span><br><span class="line">	WHEN path = 1101 THEN</span><br><span class="line">	&#x27;浏览-收藏-/-购买&#x27; </span><br><span class="line">	WHEN path = 1110 THEN</span><br><span class="line">	&#x27;浏览-收藏-加购-/&#x27; </span><br><span class="line">	WHEN path = 1111 THEN</span><br><span class="line">	&#x27;浏览-收藏-加购-购买&#x27; ELSE &#x27;浏览-/-/-/&#x27; </span><br><span class="line">	END AS description,</span><br><span class="line">	count( * ) AS path_num </span><br><span class="line">FROM</span><br><span class="line">	user_path </span><br><span class="line">WHERE</span><br><span class="line">	path REGEXP &#x27;^1&#x27; </span><br><span class="line">GROUP BY</span><br><span class="line">	path;</span><br><span class="line"></span><br><span class="line">/* 汇总 */</span><br><span class="line"></span><br><span class="line">CREATE TABLE df_buy_path    </span><br><span class="line">  (    </span><br><span class="line">  buy_path varchar(55),    </span><br><span class="line">  buy_path_num int(9)    </span><br><span class="line">  );    </span><br><span class="line"></span><br><span class="line">INSERT INTO df_buy_path    </span><br><span class="line">SELECT   </span><br><span class="line">  &#x27;浏览&#x27;,    </span><br><span class="line">  sum(path_num) as buy_path_num    </span><br><span class="line">FROM  </span><br><span class="line">  user_path_num;    </span><br><span class="line"></span><br><span class="line">INSERT INTO df_buy_path    </span><br><span class="line">SELECT    </span><br><span class="line">  &#x27;浏览后收藏加购&#x27;,    </span><br><span class="line">   sum(IF(path = 1101 OR   </span><br><span class="line">    path = 1100 OR    </span><br><span class="line">    path = 1010 or    </span><br><span class="line">    path = 1011 or    </span><br><span class="line">    path = 1110 or    </span><br><span class="line">    path = 1111,path_num,null )) as buy_path_num    </span><br><span class="line">FROM  </span><br><span class="line">  user_path_num;    </span><br><span class="line"></span><br><span class="line">INSERT INTO df_buy_path    </span><br><span class="line">SELECT</span><br><span class="line">  &#x27;浏览后收藏加购后购买&#x27;,    </span><br><span class="line">  sum(IF(path = 1101 OR    </span><br><span class="line">    path = 1011 OR    </span><br><span class="line">    path = 1111,path_num,null )) as buy_path_num    </span><br><span class="line">FROM    </span><br><span class="line">  user_path_num;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户定位分析"><a href="#用户定位分析" class="headerlink" title="用户定位分析"></a>用户定位分析</h3><p>采用常见的RFM模型，即根据R（最近一次消费的时间间隔）F（一定时间内的消费频率）M（一定时间内的消费金额）给用户分为8类</p>
+<p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-3.png" alt="alt text"></p>
+<p>由于，此处数据没有消费金额。因此只考虑R和F，分类4类</p>
+<ol>
+<li>计算R和F值</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">-- R计算</span><br><span class="line"></span><br><span class="line">CREATE VIEW c as</span><br><span class="line">SELECT</span><br><span class="line">	user_id,</span><br><span class="line">	max(dates) as &#x27;last_buy_date&#x27;</span><br><span class="line">from</span><br><span class="line">	userbehavior</span><br><span class="line">where</span><br><span class="line">	behavior_type = &#x27;buy&#x27;</span><br><span class="line">GROUP BY</span><br><span class="line">	user_id;</span><br><span class="line">	</span><br><span class="line">-- F计算</span><br><span class="line"></span><br><span class="line">CREATE VIEW d as</span><br><span class="line">SELECT</span><br><span class="line">	user_id,</span><br><span class="line">	count(user_id) as &#x27;buy_times&#x27;</span><br><span class="line">FROM</span><br><span class="line">	userbehavior</span><br><span class="line">WHERE</span><br><span class="line">	behavior_type = &#x27;buy&#x27;</span><br><span class="line">GROUP BY</span><br><span class="line">	user_id;</span><br><span class="line"></span><br><span class="line">-- 二者合称为一个新表</span><br><span class="line"></span><br><span class="line">CREATE TABLE df_rfm_model</span><br><span class="line">(</span><br><span class="line">	user_id int(9),</span><br><span class="line">	recency char(10), -- 近期</span><br><span class="line">	frequency int(9) -- 频率</span><br><span class="line">);</span><br><span class="line">INSERT INTO df_rfm_model</span><br><span class="line">SELECT</span><br><span class="line">	user_id,</span><br><span class="line">	last_buy_date,</span><br><span class="line">	buy_times</span><br><span class="line">FROM</span><br><span class="line">	c</span><br><span class="line">JOIN</span><br><span class="line">	d USING(user_id);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>量化，分级</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">-- 量化R</span><br><span class="line"></span><br><span class="line">ALTER TABLE df_rfm_model add r_score int(9);</span><br><span class="line"></span><br><span class="line">update df_rfm_model</span><br><span class="line">set r_score = </span><br><span class="line">	case</span><br><span class="line">		when recency = &#x27;2017-12-03&#x27; then 100</span><br><span class="line">		when recency = &#x27;2017-12-02&#x27; or recency = &#x27;2017-12-01&#x27; then 80</span><br><span class="line">		when recency = &#x27;2017-11-30&#x27; or recency = &#x27;2017-11-29&#x27; then 60</span><br><span class="line">		when recency = &#x27;2017-11-28&#x27; or recency = &#x27;2017-11-27&#x27; then 40</span><br><span class="line">		else 20</span><br><span class="line">	END;</span><br><span class="line"></span><br><span class="line">-- 量化F</span><br><span class="line"></span><br><span class="line">alter table df_rfm_model add f_score int(9);</span><br><span class="line"></span><br><span class="line">update df_rfm_model</span><br><span class="line">set f_score = </span><br><span class="line">	case</span><br><span class="line">		when frequency &gt; 15 then 100</span><br><span class="line">		when frequency BETWEEN 12 and 14 then 90</span><br><span class="line">		when frequency BETWEEN 9 and 11 then 70</span><br><span class="line">		when frequency BETWEEN 6 and 8 then 50</span><br><span class="line">		when frequency BETWEEN 3 and 5 then 30</span><br><span class="line">		else 10</span><br><span class="line">	end;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>平均值（创建视图）</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">-- 平均值</span><br><span class="line">create view f as</span><br><span class="line">select</span><br><span class="line">	e.user_id,</span><br><span class="line">	recency,</span><br><span class="line">	r_score,</span><br><span class="line">	avg_r,</span><br><span class="line">	frequency,</span><br><span class="line">	f_score,</span><br><span class="line">	avg_f</span><br><span class="line">FROM</span><br><span class="line">(</span><br><span class="line">	SELECT</span><br><span class="line">		user_id,</span><br><span class="line">		avg(r_score) over() as avg_r,</span><br><span class="line">		avg(f_score) over() as avg_f</span><br><span class="line">	from</span><br><span class="line">		df_rfm_model</span><br><span class="line">	) as e</span><br><span class="line">join</span><br><span class="line">	df_rfm_model using (user_id);</span><br></pre></td></tr></table></figure>
+
+<p>从两个维度把用户分成四类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/* 用户分类为四类 */</span><br><span class="line">create table df_rfm_result    </span><br><span class="line">    (    </span><br><span class="line">    user_class varchar(5),    </span><br><span class="line">    user_class_num int(9)    </span><br><span class="line">    );    </span><br><span class="line">		</span><br><span class="line">-- 插入数据到 df_rfm_result</span><br><span class="line">INSERT INTO df_rfm_result</span><br><span class="line">SELECT</span><br><span class="line">    user_class,</span><br><span class="line">    COUNT(*) AS user_class_num</span><br><span class="line">FROM (</span><br><span class="line">    SELECT</span><br><span class="line">        *,</span><br><span class="line">        CASE</span><br><span class="line">            WHEN (f_score &gt;= avg_f AND r_score &gt;= avg_r) THEN &#x27;价值用户&#x27;</span><br><span class="line">            WHEN (f_score &gt;= avg_f AND r_score &lt; avg_r) THEN &#x27;保持用户&#x27;</span><br><span class="line">            WHEN (f_score &lt; avg_f AND r_score &gt;= avg_r) THEN &#x27;发展用户&#x27;</span><br><span class="line">            ELSE &#x27;挽留用户&#x27;</span><br><span class="line">        END AS user_class</span><br><span class="line">    FROM f</span><br><span class="line">) AS g</span><br><span class="line">GROUP BY</span><br><span class="line">    user_class;</span><br></pre></td></tr></table></figure>
+
+<h3 id="商品分析"><a href="#商品分析" class="headerlink" title="商品分析"></a>商品分析</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">-- 热门品类 前TOP10   </span><br><span class="line"></span><br><span class="line">create table df_popular_category    </span><br><span class="line">  (    </span><br><span class="line">  category_id int(9),    </span><br><span class="line">  category_pv int(9)    </span><br><span class="line">  );    </span><br><span class="line">insert into df_popular_category    </span><br><span class="line">select    </span><br><span class="line">  category_id,    </span><br><span class="line">  count(if(behavior_type = &#x27;pv&#x27;,1,null)) as category_pv    </span><br><span class="line">from    </span><br><span class="line">  userbehavior    </span><br><span class="line">group by    </span><br><span class="line">  category_id    </span><br><span class="line">order by    </span><br><span class="line">  count(if(behavior_type = &#x27;pv&#x27;,1,null)) desc    </span><br><span class="line">limit 10;    </span><br><span class="line"></span><br><span class="line">-- 热门商品</span><br><span class="line"></span><br><span class="line">create table df_popular_item    </span><br><span class="line">  (    </span><br><span class="line">  item_id int(9),    </span><br><span class="line">  item_pv int(9)    </span><br><span class="line">  );    </span><br><span class="line">insert into df_popular_item    </span><br><span class="line">select    </span><br><span class="line">  item_id,    </span><br><span class="line">  count(if(behavior_type = &#x27;pv&#x27;,1,null)) as item_pv    </span><br><span class="line">from    </span><br><span class="line">  userbehavior    </span><br><span class="line">group by    </span><br><span class="line">  item_id    </span><br><span class="line">order by    </span><br><span class="line">  count(if(behavior_type = &#x27;pv&#x27;,1,null)) desc    </span><br><span class="line">limit 10;</span><br></pre></td></tr></table></figure>
+
+<h3 id="商品特征分析"><a href="#商品特征分析" class="headerlink" title="商品特征分析"></a>商品特征分析</h3><p>根据category_id进行分组，统计每个类别：商品被浏览、收藏、加入购物车、购买的次数，顺便计算了转化率</p>
+<ul>
+<li>转化率：品类被多少用户浏览数&#x2F;最后有多少用户购买了它</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">create table df_category_conv_rate    </span><br><span class="line">  (    </span><br><span class="line">  category_id int(9),    </span><br><span class="line">  PV int(9),    </span><br><span class="line">  FAV int(9),    </span><br><span class="line">  CART int(9),    </span><br><span class="line">  BUY int(9),    </span><br><span class="line">  category_conv_rate float    </span><br><span class="line">  );    </span><br><span class="line">insert into df_category_conv_rate    </span><br><span class="line">select    </span><br><span class="line">  category_id,    </span><br><span class="line">  count(if(behavior_type = &#x27;pv&#x27;,1,null)) as PV,    </span><br><span class="line">  count(if(behavior_type = &#x27;fav&#x27;,1,null)) as FAV,    </span><br><span class="line">  count(if(behavior_type = &#x27;cart&#x27;,1,null)) as CART,    </span><br><span class="line">  count(if(behavior_type = &#x27;buy&#x27;,1,null)) as BUY,    </span><br><span class="line">  count(distinct if(behavior_type = &#x27;buy&#x27;,user_id,null))/count(distinct user_id) as category_conv_rate    </span><br><span class="line">from    </span><br><span class="line">  userbehavior    </span><br><span class="line">group by    </span><br><span class="line">  category_id    </span><br><span class="line">order by    </span><br><span class="line">  category_conv_rate desc;</span><br></pre></td></tr></table></figure>
+
+<p>初步数据处理和分析，已经完成。</p>
+<p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-4.png" alt="alt text"></p>
+<h2 id="分析和可视化"><a href="#分析和可视化" class="headerlink" title="分析和可视化"></a>分析和可视化</h2><p>首先，修改下名字，然后观察看每个表和视图的数据情况</p>
+<p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-17.png" alt="alt text"></p>
+<p>导入Tableau做可视化</p>
+<h3 id="用户流量分析"><a href="#用户流量分析" class="headerlink" title="用户流量分析"></a>用户流量分析</h3><p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-12.png" alt="alt text"></p>
+<ol>
+<li><p>由于我们的数据集（2017-11-15）是从星期六开始，从理论上来讲周末的流量会大一些，统计周期的前两天和后两天的PV值刚好印证了这一特点。第二个周末的PV值要显著高于第一个周末，推测原因是由于进入12月商家为了’双十二‘提前开启了预热活动，以此吸引用户。</p>
+</li>
+<li><p>PV值有一定波动，但UV值基本不变，维持在25k左右，这表明热衷于购物的用户很大一部分都是同一批人，即有很大一部分都可能是老客户，一方面商家在做活动时可以有所偏向这部分群体，另一方面商家也需要调整手段来吸引更多新用户。</p>
+</li>
+<li><p>PV&#x2F;UV记为浏览深度，可以看到大体保持平稳状态。</p>
+</li>
+</ol>
+<h3 id="用户留存分析-1"><a href="#用户留存分析-1" class="headerlink" title="用户留存分析"></a>用户留存分析</h3><p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-11.png" alt="alt text"></p>
+<ol>
+<li><p>留存率在12月之前一直稳定在80%左右，进入12月份后急剧上升，持续逼近100%，显著说明商家的活动成功吸引到了用户。</p>
+</li>
+<li><p>本图中留存率迅速衰减的原因是由于数据集跨度不够导致的，但我们可以设想继续分析‘双十二’活动附近几天的用户留存率变化在一定程度上评估某一次活动的效果，进而商家就能知道用户喜欢什么，进而调整自己的策划方案，实现用户的长期价值。</p>
+</li>
+</ol>
+<h3 id="用户行为分析-1"><a href="#用户行为分析-1" class="headerlink" title="用户行为分析"></a>用户行为分析</h3><p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-10.png" alt="alt text"></p>
+<ol>
+<li><p>从波峰波谷来看，符合国民的日常作息，流量高峰出现在夜间8-10点，低峰在0-6点，同时购买量、收藏量、加购量呈现出明显的正相关，这也符合一般认知，商家需要做的是在高峰期保证平台正常运行以免给用户带来不好的体验感。</p>
+</li>
+<li><p>商家可以针对流量高峰采取行动，例如先是在高峰期采取更多推送，用户不但不反感还更有可能点击查看，然后采用限时限量优惠，比如每天九点限量发放满减优惠券以此实现收益扩大化。</p>
+</li>
+</ol>
+<h3 id="用户转化率分析-1"><a href="#用户转化率分析-1" class="headerlink" title="用户转化率分析"></a>用户转化率分析</h3><p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-13.png" alt="alt text"></p>
+<p>从浏览到收藏加购仅有5%，从收藏加购再到下单购买仅有10%（最初浏览量的0.5%），我们这里从中间两个阶段入手：</p>
+<ol>
+<li><p>从浏览到收藏加购来看，大多数用户在浏览后并没有进行收藏或加入购物车。需要分析用户在浏览时遇到的问题，例如产品展示不吸引人，或是促销信息不明确等等，商家需要考虑的是推出限时优惠或打折促销，激励用户收藏和加入购物车，毕竟从之前的分析来看收藏加购和购买呈现出明显的正相关性。</p>
+</li>
+<li><p>从收藏加购到购买的转化率仅为0.52%，表明用户在收藏或加入购物车后，因价格、支付流程、物流问题等等因素未完成购买，建议商家分阶段进行A&#x2F;B测试，尝试不同的页面设计、促销策略和用户体验优化，找到最佳方案。</p>
+</li>
+</ol>
+<h3 id="用户定位分析-1"><a href="#用户定位分析-1" class="headerlink" title="用户定位分析"></a>用户定位分析</h3><p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-14.png" alt="alt text"></p>
+<ol>
+<li><p>个人认为看整个平台的用户定位分析可能意义不大，更好的是看平台之间的对比或者是每个商家的用户分层状况，以此来评估这个商家或者平台的经营状况如何。</p>
+</li>
+<li><p>这里发展用户、价值用户、挽留用户三者占比相当，保持用户占比较少。</p>
+</li>
+<li><p>就商家的用户定位分析而言，针对不同的用户群体，他们可以使用不同的策略。例如针对价值用户要继续维持之前的服务不能松懈；针对发展用户，可以采取第二次购买优惠的手段来提高他们的购买频率；针对保持用户，属于一段时间没来的忠实用户，可以采取给这类用户单独发放优惠券的形式来吸引他们；对于挽留用户，应尽可能地采取措施挽回，整体上实现精细化运营。</p>
+</li>
+</ol>
+<h3 id="热门商品-品类TOP10"><a href="#热门商品-品类TOP10" class="headerlink" title="热门商品&#x2F;品类TOP10"></a>热门商品&#x2F;品类TOP10</h3><p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-15.png" alt="alt text">  <img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-16.png" alt="alt text"></p>
+<p>针对热门商品和热门类别，平台可以将它放在主页推荐位显眼的地方更容易吸引顾客</p>
+<h3 id="商品特征分析-1"><a href="#商品特征分析-1" class="headerlink" title="商品特征分析"></a>商品特征分析</h3><p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-19.png" alt="alt text"></p>
+<p>发现密集集中于平均值处，因此猜测数据受极小值影响很大，所以这里筛选PV&gt;15000的数据，并设置新的字段：</p>
+<pre><code>IF [PV] &gt; 15000 THEN [PV] ELSE NULL END
+</code></pre>
+<p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/image-20.png" alt="alt text"></p>
+<ol>
+<li><p>第一象限的品类点击量高购买量高，很可能是必需品（例如卫生纸、洗衣粉等等），同时每个品类的下属商品应该有很多种，用户会有多种选择；</p>
+</li>
+<li><p>第二象限的品类点击量低但是购买量高，说明用户购买非常果断，而且可选择的商品也比较少，个人推测存在一定垄断的，比如买可乐，一般固定为百事可乐或者可口可乐，很少有人会浏览其他的品牌（仅代表个人）；</p>
+</li>
+<li><p>第四象限的品类点击量高但是购买量低，个人认为这应当是弹性较高的奢侈品，比如珠宝首饰、电子设备等等，你总是会浏览很多次又货比三家之后才购买；</p>
+</li>
+<li><p>第三象限的品类点击量低购买量也低，个人认为这类商品可能是有很多的替代品，比如你在楼下小卖部就能买到的矿泉水，你也不太可能会为了哪个牌子特地去网上买，因此用户对这类商品的浏览量比较低而且也不倾向于购买他们。</p>
+</li>
+</ol>
+<h2 id="仪表盘搭建"><a href="#仪表盘搭建" class="headerlink" title="仪表盘搭建"></a>仪表盘搭建</h2><p>这一次主风格采用粉紫色系，还在摸索当中..</p>
+<p><img src="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/%E4%BB%AA%E8%A1%A8%E6%9D%BF%201.png" alt="alt text"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>PV上升的同时UV维持在22K左右，平台流量以老用户为主，吸引新用户能力不足；</p>
+</li>
+<li><p>‘双十二’预热活动有效提升了用户的短期留存率将近20个百分点；</p>
+</li>
+<li><p>在晚间20-22点流量高峰期间建议发放限时限量优惠，扩大收益；</p>
+</li>
+<li><p>从浏览到收藏加购再到购买的转化率分别为5.32%和0.52%，建议通过A&#x2F;B测试调整策略来提高转化率；</p>
+</li>
+<li><p>对于不同的用户和商品应该实现精细化运营（详见上文）</p>
+</li>
+</ol>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2024/08/05/WIFI%E6%84%9F%E7%9F%A5-need/"
+      title="Some need"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Some need
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/07/28/%E6%95%B0%E5%88%86-SQL/"
+      title="SQL"
+     >
+
+    <p class="title-text">
+      
+        SQL
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+
+
+  <script src="https://cdn.staticfile.org/twikoo/1.6.26/twikoo.all.min.js"></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="tcomment"></div>
+  </div>
+  <script>
+      twikoo.init({
+          envId: 'https://sucarrie.netlify.app/.netlify/functions/twikoo',
+          el: '#tcomment',
+          region: 'ap-guangzhou',
+          path: 'location.pathname',
+          lang: 'zh-CN',
+      })
+  </script>
+  
+
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Carrie<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

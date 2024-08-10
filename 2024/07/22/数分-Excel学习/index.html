@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+<!-- Gaug.es Analytics -->
+<script>
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', 'true');
+    t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
+    t.src = 'https://d36ee2fcip1434.cloudfront.net/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+<!-- End Gaug.es Analytics -->
+
+
+  
+  <title>Excel学习 | Carrie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="Excel 基础概念 对数据进行备份  右键——移动或复制——移到最后——创建副本——隐藏 需要显现的时候，右键任意sheet，取消隐藏 数据理解     ctrl + shift + L  &#x2F;* 全部筛选 *&#x2F;  UV与PV：去重与不去重  CPC：单次广告的成本 数据透视表筛选  插入切片器 透视表内的筛选  都可以进行筛选，区别是：切片器不只应用于透视表。 双击可以更改名称：  插入字段 函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Excel学习">
+<meta property="og:url" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Carrie">
+<meta property="og:description" content="Excel 基础概念 对数据进行备份  右键——移动或复制——移到最后——创建副本——隐藏 需要显现的时候，右键任意sheet，取消隐藏 数据理解     ctrl + shift + L  &#x2F;* 全部筛选 *&#x2F;  UV与PV：去重与不去重  CPC：单次广告的成本 数据透视表筛选  插入切片器 透视表内的筛选  都可以进行筛选，区别是：切片器不只应用于透视表。 双击可以更改名称：  插入字段 函">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-1.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-3.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-2.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-4.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-5.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-6.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-7.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-8.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-9.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-10.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-11.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-12.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-13.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-14.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-15.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-16.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-17.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-18.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-19.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-22.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-21.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-23.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-24.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-25.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-26.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-27.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-28.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-29.png">
+<meta property="article:published_time" content="2024-07-22T06:49:45.000Z">
+<meta property="article:modified_time" content="2024-07-22T06:49:45.188Z">
+<meta property="article:author" content="Carrie">
+<meta property="article:tag" content="数据分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wwcarrie.github.io/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Carrie" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/background.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="  ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Carrie </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M198-120q-25.846 0-44.23-18.384-18.384-18.385-18.384-44.23 0-25.846 18.384-44.23 18.384-18.385 44.23-18.385 25.846 0 44.23 18.385 18.384 18.384 18.384 44.23 0 25.845-18.384 44.23Q223.846-120 198-120Zm538.385 0q-18.846 0-32.923-13.769-14.076-13.769-15.922-33.23-8.692-100.616-51.077-188.654-42.385-88.039-109.885-155.539-67.5-67.501-155.539-109.885Q283-663.462 182.385-672.154q-19.461-1.846-33.23-16.23-13.769-14.385-13.769-33.846t14.076-32.922q14.077-13.461 32.923-12.23 120.076 8.692 226.038 58.768 105.961 50.077 185.73 129.846 79.769 79.769 129.846 185.731 50.077 105.961 58.769 226.038 1.231 18.846-12.538 32.922Q756.461-120 736.385-120Zm-252 0q-18.231 0-32.423-13.461t-18.653-33.538Q418.155-264.23 348.886-333.5q-69.27-69.27-166.501-84.423-20.077-4.462-33.538-18.961-13.461-14.5-13.461-33.346 0-19.076 13.884-33.23 13.884-14.153 33.115-10.922 136.769 15.384 234.384 112.999 97.615 97.615 112.999 234.384 3.231 19.23-10.538 33.115Q505.461-120 484.385-120Z"/></svg>
+      </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/myself1.jpg></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Carrie </div>
+      <div class="dot"></div>
+      <div class="subtitle">看世界 找自己 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://store.steampowered.com" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/wwCarrie" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/README/" rel="tag">README</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%88%86%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" rel="tag">数分项目实战</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag">日常</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          八月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          七月 2024 
+          <div class="archive-count">10 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/08/10/WIFI%E6%84%9F%E7%9F%A5-note-2/" title="note_2 特征" >
+            <div class="recent-link-text">
+              note_2 特征
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/10/WIFI%E6%84%9F%E7%9F%A5-demo-2/" title="demo_2 特征" >
+            <div class="recent-link-text">
+              demo_2 特征
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/" title="note_1 概念" >
+            <div class="recent-link-text">
+              note_1 概念
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/06/WIFI%E6%84%9F%E7%9F%A5-demo_1/" title="demo_1 速率" >
+            <div class="recent-link-text">
+              demo_1 速率
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/05/WIFI%E6%84%9F%E7%9F%A5-need/" title="Some need" >
+            <div class="recent-link-text">
+              Some need
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+
+<article id="post-数分-Excel学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Excel学习
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-22T06:49:45.000Z" itemprop="datePublished">2024-07-22</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="Excel"><a href="#Excel" class="headerlink" title="Excel"></a>Excel</h1><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image.png" alt="学习路线"></p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><ol>
+<li>对数据进行备份</li>
+</ol>
+<p>右键——移动或复制——移到最后——创建副本——隐藏</p>
+<p>需要显现的时候，右键任意sheet，取消隐藏</p>
+<h2 id="数据理解"><a href="#数据理解" class="headerlink" title="数据理解"></a>数据理解</h2><pre><code>     ctrl + shift + L  /* 全部筛选 */
+</code></pre>
+<p>UV与PV：去重与不去重</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-1.png" alt="UV与PV"></p>
+<p>CPC：单次广告的成本</p>
+<h3 id="数据透视表"><a href="#数据透视表" class="headerlink" title="数据透视表"></a>数据透视表</h3><h4 id="筛选"><a href="#筛选" class="headerlink" title="筛选"></a>筛选</h4><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-3.png" alt="alt text"></p>
+<ol>
+<li>插入切片器</li>
+<li>透视表内的筛选<br><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-2.png" alt="alt text"></li>
+</ol>
+<p>都可以进行筛选，区别是：切片器不只应用于透视表。</p>
+<p>双击可以更改名称：</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-4.png" alt="alt text"></p>
+<h4 id="插入字段"><a href="#插入字段" class="headerlink" title="插入字段"></a>插入字段</h4><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-5.png" alt="alt text"></p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="sum函数"><a href="#sum函数" class="headerlink" title="sum函数"></a>sum函数</h3><h4 id="新建窗口"><a href="#新建窗口" class="headerlink" title="新建窗口"></a>新建窗口</h4><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-6.png" alt="alt text"></p>
+<h4 id="冻结窗口"><a href="#冻结窗口" class="headerlink" title="冻结窗口"></a>冻结窗口</h4><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-7.png" alt="alt text"></p>
+<h4 id="sum特殊"><a href="#sum特殊" class="headerlink" title="sum特殊"></a>sum特殊</h4><pre><code>     win + 上下左右 /* 任意分屏 */
+</code></pre>
+<p>中间加逗号可以分开来选。</p>
+<h3 id="sumif函数"><a href="#sumif函数" class="headerlink" title="sumif函数"></a>sumif函数</h3><h4 id="锁定"><a href="#锁定" class="headerlink" title="锁定"></a>锁定</h4><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-8.png" alt="alt text"></p>
+<h4 id="sumif"><a href="#sumif" class="headerlink" title="sumif"></a>sumif</h4><pre><code>     sumif( 比对的数据行，标准，要的数据行)
+</code></pre>
+<h4 id="sumifs"><a href="#sumifs" class="headerlink" title="sumifs"></a>sumifs</h4><pre><code>     sumifs( 要的数据行，对比的数据行1，标准1，对比数据行2，标准2，...)
+</code></pre>
+<h4 id="环比与同比"><a href="#环比与同比" class="headerlink" title="环比与同比"></a>环比与同比</h4><p>同比：上一年或者上一月<br>环比：上一个相邻的</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-9.png" alt="alt text"></p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-10.png" alt="alt text"></p>
+<h4 id="拆解日期"><a href="#拆解日期" class="headerlink" title="拆解日期"></a>拆解日期</h4><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-11.png" alt="alt text"></p>
+<h4 id="组合日期"><a href="#组合日期" class="headerlink" title="组合日期"></a>组合日期</h4><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-12.png" alt="alt text"></p>
+<p>如果前一个月没有那一天，就会返回第一天。跨年算的结果是正确的。</p>
+<p>不要用Excel的日期格式去存储日期，要用字符串格式。</p>
+<h4 id="求每个月最后一天"><a href="#求每个月最后一天" class="headerlink" title="求每个月最后一天"></a>求每个月最后一天</h4><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-13.png" alt="alt text"></p>
+<h4 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h4><p>符号要加双引号<br>后面跟&amp;</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-14.png" alt="alt text"></p>
+<p>总结</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-15.png" alt="alt text"></p>
+<h3 id="subtotal"><a href="#subtotal" class="headerlink" title="subtotal"></a>subtotal</h3><pre><code>     subtotal(选择功能，要求和的)
+</code></pre>
+<h4 id="subtotal和sum区别"><a href="#subtotal和sum区别" class="headerlink" title="subtotal和sum区别"></a>subtotal和sum区别</h4><p>subtotal可以根据原表筛选，进行筛选求和，更灵活。</p>
+<h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><pre><code>     if(判断条件，True返回结果，False返回结果)
+</code></pre>
+<p>if可以进行嵌套</p>
+<h3 id="vlookup"><a href="#vlookup" class="headerlink" title="vlookup"></a>vlookup</h3><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-16.png" alt="alt text"></p>
+<p>几个注意的点：</p>
+<ol>
+<li><p>匹配的一般是第一个</p>
+</li>
+<li><p>0是精确匹配，1是模糊匹配</p>
+</li>
+<li><p>如果是查找a开头的</p>
+<pre><code>  &amp;&quot;*&quot; /* 通配符 */
+</code></pre>
+</li>
+<li><p>如果是查找a开头，往后数固定位数</p>
+<pre><code>  &amp;&quot;??&quot; /* 2 */
+</code></pre>
+</li>
+<li><p>vlookup 查找的是符合的第一个来返回</p>
+</li>
+<li><p>$ 来锁定函数里面的数值</p>
+</li>
+</ol>
+<h3 id="match"><a href="#match" class="headerlink" title="match"></a>match</h3><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-17.png" alt="alt text"></p>
+<pre><code>     match(查找项,查找区域,0)
+
+     index(数据区域,行,列)
+</code></pre>
+<p>步骤：使用match先匹配行再匹配列，再用index根据位置得到数值</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-18.png" alt="alt text"></p>
+<p>返回整列和整行，该位置就填0</p>
+<p>如果是一列里面有若干，需要累计返回的，用sumifs</p>
+<p><strong>如果有些地方需要，锁定的要记得锁定</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-19.png" alt="alt text"></p>
+<h2 id="报表"><a href="#报表" class="headerlink" title="报表"></a>报表</h2><h3 id="统计口径"><a href="#统计口径" class="headerlink" title="统计口径"></a>统计口径</h3><p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-22.png" alt="alt text"></p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p><strong>所有都要引用，才会联动</strong></p>
+<p>关于<strong>营销占比</strong>的总计计算会比较困难，参考下图</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-21.png" alt="alt text"></p>
+<p>关于<strong>周环比</strong>的计算会比较困难，参考下图</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-23.png" alt="alt text"></p>
+<p>关于<strong>到手率的周环比</strong>的计算会比较困难，参考下图</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-24.png" alt="alt text"></p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-25.png" alt="alt text"></p>
+<p>唯一秘诀就是化简公式！！</p>
+<p>设置特殊格式：可以让所有小于均值的都加粗加下划线</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-26.png" alt="alt text"></p>
+<h3 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h3><p>Excel报表的自动化</p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-27.png" alt="alt text"></p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-28.png" alt="alt text"></p>
+<p><img src="/2024/07/22/%E6%95%B0%E5%88%86-Excel%E5%AD%A6%E4%B9%A0/image-29.png" alt="alt text"></p>
+<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>没想到此次学习竟然进行了这么久，主要是Excel的学习也是一个会偏无聊的过程（特别是函数学习），很高兴！通过此次机会很好地学习了Excel的基础技能，学会了制作报表。</p>
+<p>最后，我想说，发明Excel的真的是天才！！</p>
+<p>学习永无止境：</p>
+<h3 id="哪里不会搜哪里"><a href="#哪里不会搜哪里" class="headerlink" title="哪里不会搜哪里"></a>哪里不会搜哪里</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/excel">Excel官方文档</a></li>
+</ul>
+<h3 id="不断积累新用法"><a href="#不断积累新用法" class="headerlink" title="不断积累新用法"></a>不断积累新用法</h3><ul>
+<li>学到新东西记下来</li>
+<li>看到好资源要保存</li>
+</ul>
+<h3 id="定期对用法总结"><a href="#定期对用法总结" class="headerlink" title="定期对用法总结"></a>定期对用法总结</h3>
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2024/07/25/%E6%95%B0%E5%88%86-Tableau/"
+      title="Tableau"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Tableau
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/07/20/%E6%95%B0%E5%88%86-%E7%AC%94%E8%AE%B0/"
+      title="笔记"
+     >
+
+    <p class="title-text">
+      
+        笔记
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+
+
+  <script src="https://cdn.staticfile.org/twikoo/1.6.26/twikoo.all.min.js"></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="tcomment"></div>
+  </div>
+  <script>
+      twikoo.init({
+          envId: 'https://sucarrie.netlify.app/.netlify/functions/twikoo',
+          el: '#tcomment',
+          region: 'ap-guangzhou',
+          path: 'location.pathname',
+          lang: 'zh-CN',
+      })
+  </script>
+  
+
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Carrie<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

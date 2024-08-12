@@ -511,7 +511,7 @@ CNN（Convolutional Neural Network）卷尺神经网络本节将提供一个工�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            43 词 
+            2.6k 词 
           </div>
         </div>
         
@@ -522,13 +522,34 @@ CNN（Convolutional Neural Network）卷尺神经网络本节将提供一个工�
         
           <div class="truncate-text">
             
-              用于后续手写python进行转换的
-TOF飞行时间测距TOF
+              用于后续手写python进行转换参考
+main
+计算子载波波长
+
+
+
+天线排列
+
+linspace(5.8153e9, 5.8347e9, 57);创建一个等间隔的频率数组。linspace函数用于生成一个在指定区间内均匀分布的数值序列，起始频率5.8153GHz，终止频率5.8347GHz，生成的间隔数值57。
+num2str 将数值转换为字符串
+
+计算偏差
+
+
+计算AoA估计
+
+aoa_mat = naive_aoa(csi_src, antenna_loc, zeros(3, 1)); zeros(3,1)适用于RCO（射频链路偏移）的零向量，在这个例子里，RCO被假设为0
+aoa_gt = [0; 0; 1]; 给定的地面真实AoA向量，假设实际AoA沿着z的单位向量
+error = mean(acos(aoa_gt&#39; * aoa_mat)); 里面先计算点积，得到余弦相似度，acos(cos(theta))就得到theta，两个向量之间的夹角，取平均，得到所有估计值的平均角度误差
+
+TOF概念TOF
 
 
 英文翻译中文
  
-AoA到达角速度
+代码注解输入:
+
+csidata csi...
             
           </div>
         
@@ -589,7 +610,7 @@ AoA到达角速度
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            5.6k 词 
+            5.7k 词 
           </div>
         </div>
         
@@ -744,7 +765,7 @@ CSI：（物理层信息）信号状态信息（通信链路的信道属性）�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            158 词 
+            9.9k 词 
           </div>
         </div>
         
@@ -812,7 +833,7 @@ CSI：（物理层信息）信号状态信息（通信链路的信道属性）�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            496 词 
+            519 词 
           </div>
         </div>
         

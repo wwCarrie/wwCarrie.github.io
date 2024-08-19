@@ -50,15 +50,15 @@
 <meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-4.jpg">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-5.jpg">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-6.jpg">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-3.png">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-4.png">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-5.png">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-6.png">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-7.png">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-8.png">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-9.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-10.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-11.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-12.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-13.png">
 <meta property="article:published_time" content="2024-08-07T16:36:04.000Z">
-<meta property="article:modified_time" content="2024-08-17T15:02:23.358Z">
+<meta property="article:modified_time" content="2024-08-19T01:51:43.967Z">
 <meta property="article:author" content="Carrie">
 <meta property="article:tag" content="WIFI感知">
 <meta name="twitter:card" content="summary">
@@ -322,7 +322,7 @@
 <p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-4.jpg" alt="alt text"></p>
 <p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-5.jpg" alt="alt text"></p>
 <h2 id><a href="#" class="headerlink" title></a><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-6.jpg" alt="alt text"></h2><h3 id="复现笔记"><a href="#复现笔记" class="headerlink" title="复现笔记"></a>复现笔记</h3><p><a target="_blank" rel="noopener" href="https://kns.cnki.net/reader/flowpdf?invoice=WhCyJc4ooaSz1G644vQ/W29PsnzjsPD24FbyQxdD42UG1SsS7wlcFFz3bJrNUhHHHB+RoDXMr5i1pNK9hJZ7hqVfMrd/Jf9KHCd5QfWWXkZD1A/tJvHHC6AHzglQRiQ3SfCqWA1z4zE7j/lV7vTj3utRAXH8i2EUQaLV0UW6Rxg=&platform=NZKPT&product=CMFD&filename=1022784760.nh&tablename=cmfd202301&type=DISSERTATION&scope=trial&cflag=pdf&dflag=pdf&pages=&language=CHS&trial=&nonce=7111ED0BF5D446A4BE72255443EF1C89">基于WiFi的人体行为感知技术研究_朱旭.caj</a></p>
-<h4 id="总流程图"><a href="#总流程图" class="headerlink" title="总流程图"></a>总流程图</h4><p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-3.png" alt="alt text"></p>
+<h4 id="总流程图"><a href="#总流程图" class="headerlink" title="总流程图"></a>总流程图</h4><p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-7.png" alt="alt text"></p>
 <p>数据信息：3接收、3发射，30个子载波，采样率200Hz</p>
 <h5 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h5><ol>
 <li>从CSI分离出与呼吸相关的动态分量</li>
@@ -346,7 +346,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install EMD-signal</span><br></pre></td></tr></table></figure>
 
 <p><code>END</code>是一种基于时域进行信号分解的手段，适用于分解非线性和非平稳的信号序列。与传统小波分解相比，<code>EMD</code>没有基函数并且只依赖于原始信号本身。<code>EMD</code>的过程基于信号的最大最小值、局部平均值和时间尺度特征自动进行，将信号分解为从高频倒低频的一系列本征模函数（<code>IMF</code>），每个模函数都包含有关原始信号频率如何随时间变化的信息。<br>由于<code>EMD</code>分解出的<code>IMF</code>依次从高频到低频排列，所以本系统选择去除最开始的两个<code>IMF</code>，将剩下的IMF相加来重构呼吸信号。重构的呼吸信号周期性更强，信号波形更加平滑，一定程度上也减少了高频噪声的影响。</p>
-<p>（稍后补伪代码来代替下图<br><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-4.png" alt="alt text"></p>
+<p>（稍后补伪代码来代替下图<br><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-8.png" alt="alt text"></p>
 <p>（2）DWT（小波变换）<br>都可以用于重建呼吸信号曲线，相较于DWT，EMD能够在没有预选基函数情况下，分解原始分号，只依赖信号本身。<br>另外采用基于<strong>FFT</strong>的子载波选择策略，筛选周期波动明显的子载波，提高呼吸数据的可靠性。</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fengzhuqiaoqiu/article/details/127779846">EMD</a>分解，去除高频噪声</p>
 <ol start="4">
@@ -354,12 +354,12 @@
 </ol>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengyuyin/article/details/127499584">ref</a></p>
 <p>不同的子载波对于呼吸的感知粒度不同</p>
-<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-5.png" alt="alt text"></p>
+<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-9.png" alt="alt text"></p>
 <p>人正常情况下的呼吸频率范围为[0.1667Hz，0.6167Hz]，系统在这里选取的频率范围则是<br>[0.15Hz,0.5Hz]</p>
 <p>（1）确定C(fft)中子载波序列的第n个数，与频率f，采样频率f(s)和序列总长N之间的关系，公式如下：</p>
-<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-6.png" alt="alt text"></p>
+<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-10.png" alt="alt text"></p>
 <p>（2）基于FFT的筛选指标的计算公式，如下：</p>
-<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-7.png" alt="alt text"></p>
+<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-11.png" alt="alt text"></p>
 <h5 id="呼吸速率检测"><a href="#呼吸速率检测" class="headerlink" title="呼吸速率检测"></a>呼吸速率检测</h5><ol start="5">
 <li>CFAR寻峰操作，精确计算呼吸速率</li>
 </ol>
@@ -369,10 +369,10 @@
 <p>（1）比较法：对平滑后的曲线进行基于最大值的比较，只适合找强单峰，易受噪声影响。</p>
 <p>（2）导数法：对平滑后的曲线，进行一、二、三阶求导，根据数据的均值设置门限值，再峰值筛选，缺点是对弱峰和强峰分辨效果不理想。</p>
 <p>（3）CFAR寻峰算法：自适应算法，用于在噪声和杂波下监测目标回波，超过阈值的被人为来自目标。</p>
-<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-8.png" alt="alt text"></p>
+<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-12.png" alt="alt text"></p>
 <p>（4）对称零面积法：选择对称零面积简单函数作为变换函数，按照对称零面积设置窗函数，计算峰的净面积和总面积的标准片擦汗，阈值判断是否为真。计算复杂。</p>
 <p>（5）线性拟合寻峰法：最小二乘法得出线性函数系数，根据拟合函数得出拟合曲线，计算相应峰的高度和宽度。计算复杂。</p>
-<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-9.png" alt="alt text"></p>
+<p><img src="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/image-13.png" alt="alt text"></p>
 <hr>
 <p><a target="_blank" rel="noopener" href="http://tns.thss.tsinghua.edu.cn/wifiradar/papers/QianKun-TECS2017.pdf">相位校准</a></p>
 <hr>

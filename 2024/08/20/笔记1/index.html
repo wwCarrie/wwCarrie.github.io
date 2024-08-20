@@ -36,20 +36,20 @@
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="论文名：基于WIFI的人体行为感知技术研究 作者：朱旭 种类：南京邮电大学专业学位硕士研究生学位论文 关键词：行为感知、WIFI、CSI、人员识别、手语识别  人员识别一、监测呼吸速率（note_1详细记录）  CSI进行共轭相乘 中值滤波 EMD经验模态分解 FFT子载波选择策略 恒虚警CFAR寻峰算法  二、人员识别  滑动窗口 Input:  行:  $$NTNRK$$ 式中：NT、NR分">
+  <meta name="description" content="论文名：基于WIFI的人体行为感知技术研究 作者：朱旭 种类：南京邮电大学专业学位硕士研究生学位论文 关键词：行为感知、WIFI、CSI、人员识别、手语识别  人员识别一、监测呼吸速率（note_1详细记录）  CSI进行共轭相乘 中值滤波 EMD经验模态分解 FFT子载波选择策略 恒虚警CFAR寻峰算法  二、人员识别  滑动窗口 Input:  行: NTNRK  式中：NT、NR分别是发送">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记1">
 <meta property="og:url" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/index.html">
 <meta property="og:site_name" content="Carrie">
-<meta property="og:description" content="论文名：基于WIFI的人体行为感知技术研究 作者：朱旭 种类：南京邮电大学专业学位硕士研究生学位论文 关键词：行为感知、WIFI、CSI、人员识别、手语识别  人员识别一、监测呼吸速率（note_1详细记录）  CSI进行共轭相乘 中值滤波 EMD经验模态分解 FFT子载波选择策略 恒虚警CFAR寻峰算法  二、人员识别  滑动窗口 Input:  行:  $$NTNRK$$ 式中：NT、NR分">
+<meta property="og:description" content="论文名：基于WIFI的人体行为感知技术研究 作者：朱旭 种类：南京邮电大学专业学位硕士研究生学位论文 关键词：行为感知、WIFI、CSI、人员识别、手语识别  人员识别一、监测呼吸速率（note_1详细记录）  CSI进行共轭相乘 中值滤波 EMD经验模态分解 FFT子载波选择策略 恒虚警CFAR寻峰算法  二、人员识别  滑动窗口 Input:  行: NTNRK  式中：NT、NR分别是发送">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/image-20240820122005765.png">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/.%5C%E7%AC%94%E8%AE%B01%5Cimage-20240820122651770.png">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/.%5C%E7%AC%94%E8%AE%B01%5Cimage-20240820123301216.png">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/.%5C%E7%AC%94%E8%AE%B01%5Cimage-20240820123555619.png">
-<meta property="og:image" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/.%5C%E7%AC%94%E8%AE%B01%5Cimage-20240820123614231.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/image-20240820122651770.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/image-20240820123301216.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/image-20240820123555619.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/08/20/%E7%AC%94%E8%AE%B01/image-20240820123614231.png">
 <meta property="article:published_time" content="2024-08-20T03:19:11.000Z">
-<meta property="article:modified_time" content="2024-08-20T05:48:36.071Z">
+<meta property="article:modified_time" content="2024-08-20T14:27:45.809Z">
 <meta property="article:author" content="Carrie">
 <meta property="article:tag" content="WIFI感知">
 <meta name="twitter:card" content="summary">
@@ -289,7 +289,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            842 词 
+            834 词 
           </div>
         </div>
         
@@ -317,14 +317,12 @@
 <li><p>滑动窗口</p>
 <p>Input:</p>
 <ul>
-<li>行:</li>
+<li>行: NT<em>NR</em>K</li>
 </ul>
-<p>$$<br>NT<em>NR</em>K<br>$$</p>
 <p>式中：NT、NR分别是发送和接收天线，K为子载波选择的数目。</p>
 <ul>
-<li>列:</li>
+<li>列: Nresample*t</li>
 </ul>
-<p>$$<br>Nresample*t<br>$$</p>
 <p>式中：N是重采样率，t是采样时长。</p>
 <p>设置窗口大小200，步长40，CSI产生86个样本。</p>
 </li>
@@ -346,7 +344,7 @@
 <p>Hampel滤波器使用Hampel标识符监测并去除信号中的离群值。基于中值和中值绝对偏差（MAD）对离群值位置和散步进行鲁棒性估计。</p>
 </li>
 </ol>
-<p><img src="/2024/08/20/%E7%AC%94%E8%AE%B01/.%5C%E7%AC%94%E8%AE%B01%5Cimage-20240820122651770.png" alt="image-20240820122651770"></p>
+<p><img src="/2024/08/20/%E7%AC%94%E8%AE%B01/image-20240820122651770.png" alt="image-20240820122651770"></p>
 <ol start="3">
 <li><p>Z-core标准化</p>
 <p>消除评价指标量纲和取模规模的影响，利于不同量级或单位的指标间的比较或加权计算。深度学习中，减少内部协变量偏移（ICS），加速训练，减少梯度依赖性，优化更快，加速收敛。</p>
@@ -357,7 +355,7 @@
 </ul>
 </li>
 </ol>
-<p><img src="/2024/08/20/%E7%AC%94%E8%AE%B01/.%5C%E7%AC%94%E8%AE%B01%5Cimage-20240820123301216.png" alt="image-20240820123301216"></p>
+<p><img src="/2024/08/20/%E7%AC%94%E8%AE%B01/image-20240820123301216.png" alt="image-20240820123301216"></p>
 <ol start="3">
 <li><p>动态时间归整（DTW）的选择策略筛选可用子载波</p>
 <p>选择具有高度相关性的子载波。</p>
@@ -365,8 +363,8 @@
 <p>选择DTW作为指标，测量两个时间序列的相似性，适用于视频、音频、图形等可以转换为线性序列的数据。</p>
 </li>
 </ol>
-<p><img src="/2024/08/20/%E7%AC%94%E8%AE%B01/.%5C%E7%AC%94%E8%AE%B01%5Cimage-20240820123555619.png" alt="image-20240820123555619"></p>
-<p><img src="/2024/08/20/%E7%AC%94%E8%AE%B01/.%5C%E7%AC%94%E8%AE%B01%5Cimage-20240820123614231.png" alt="image-20240820123614231"></p>
+<p><img src="/2024/08/20/%E7%AC%94%E8%AE%B01/image-20240820123555619.png" alt="image-20240820123555619"></p>
+<p><img src="/2024/08/20/%E7%AC%94%E8%AE%B01/image-20240820123614231.png" alt="image-20240820123614231"></p>
 <ol start="4">
 <li><p>CNN-BiLSTM双向长短期记忆的深度学习模型-进行分类</p>
 <p>同时，可以用KNN、SVM、CNN进行对比参照。</p>

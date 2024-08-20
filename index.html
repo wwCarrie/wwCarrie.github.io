@@ -186,7 +186,7 @@
       
         <a class="archive-link" href="/archives/2024/08 ">
           八月 2024 
-          <div class="archive-count">7 </div>
+          <div class="archive-count">8 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/07 ">
@@ -204,6 +204,12 @@
     <div class="widget">
       <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/08/20/%E7%AC%94%E8%AE%B01/" title="笔记1" >
+            <div class="recent-link-text">
+              笔记1
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/08/11/WIFI%E6%84%9F%E7%9F%A5-demo_3/" title="demo_3 深度学习" >
             <div class="recent-link-text">
@@ -226,12 +232,6 @@
           <a class="recent-link" href="/2024/08/10/WIFI%E6%84%9F%E7%9F%A5-demo_2/" title="demo_2 特征" >
             <div class="recent-link-text">
               demo_2 特征
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/08/08/WIFI%E6%84%9F%E7%9F%A5-note_1/" title="note_1 概念" >
-            <div class="recent-link-text">
-              note_1 概念
             </div>
           </a>
         
@@ -312,6 +312,123 @@
     <a class="right-panel  non-pic  "
       
       href="/2024/07/10/try/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+   
+
+
+<article id="post-笔记1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/20/%E7%AC%94%E8%AE%B01/">笔记1</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-20T03:19:11.000Z" itemprop="datePublished">2024-08-20</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            842 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              
+论文名：基于WIFI的人体行为感知技术研究
+作者：朱旭
+种类：南京邮电大学专业学位硕士研究生学位论文
+关键词：行为感知、WIFI、CSI、人员识别、手语识别
+
+人员识别一、监测呼吸速率（note_1详细记录）
+
+CSI进行共轭相乘
+中值滤波
+EMD经验模态分解
+FFT子载波选择策略
+恒虚警CFAR寻峰算法
+
+二、人员识别
+
+滑动窗口
+Input:
+
+行:
+
+$$NTNRK$$
+式中：NT、NR分别是发送和接收天线，K为子载波选择的数目。
+
+列:
+
+$$Nresample*t$$
+式中：N是重采样率，t是采样时长。
+设置窗口大小200，步长40，CSI产生86个样本。
+
+CNN
+
+
+可改进：
+
+基于EMD的信号分解算法，如何选择IMF重构呼吸信号[40]动态；
+均值类CFAR寻峰算法可以改进，CFAR算法中的自适应类；
+进一步改进分类模型。
+
+手语识别
+
+一维数据插值
+在一组已知数据点的范围内添加新数据点的技术。线性插值是一种使用线性多项式在已知数据点的离散集合范围内构造新数据点的曲线拟合方法，适用于一维数据。
+
+Hampel滤波器-进行降噪
+Hampel滤波器使用Hampel标...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/20/%E7%AC%94%E8%AE%B01/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
@@ -843,7 +960,7 @@ Monitor模式采取数据可能丢包，为使数据更准确。先进行线性�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            519 词 
+            540 词 
           </div>
         </div>
         
@@ -875,10 +992,9 @@ Intel 5300官方网站
 Nexus 5官方网站
 CSI基础处理CSI测量值解析出来为a+bj的复数形式
 相关工作及代码
-自我翻阅的helpWifi Sensing CSDN
-one
-two
-three d...
+自我翻阅的helpone road
+two Wifi Sensing CSDN
+th...
             
           </div>
         
@@ -974,86 +1090,6 @@ three d...
     <a class="right-panel  non-pic  "
       
       href="/2024/07/28/%E6%95%B0%E5%88%86-%E5%AE%9E%E6%88%981/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-   
-
-
-<article id="post-数分-SQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/28/%E6%95%B0%E5%88%86-SQL/">SQL</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-28T01:18:16.000Z" itemprop="datePublished">2024-07-28</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            4k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              查缺补漏
-刷题
-从第三行数据开始，只取一行12SELECT * FROM employees ORDER BY hire_date DESCLIMIT 1 OFFSET 2
-
-左连接1234select last_name,first_name,dept_nofrom employees sleft join dept_emp don s.emp_no = d.emp_no
-
-获取每个部门中当前员工薪水最高的相关信息，给出dept_no, emp_no以及其对应的salary，按照部门编号dept_no升序排列
-
-12345678910SELECT d.dept_no, d.emp_no, s.salaryFROM dept_emp dJOIN salaries s ON d.emp_no = s.emp_noWHERE s.salary = (    SELECT MAX(s1.salary)    FROM dept_emp d1    JOIN salaries s1 ON d1.emp_no = s1.emp_no    WHERE d1.dept_no = d.dept...
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/28/%E6%95%B0%E5%88%86-SQL/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

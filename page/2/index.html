@@ -172,7 +172,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">标签</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/README/" rel="tag">README</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%88%86%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" rel="tag">数分项目实战</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag">日常</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/README/" rel="tag">README</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%88%86%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" rel="tag">数分项目实战</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag">日常</a></li></ul>
     </div>
   </div>
 
@@ -186,7 +186,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           九月 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -209,6 +209,12 @@
     <div class="widget">
       <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/28/Django_%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" title="初识-新闻" >
+            <div class="recent-link-text">
+              初识-新闻
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/13/Python/" title="Python" >
             <div class="recent-link-text">
@@ -234,12 +240,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/08/10/WIFI%E6%84%9F%E7%9F%A5-note_2/" title="note_2 特征" >
-            <div class="recent-link-text">
-              note_2 特征
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -250,6 +250,101 @@
     </div>
     <div id="content-body">
       
+   
+
+
+<article id="post-WIFI感知-need" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/05/WIFI%E6%84%9F%E7%9F%A5-need/">Some need</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-05T06:14:22.000Z" itemprop="datePublished">2024-08-05</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            540 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              这篇主要是WIFI感知（包括CSI）相关知识的一个梳理
+入门
+软硬件平台：基础至少需要一个发送设备+一个接收设备，各设备2-3个外接天线。
+CSI测量工具：Linux Ubuntu系统安装，Atheros CSI tool、Intel 5300 NIC CSI tool，Nexus 5（不同测量工具对网卡版本均有要求）
+CSI处理
+
+进阶
+感知算法设计
+感知系统可视化
+
+案例实践
+Widar 3.0 http://tns.thss.tsinghua.edu.cn/widar3.0/
+
+Wi-Fi感知，顾名思义，就是利用Wi-Fi信号实现对周围环境以及环境中的人体、物体状态的感知。现有Wi-Fi感知方法主要通过分析从Wi-Fi信号采集到信道状态信息（Channel State Information，CSI）实现
+Atheros CSI Tool官方网站
+指引文件
+开源地址
+Intel 5300官方网站
+Nexus 5官方网站
+CSI基础处理CSI测量值解析出来为a+bj的复数形式
+相关工作及代码
+自我翻阅的helpone road
+two Wifi Sensing CSDN
+th...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/05/WIFI%E6%84%9F%E7%9F%A5-need/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
    
 
 

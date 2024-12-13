@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+<!-- Gaug.es Analytics -->
+<script>
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', 'true');
+    t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
+    t.src = 'https://d36ee2fcip1434.cloudfront.net/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+<!-- End Gaug.es Analytics -->
+
+
+  
+  <title>Django-数分平台 | Carrie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="写在前面现在时隔大概1-2月，又重新开始博客记录。没有记录的原因是前段时间都未曾开展技术学习。谈及原因，是这学期参加大多数评优评奖而全力改动PPT和练演讲。因此，没有收入就没有产出。 数据分析平台缘由我个人一直想做，作为Python大作业，也当作练手项目。当初看到这个参照项目时，刚好有个人做了这么个项目，也愿意教授。另一方面，是2020年已然有这样的技术，感到惊叹。再者则是，对于作者数据分析师但能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django-数分平台">
+<meta property="og:url" content="https://wwcarrie.github.io/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/index.html">
+<meta property="og:site_name" content="Carrie">
+<meta property="og:description" content="写在前面现在时隔大概1-2月，又重新开始博客记录。没有记录的原因是前段时间都未曾开展技术学习。谈及原因，是这学期参加大多数评优评奖而全力改动PPT和练演讲。因此，没有收入就没有产出。 数据分析平台缘由我个人一直想做，作为Python大作业，也当作练手项目。当初看到这个参照项目时，刚好有个人做了这么个项目，也愿意教授。另一方面，是2020年已然有这样的技术，感到惊叹。再者则是，对于作者数据分析师但能">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-3.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-4.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-5.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-6.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-7.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-8.png">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-9.png">
+<meta property="article:published_time" content="2024-12-11T12:32:42.000Z">
+<meta property="article:modified_time" content="2024-12-13T09:31:21.726Z">
+<meta property="article:author" content="Carrie">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wwcarrie.github.io/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-3.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Carrie" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/background.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="  ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Carrie </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M198-120q-25.846 0-44.23-18.384-18.384-18.385-18.384-44.23 0-25.846 18.384-44.23 18.384-18.385 44.23-18.385 25.846 0 44.23 18.385 18.384 18.384 18.384 44.23 0 25.845-18.384 44.23Q223.846-120 198-120Zm538.385 0q-18.846 0-32.923-13.769-14.076-13.769-15.922-33.23-8.692-100.616-51.077-188.654-42.385-88.039-109.885-155.539-67.5-67.501-155.539-109.885Q283-663.462 182.385-672.154q-19.461-1.846-33.23-16.23-13.769-14.385-13.769-33.846t14.076-32.922q14.077-13.461 32.923-12.23 120.076 8.692 226.038 58.768 105.961 50.077 185.73 129.846 79.769 79.769 129.846 185.731 50.077 105.961 58.769 226.038 1.231 18.846-12.538 32.922Q756.461-120 736.385-120Zm-252 0q-18.231 0-32.423-13.461t-18.653-33.538Q418.155-264.23 348.886-333.5q-69.27-69.27-166.501-84.423-20.077-4.462-33.538-18.961-13.461-14.5-13.461-33.346 0-19.076 13.884-33.23 13.884-14.153 33.115-10.922 136.769 15.384 234.384 112.999 97.615 97.615 112.999 234.384 3.231 19.23-10.538 33.115Q505.461-120 484.385-120Z"/></svg>
+      </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/myself1.jpg></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Carrie </div>
+      <div class="dot"></div>
+      <div class="subtitle">看世界 找自己 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://store.steampowered.com" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/wwCarrie" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/README/" rel="tag">README</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%88%86%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" rel="tag">数分项目实战</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag">日常</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/12 ">
+          十二月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/10 ">
+          十月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/09 ">
+          九月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          八月 2024 
+          <div class="archive-count">8 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          七月 2024 
+          <div class="archive-count">10 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/" title="Django-数分平台" >
+            <div class="recent-link-text">
+              Django-数分平台
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/13/Vue/" title="Vue 笔记" >
+            <div class="recent-link-text">
+              Vue 笔记
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/28/Django-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" title="初识-新闻" >
+            <div class="recent-link-text">
+              初识-新闻
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/13/Python/" title="Python" >
+            <div class="recent-link-text">
+              Python
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/20/%E7%AC%94%E8%AE%B01/" title="笔记1" >
+            <div class="recent-link-text">
+              笔记1
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+
+<article id="post-Django-数分平台" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Django-数分平台
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-12-11T12:32:42.000Z" itemprop="datePublished">2024-12-11</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            5.6k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>现在时隔大概1-2月，又重新开始博客记录。没有记录的原因是前段时间都未曾开展技术学习。<br>谈及原因，是这学期参加大多数评优评奖而全力改动PPT和练演讲。因此，没有收入就没有产出。</p>
+<h1 id="数据分析平台"><a href="#数据分析平台" class="headerlink" title="数据分析平台"></a>数据分析平台</h1><h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p>我个人一直想做，作为Python大作业，也当作练手项目。<br>当初看到这个参照项目时，刚好有个人做了这么个项目，也愿意教授。<br>另一方面，是2020年已然有这样的技术，感到惊叹。<br>再者则是，对于作者数据分析师但能不断求知和探索能力的赞赏。</p>
+<hr>
+<p>Django主要就是mtv+URL，对于这种项目mt完全用不上，交互问题很吃亏。后续可以考虑改为前后端分离。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>ref：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142490087">Python Django+SQL+Pandas+Pyecharts自建在线数据分析平台 | 知乎</a>，特此鸣谢！</p>
+<h3 id="需求-改变"><a href="#需求-改变" class="headerlink" title="需求&amp;改变"></a>需求&amp;改变</h3><ol>
+<li>脱离Excel的展示框架</li>
+<li>VBA+ADO运行效率瓶颈</li>
+</ol>
+<p>未来扩展方向</p>
+<p><img src="/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-3.png" alt="alt text"></p>
+<p>目前实现核心的功能需求。</p>
+<h3 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h3><ul>
+<li>后端Web框架：Python3.11 + Django</li>
+<li>数据库：MySQL</li>
+<li>数据处理：Pandas + Numpy + mkl + 其他</li>
+<li>Javascript库：JQuery</li>
+<li>前端CSS：Semantic UI</li>
+<li>前端交互表图：Pyecharts</li>
+<li>前端数据表格：jQuery Datatables</li>
+<li>部署（未）</li>
+</ul>
+<h2 id="Django框架"><a href="#Django框架" class="headerlink" title="Django框架"></a>Django框架</h2><p><img src="/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-4.png" alt="alt text"></p>
+<p>关于Django创建和启动略</p>
+<h2 id="初步搭建Django环境"><a href="#初步搭建Django环境" class="headerlink" title="初步搭建Django环境"></a>初步搭建Django环境</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    ...</span><br><span class="line">    &#x27;chpa_data&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>在<code>settings.py</code>将<code>chpa_data</code>加入</p>
+<p>层级结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">datasite</span><br><span class="line">├── chpa_data</span><br><span class="line">│   ├── admin.py</span><br><span class="line">|   └── ....</span><br><span class="line">├── datasite</span><br><span class="line">└── manage.py</span><br></pre></td></tr></table></figure>
+
+<p>由于要处理大量数据，考虑Django ORM只有在处理事务型数据时有一些易用性和可读性方面的优势，因此，在View层用SQL Alchemy或Pyodbc等中间库直接用SQL语句操作数据库，在View层直接返回API的JsonResponse。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from django.http import HttpResponse</span><br><span class="line">from sqlalchemy import create_engine</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ENGINE = create_engine(&#x27;mssql+pymssql://(local)/CHPA_1806&#x27;) #创建数据库连接引擎</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def index(request):</span><br><span class="line">    sql = &quot;Select count(*) from data&quot;</span><br><span class="line">    df = pd.read_sql_query(sql, ENGINE)</span><br><span class="line">    return HttpResponse(df.to_html()) #渲染，这里暂时渲染为最简单的HttpResponse</span><br></pre></td></tr></table></figure>
+
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># ----------------* urls.py *----------------------</span><br><span class="line"></span><br><span class="line">from django.contrib import admin</span><br><span class="line">from django.urls import include,path</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line"></span><br><span class="line">    path(&#x27;chpa/&#x27;, include(&#x27;chpa_data.urls&#x27;)),</span><br><span class="line">    path(&#x27;admin/&#x27;, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># ----------------* chpa_data目录创建一个urls.py</span><br><span class="line"># 写入app下views.py里面每个view对应url</span><br><span class="line"></span><br><span class="line">from django.urls import path</span><br><span class="line">from . import views</span><br><span class="line"></span><br><span class="line">app_name = &#x27;chpa&#x27;  # 这句是必须的，和之后所有的URL语句有关</span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(r&#x27;index&#x27;, views.index, name=&#x27;index&#x27;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h2><p><img src="/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-5.png" alt="alt text"></p>
+<p>根据此布局，搭建模板架构，并充分利用其模板继承特性</p>
+<h4 id="基础模板（父模板）"><a href="#基础模板（父模板）" class="headerlink" title="基础模板（父模板）"></a>基础模板（父模板）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 载入静态文件 --&gt;</span><br><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- 引入导航栏 --&gt;</span><br><span class="line">&#123;% include &#x27;chpa_data/header.html&#x27; %&#125;</span><br><span class="line">&lt;!-- 预留具体页面的位置 --&gt;</span><br><span class="line">&#123;% block body %&#125;&#123;% endblock body %&#125;</span><br><span class="line">&lt;!-- 引入注脚 --&gt;</span><br><span class="line">&#123;% include &#x27;chpa_data/footer.html&#x27; %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>header已引入需要的静态文件，继承base页面无需再引用静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># ------------------* datasite的settings.py加一条设置</span><br><span class="line"></span><br><span class="line">STATIC_URL = &#x27;/static/&#x27; # 静态文件夹相对于工程根目录的相对位置</span><br><span class="line">STATICFILES_DIRS = (</span><br><span class="line">    os.path.join(BASE_DIR, &quot;static&quot;), </span><br><span class="line">)  # 该语句建议保留，对低版本的Django也是指明静态文件的位置，后续版本有功能改变</span><br></pre></td></tr></table></figure>
+
+<p><code>&#123;% include  %&#125;</code> 通用相对静态，使用include直接引用。多对一和一对一<br><code>&#123;% block %&#125;&#123;% endblock %&#125;</code> 多个子模版多次继承重写同一部分。一对多<br><code>&#123;% extends "chpa_data/base.html" %&#125;</code> 继承</p>
+<h4 id="header"><a href="#header" class="headerlink" title="header"></a>header</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&#123;% url &quot;chpa:index&quot; %&#125; class=&quot;item&quot;&gt;首页&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p><code>url tag</code>，结构对应<code>chpa_data</code>的urls.py里的<code>&#123;% url "app_name:view_name" %&#125;</code></p>
+<h3 id="各页面关系"><a href="#各页面关系" class="headerlink" title="各页面关系"></a>各页面关系</h3><p>普通页面继承于父页面<br>display继承于analysis</p>
+<p>base：导航，所需css，注脚<br>analysis：主要是分页（分为filter和display）<br>index：内容</p>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><h3 id="指标分析"><a href="#指标分析" class="headerlink" title="指标分析"></a>指标分析</h3><p>这是比较重要的步骤，争取呈现更丰富有价值的结果。</p>
+<p>业务..重中之重</p>
+<p><img src="/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-6.png" alt="alt text"></p>
+<ul>
+<li>属性字段：前13描述药品的属性，包括分类，化合物通用名，剂型，生产公司等</li>
+<li>指标字段：AMOUNT量化指标</li>
+<li>筛选字段：UNIT区分销售额、销售量（盒数）或销售量（片数）；PERIOD区分滚动年或季度</li>
+<li>日期字段（横截面数据分析是筛选，同比增长等；趋势分析作为行列的维度）</li>
+</ul>
+<p><strong>日期</strong>遇到移动平均数据，有规则：<br>季度：全选或批量连续选<br>滚动年：移动平均的rolling期数间隔筛选DATE</p>
+<h3 id="实际处理"><a href="#实际处理" class="headerlink" title="实际处理"></a>实际处理</h3><p>用SQL尽可能精确地筛选数据，再由Pandas根据需求把数据做各种处理</p>
+<p><code>Pandas</code>的<code>pivoted_table</code>方法快速透视数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pivoted = pd.pivot_table(df,</span><br><span class="line">                       values=&#x27;AMOUNT&#x27;,  # 数据透视汇总值为AMOUNT字段，一般保持不变</span><br><span class="line">                       index=&#x27;DATE&#x27;,  # 数据透视行为DATE字段，一般保持不变</span><br><span class="line">                       columns=&#x27;MOLECULE&#x27;,  # 数据透视列为MOLECULE字段，该字段以后应跟随分析需要动态传参</span><br><span class="line">                       aggfunc=np.sum) # 数据透视汇总方式为求和，一般保持不变</span><br></pre></td></tr></table></figure>
+
+<h4 id="计算各种经济指标"><a href="#计算各种经济指标" class="headerlink" title="计算各种经济指标"></a>计算各种经济指标</h4><p>年复合增长率<br><img src="/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-7.png" alt="alt text"></p>
+<p>同比增长率<br><img src="/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-8.png" alt="alt text"></p>
+<p>环比增长率<br><img src="/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/image-9.png" alt="alt text"></p>
+<p>基于上述，进一步计算：</p>
+<ol>
+<li>最新滚动年销售额：最新数据行的销售额或其他关键数据。</li>
+<li>净增长：与 4 个周期前的变化（即同比净增长）。</li>
+<li>份额：最新时间点的份额。</li>
+<li>份额同比变化：份额与 4 个周期前的变化。</li>
+<li>同比增长率：每个时间点的同比增长率。</li>
+<li>EI：衡量该时间点与市场增速的对比，&gt; 100 时为跑赢大盘。</li>
+</ol>
+<p><code>.to_html</code>转为html，可以渲染到页面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Django渲染html代码时需要加入|safe，保证html不会被自动转义 --&gt;</span><br><span class="line">&#123;&#123; ptable|safe &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>views.py内的函数的作用</p>
+<p>index主<br>ptable竞争现状<br>get_kpi市场规模</p>
+<h2 id="前端表单交互"><a href="#前端表单交互" class="headerlink" title="前端表单交互"></a>前端表单交互</h2><p>search查询</p>
+<h4 id="filter里面的筛选器"><a href="#filter里面的筛选器" class="headerlink" title="filter里面的筛选器"></a>filter里面的筛选器</h4><p>下拉菜单，使用<code>Semantic UI</code>的搜索相应功能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class：class=&quot;ui fluid search dropdown&quot;</span><br><span class="line"></span><br><span class="line">&lt;!-- 因为用到Semantic UI的Search Dropdown控件，必须有下面语句初始化 --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    $(&#x27;.ui.fluid.search.dropdown&#x27;)</span><br><span class="line">        .dropdown(&#123; fullTextSearch: true &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="异步传参加载"><a href="#异步传参加载" class="headerlink" title="异步传参加载"></a>异步传参加载</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    ...</span><br><span class="line">    path(r&#x27;search/&lt;str:column&gt;/&lt;str:kw&gt;&#x27;, views.search, name=&#x27;search&#x27;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>AJAX（异步的JavaScript和XML技术）实现异步传参</p>
+<p>GET得到结果：</p>
+<ol>
+<li>解析前端参数到理想格式</li>
+<li>根据前端参数数据拼接SQL并用Pandas读取</li>
+<li>Pandas读取数据后，将前端选择的DIMENSION作为pivot_table方法的column参数</li>
+<li>返回Json格式的结果</li>
+</ol>
+<h3 id="自定义的模板过滤器tag-filter"><a href="#自定义的模板过滤器tag-filter" class="headerlink" title="自定义的模板过滤器tag filter"></a>自定义的模板过滤器tag filter</h3><p>创建templatetags，tags.py–保留一位小数的百分号</p>
+<p>前端模板加入：<code>&#123;% load tags %&#125;</code></p>
+<p>改写<code>&#123;&#123; market_gr|percentage:1 &#125;&#125;</code></p>
+<h2 id="表格设置"><a href="#表格设置" class="headerlink" title="表格设置"></a>表格设置</h2><p>数据源为DOM，前端分页，JS设置的方法</p>
+<p>filter里面初始化DataTables</p>
+<h3 id="一键复制"><a href="#一键复制" class="headerlink" title="一键复制"></a>一键复制</h3><p>编写<code>js</code></p>
+<p><code>range.selectNodeContents(el)</code>用于选择<code>el</code>元素的所有内容<br>并添加到<code>window.getSelection</code>的选中区域。</p>
+<p><code>document.execCommand(&quot;Copy&quot;)</code><br>这是用来执行复制操作的浏览器命令，将选中的内容复制到剪贴板。</p>
+<h2 id="动态图表"><a href="#动态图表" class="headerlink" title="动态图表"></a>动态图表</h2><p>过程步骤（下面静态大体相似）：</p>
+<ol>
+<li>前端html部分准备一个空白的DOM<br><code>&lt;div id=&quot;bar_total_trend&quot; style=&quot;width:1000px; height:600px;&quot;&gt;&lt;/div&gt;</code></li>
+<li>JS部分用echarts初始化命令渲染这个元素</li>
+<li>后端准备数据</li>
+<li>使用数据用Pyecharts生成图表对象</li>
+<li>利用Pyechart全局API dump_options()生成图表对象json格式的全局options</li>
+<li>前端JS部分用AJAX通信获取后端json <code>chart.dump_options()</code></li>
+<li>AJAX调用json成功后使用.setOption方法刷新图表元素呈现可视化结果</li>
+</ol>
+<h2 id="静态图表"><a href="#静态图表" class="headerlink" title="静态图表"></a>静态图表</h2><p>将上方大量代码绘制的Matplotlib图片保存为base64编码的字符串，再在头部加上Data URI scheme</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 保存到字符串</span><br><span class="line">    sio = BytesIO()</span><br><span class="line">    plt.savefig(sio, format=&#x27;png&#x27;, bbox_inches=&#x27;tight&#x27;, transparent=True, dpi=600)</span><br><span class="line">    data = base64.encodebytes(sio.getvalue()).decode()  # 解码为base64编码的png图片数据</span><br><span class="line">    src = &#x27;data:image/png;base64,&#x27; + str(data)  # 增加Data URI scheme</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    return src</span><br></pre></td></tr></table></figure>
+
+<h2 id="导出excel"><a href="#导出excel" class="headerlink" title="导出excel"></a>导出excel</h2><p>在实现导出数据至 Excel 的功能时，<br>你不能仅仅依赖于 AJAX 回调来实现导出功能，<br>因为导出数据通常涉及到生成一个文件并返回给用户，<br>这个过程不适合使用 AJAX 异步请求处理。<br>相反，导出功能应该与查询功能（查询数据并显示结果）并行工作，<br>意味着你需要为导出功能创建一个 新的方法 和 新的 URL 路径 来处理数据导出的请求。</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存最适合的场景是前端请求频率高+后台更新频率低</p>
+<p>本项目（医疗药品）后台更新频率非实时更新的月度收集数据，适合缓存。采用文件缓存。</p>
+<p>视图缓存和URL缓存都要先引用缓存装饰器：<br><code>from django.views.decorators.cache import cache_page</code></p>
+<p>声明<code>duration</code>：<br><code>@cache_page(60 * 60 * 24 * 30) #  缓存30天</code></p>
+<p>这二者比较简单，但需要你的返回内容相对每个参数是完全静态的。<br>整站缓存或模板层缓存操作复杂。前者要中间件，后者标识缓存DOM。</p>
+<p>创建清除缓存。</p>
+<h2 id="用户登录"><a href="#用户登录" class="headerlink" title="用户登录"></a>用户登录</h2><p>Django原生系统的用户数据和sesssion数据都需要数据库存储，使用使用django默认的sqlite3数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    &#x27;default&#x27;: &#123;</span><br><span class="line">        &#x27;ENGINE&#x27;: &#x27;django.db.backends.sqlite3&#x27;,</span><br><span class="line">        &#x27;NAME&#x27;: os.path.join(BASE_DIR, &#x27;db.sqlite3&#x27;),</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一次<br><code>python manage.py migrate</code><br>超级管理员<br><code>python manage.py createsuperuser</code></p>
+<p>绑定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@login_required</span><br><span class="line">@cache_page(60 * 60 * 24 * 30)</span><br></pre></td></tr></table></figure>
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/10/13/Vue/"
+      title="Vue 笔记"
+     >
+
+    <p class="title-text">
+      
+        Vue 笔记
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+
+
+  <script src="https://cdn.staticfile.org/twikoo/1.6.26/twikoo.all.min.js"></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="tcomment"></div>
+  </div>
+  <script>
+      twikoo.init({
+          envId: 'https://sucarrie.netlify.app/.netlify/functions/twikoo',
+          el: '#tcomment',
+          region: 'ap-guangzhou',
+          path: 'location.pathname',
+          lang: 'zh-CN',
+      })
+  </script>
+  
+
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Carrie<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

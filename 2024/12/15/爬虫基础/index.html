@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+<!-- Gaug.es Analytics -->
+<script>
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', 'true');
+    t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
+    t.src = 'https://d36ee2fcip1434.cloudfront.net/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+<!-- End Gaug.es Analytics -->
+
+
+  
+  <title>爬虫基础 | Carrie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="写在前面今天想着先把爬虫重新捡起来，再深入下。结果一打开，就看到12.14有4名因为非法爬取判处有期徒刑的新闻。。只能说，接下来我要小心谨慎点了。 爬虫框架 调度器：相当于cpu，调度下面几个之间协调工作 URL管理器：带爬取URL和已爬取URL，通过内存、数据库、缓存数据库实现 网页下载器：传入URL下载网页，转为字符串。urllib 网页解析器：字符串进行解析，提取我们需要的。有：re、htm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫基础">
+<meta property="og:url" content="https://wwcarrie.github.io/2024/12/15/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Carrie">
+<meta property="og:description" content="写在前面今天想着先把爬虫重新捡起来，再深入下。结果一打开，就看到12.14有4名因为非法爬取判处有期徒刑的新闻。。只能说，接下来我要小心谨慎点了。 爬虫框架 调度器：相当于cpu，调度下面几个之间协调工作 URL管理器：带爬取URL和已爬取URL，通过内存、数据库、缓存数据库实现 网页下载器：传入URL下载网页，转为字符串。urllib 网页解析器：字符串进行解析，提取我们需要的。有：re、htm">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wwcarrie.github.io/2024/12/15/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/image-3.png">
+<meta property="article:published_time" content="2024-12-15T02:34:26.000Z">
+<meta property="article:modified_time" content="2024-12-15T09:43:32.052Z">
+<meta property="article:author" content="Carrie">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wwcarrie.github.io/2024/12/15/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/image-3.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Carrie" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/background.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="  ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Carrie </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M198-120q-25.846 0-44.23-18.384-18.384-18.385-18.384-44.23 0-25.846 18.384-44.23 18.384-18.385 44.23-18.385 25.846 0 44.23 18.385 18.384 18.384 18.384 44.23 0 25.845-18.384 44.23Q223.846-120 198-120Zm538.385 0q-18.846 0-32.923-13.769-14.076-13.769-15.922-33.23-8.692-100.616-51.077-188.654-42.385-88.039-109.885-155.539-67.5-67.501-155.539-109.885Q283-663.462 182.385-672.154q-19.461-1.846-33.23-16.23-13.769-14.385-13.769-33.846t14.076-32.922q14.077-13.461 32.923-12.23 120.076 8.692 226.038 58.768 105.961 50.077 185.73 129.846 79.769 79.769 129.846 185.731 50.077 105.961 58.769 226.038 1.231 18.846-12.538 32.922Q756.461-120 736.385-120Zm-252 0q-18.231 0-32.423-13.461t-18.653-33.538Q418.155-264.23 348.886-333.5q-69.27-69.27-166.501-84.423-20.077-4.462-33.538-18.961-13.461-14.5-13.461-33.346 0-19.076 13.884-33.23 13.884-14.153 33.115-10.922 136.769 15.384 234.384 112.999 97.615 97.615 112.999 234.384 3.231 19.23-10.538 33.115Q505.461-120 484.385-120Z"/></svg>
+      </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/myself1.jpg></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Carrie </div>
+      <div class="dot"></div>
+      <div class="subtitle">看世界 找自己 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://store.steampowered.com" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/wwCarrie" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/README/" rel="tag">README</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/WIFI%E6%84%9F%E7%9F%A5/" rel="tag">WIFI感知</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%88%86%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" rel="tag">数分项目实战</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag">日常</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%AF%8F%E6%9C%88%E6%80%BB%E7%BB%93/" rel="tag">每月总结</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/12 ">
+          十二月 2024 
+          <div class="archive-count">4 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/10 ">
+          十月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/09 ">
+          九月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          八月 2024 
+          <div class="archive-count">8 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          七月 2024 
+          <div class="archive-count">10 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/12/15/%E3%80%8A%E5%A4%A9%E6%89%8D%E5%9F%BA%E6%9C%AC%E6%B3%95%E3%80%8B/" title="《天才基本法》" >
+            <div class="recent-link-text">
+              《天才基本法》
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/12/15/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" title="爬虫基础" >
+            <div class="recent-link-text">
+              爬虫基础
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/12/14/2024-12-14/" title="11月总结" >
+            <div class="recent-link-text">
+              11月总结
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/12/11/Django-%E6%95%B0%E5%88%86%E5%B9%B3%E5%8F%B0/" title="Django-数分平台" >
+            <div class="recent-link-text">
+              Django-数分平台
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/13/Vue/" title="Vue 笔记" >
+            <div class="recent-link-text">
+              Vue 笔记
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+
+<article id="post-爬虫基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        爬虫基础
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-12-15T02:34:26.000Z" itemprop="datePublished">2024-12-15</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            6.2k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>今天想着先把爬虫重新捡起来，再深入下。结果一打开，就看到12.14有4名因为非法爬取判处有期徒刑的新闻。。<br>只能说，接下来我要小心谨慎点了。</p>
+<h2 id="爬虫框架"><a href="#爬虫框架" class="headerlink" title="爬虫框架"></a>爬虫框架</h2><ul>
+<li>调度器：相当于cpu，调度下面几个之间协调工作</li>
+<li>URL管理器：带爬取URL和已爬取URL，通过内存、数据库、缓存数据库实现</li>
+<li>网页下载器：传入URL下载网页，转为字符串。urllib</li>
+<li>网页解析器：字符串进行解析，提取我们需要的。有：re、html.parser、beautifulsoup（可以多种）、lxml（解析xml和HTML）。html.parser、beautifulsoup、lxml都以DOM树方式进行解析。</li>
+</ul>
+<p><img src="/2024/12/15/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/image-3.png" alt="alt text"></p>
+<p>可以测试能否爬取：</p>
+<ol>
+<li>看robots.txt</li>
+<li>网站测试</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.dute.org/robots-tester">检验robots</a></p>
+<h2 id="豆瓣爬取"><a href="#豆瓣爬取" class="headerlink" title="豆瓣爬取"></a>豆瓣爬取</h2><p>大部分的人启蒙应该都从豆瓣开始</p>
+<p>在爬取之前，需要先补一下正则表达式的大坑（详见下一章），因为此次主要用正则表达式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"># -*- codeing = utf-8 -*-</span><br><span class="line">from bs4 import BeautifulSoup  # 网页解析，获取数据</span><br><span class="line">import re  # 正则表达式，进行文字匹配`</span><br><span class="line">import urllib.request, urllib.error  # 制定URL，获取网页数据</span><br><span class="line">import xlwt  # 进行excel操作</span><br><span class="line"></span><br><span class="line">findLink = re.compile(r&#x27;&lt;a href=&quot;(.*?)&quot;&gt;&#x27;)  # 创建正则表达式对象，标售规则   影片详情链接的规则</span><br><span class="line">findImgSrc = re.compile(r&#x27;&lt;img.*src=&quot;(.*?)&quot;&#x27;, re.S)</span><br><span class="line">findTitle = re.compile(r&#x27;&lt;span class=&quot;title&quot;&gt;(.*)&lt;/span&gt;&#x27;)</span><br><span class="line">findRating = re.compile(r&#x27;&lt;span class=&quot;rating_num&quot; property=&quot;v:average&quot;&gt;(.*)&lt;/span&gt;&#x27;)</span><br><span class="line">findJudge = re.compile(r&#x27;&lt;span&gt;(\d*)人评价&lt;/span&gt;&#x27;)</span><br><span class="line">findInq = re.compile(r&#x27;&lt;span class=&quot;inq&quot;&gt;(.*)&lt;/span&gt;&#x27;)</span><br><span class="line">findBd = re.compile(r&#x27;&lt;p class=&quot;&quot;&gt;(.*?)&lt;/p&gt;&#x27;, re.S)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    baseurl = &quot;https://movie.douban.com/top250?start=&quot;  #要爬取的网页链接</span><br><span class="line">    # 1.爬取网页</span><br><span class="line">    datalist = getData(baseurl)</span><br><span class="line">    savepath = &quot;豆瓣电影Top250.xls&quot;    #当前目录新建XLS，存储进去</span><br><span class="line">    # dbpath = &quot;movie.db&quot;              #当前目录新建数据库，存储进去</span><br><span class="line">    # 3.保存数据</span><br><span class="line">    saveData(datalist,savepath)      #2种存储方式可以只选择一种</span><br><span class="line">    # saveData2DB(datalist,dbpath)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 爬取网页</span><br><span class="line">def getData(baseurl):</span><br><span class="line">    datalist = []  #用来存储爬取的网页信息</span><br><span class="line">    for i in range(0, 10):  # 调用获取页面信息的函数，10次</span><br><span class="line">        url = baseurl + str(i * 25)</span><br><span class="line">        html = askURL(url)  # 保存获取到的网页源码</span><br><span class="line">        # 2.逐一解析数据</span><br><span class="line">        soup = BeautifulSoup(html, &quot;html.parser&quot;)</span><br><span class="line">        for item in soup.find_all(&#x27;div&#x27;, class_=&quot;item&quot;):  # 查找符合要求的字符串</span><br><span class="line">            data = []  # 保存一部电影所有信息</span><br><span class="line">            item = str(item)</span><br><span class="line">            link = re.findall(findLink, item)[0]  # 通过正则表达式查找</span><br><span class="line">            data.append(link)</span><br><span class="line">            imgSrc = re.findall(findImgSrc, item)[0]</span><br><span class="line">            data.append(imgSrc)</span><br><span class="line">            titles = re.findall(findTitle, item)</span><br><span class="line">            if (len(titles) == 2):</span><br><span class="line">                ctitle = titles[0]</span><br><span class="line">                data.append(ctitle)</span><br><span class="line">                otitle = titles[1].replace(&quot;/&quot;, &quot;&quot;)  #消除转义字符</span><br><span class="line">                data.append(otitle)</span><br><span class="line">            else:</span><br><span class="line">                data.append(titles[0])</span><br><span class="line">                data.append(&#x27; &#x27;)</span><br><span class="line">            rating = re.findall(findRating, item)[0]</span><br><span class="line">            data.append(rating)</span><br><span class="line">            judgeNum = re.findall(findJudge, item)[0]</span><br><span class="line">            data.append(judgeNum)</span><br><span class="line">            inq = re.findall(findInq, item)</span><br><span class="line">            if len(inq) != 0:</span><br><span class="line">                inq = inq[0].replace(&quot;。&quot;, &quot;&quot;)</span><br><span class="line">                data.append(inq)</span><br><span class="line">            else:</span><br><span class="line">                data.append(&quot; &quot;)</span><br><span class="line">            bd = re.findall(findBd, item)[0]</span><br><span class="line">            bd = re.sub(&#x27;&lt;br(\s+)?/&gt;(\s+)?&#x27;, &quot;&quot;, bd)</span><br><span class="line">            bd = re.sub(&#x27;/&#x27;, &quot;&quot;, bd)</span><br><span class="line">            data.append(bd.strip())</span><br><span class="line">            datalist.append(data)</span><br><span class="line"></span><br><span class="line">    return datalist</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 得到指定一个URL的网页内容</span><br><span class="line">def askURL(url):</span><br><span class="line">    head = &#123;  # 模拟浏览器头部信息，向豆瓣服务器发送消息</span><br><span class="line">        &quot;User-Agent&quot;: &quot;Mozilla / 5.0(Windows NT 10.0; Win64; x64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 80.0.3987.122  Safari / 537.36&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    # 用户代理，表示告诉豆瓣服务器，我们是什么类型的机器、浏览器（本质上是告诉浏览器，我们可以接收什么水平的文件内容）</span><br><span class="line"></span><br><span class="line">    request = urllib.request.Request(url, headers=head)</span><br><span class="line">    html = &quot;&quot;</span><br><span class="line">    try:</span><br><span class="line">        response = urllib.request.urlopen(request)</span><br><span class="line">        html = response.read().decode(&quot;utf-8&quot;)</span><br><span class="line">    except urllib.error.URLError as e:</span><br><span class="line">        if hasattr(e, &quot;code&quot;):</span><br><span class="line">            print(e.code)</span><br><span class="line">        if hasattr(e, &quot;reason&quot;):</span><br><span class="line">            print(e.reason)</span><br><span class="line">    return html</span><br><span class="line"></span><br><span class="line"># 保存数据到表格</span><br><span class="line">def saveData(datalist,savepath):</span><br><span class="line">    print(&quot;save.......&quot;)</span><br><span class="line">    book = xlwt.Workbook(encoding=&quot;utf-8&quot;,style_compression=0) #创建workbook对象</span><br><span class="line">    sheet = book.add_sheet(&#x27;豆瓣电影Top250&#x27;, cell_overwrite_ok=True) #创建工作表</span><br><span class="line">    col = (&quot;电影详情链接&quot;,&quot;图片链接&quot;,&quot;影片中文名&quot;,&quot;影片外国名&quot;,&quot;评分&quot;,&quot;评价数&quot;,&quot;概况&quot;,&quot;相关信息&quot;)</span><br><span class="line">    for i in range(0,8):</span><br><span class="line">        sheet.write(0,i,col[i])  #列名</span><br><span class="line">    for i in range(0,250):</span><br><span class="line">        # print(&quot;第%d条&quot; %(i+1))       #输出语句，用来测试</span><br><span class="line">        data = datalist[i]</span><br><span class="line">        for j in range(0,8):</span><br><span class="line">            sheet.write(i+1,j,data[j])  #数据</span><br><span class="line">    book.save(savepath) #保存</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:  # 当程序执行时</span><br><span class="line">    # 调用函数</span><br><span class="line">     main()</span><br><span class="line">    # init_db(&quot;movietest.db&quot;)</span><br><span class="line">     print(&quot;爬取完毕！&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="爬取自己博客"><a href="#爬取自己博客" class="headerlink" title="爬取自己博客"></a>爬取自己博客</h2><p>弄完后，我想试下爬取自己的博客hh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"># -*- codeing = utf-8 -*-</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">import pandas as pd</span><br><span class="line">import urllib.request, urllib.error</span><br><span class="line">import xlwt</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    baseurl = &quot;https://wwcarrie.github.io/&quot;</span><br><span class="line">    # 1. 爬取网页</span><br><span class="line">    datalist = getData(baseurl)</span><br><span class="line"></span><br><span class="line">    save_to_excel(datalist)</span><br><span class="line"></span><br><span class="line">def getData(baseurl):</span><br><span class="line">    datalist = []</span><br><span class="line">    for i in range(1,4): # 由于第一页是没有1的</span><br><span class="line">        if i == 1:</span><br><span class="line">            url = baseurl</span><br><span class="line">        else:</span><br><span class="line">            url = baseurl + &#x27;page/&#x27; +str(i)</span><br><span class="line">        html = askURL(url)</span><br><span class="line">        soup = BeautifulSoup(html, &#x27;html.parser&#x27;)</span><br><span class="line">        articles = soup.find_all(&#x27;article&#x27;, class_=&#x27;article&#x27;)</span><br><span class="line">        print(articles)</span><br><span class="line">        for article in articles:</span><br><span class="line">            # id</span><br><span class="line">            article_id = article.get(&#x27;id&#x27;)</span><br><span class="line"></span><br><span class="line">            # 标题</span><br><span class="line">            title_tag = article.find(&#x27;a&#x27;,class_=&quot;p-name article-title&quot;)</span><br><span class="line">            title = title_tag.get_text(strip=True) if title_tag else None</span><br><span class="line"></span><br><span class="line">            # 发布时间</span><br><span class="line">            time_tag = article.find(&#x27;time&#x27;,class_=&quot;dt-published&quot;)</span><br><span class="line">            time = time_tag[&#x27;datetime&#x27;] if time_tag else None</span><br><span class="line"></span><br><span class="line">            # 获取标签</span><br><span class="line">            tag_tag = article.find(&#x27;a&#x27;,class_=&quot;article-tag-list-link&quot;)</span><br><span class="line">            tag = tag_tag.get_text(strip=True) if tag_tag else None</span><br><span class="line"></span><br><span class="line">            # 获取简介</span><br><span class="line">            introduce_tag = article.find(&#x27;div&#x27;,class_=&quot;e-content article-entry&quot;)</span><br><span class="line">            introduce = introduce_tag.get_text(strip=True) if introduce_tag else None</span><br><span class="line"></span><br><span class="line">            # 获取链接</span><br><span class="line">            link_tag = article.find(&#x27;a&#x27;,class_=&quot;p-name article-title&quot;)</span><br><span class="line">            link = link_tag[&#x27;href&#x27;] if link_tag else None</span><br><span class="line"></span><br><span class="line">            # 将提取的数据存储到列表中</span><br><span class="line">            datalist.append(&#123;</span><br><span class="line">                &#x27;id&#x27;: article_id,</span><br><span class="line">                &#x27;标题&#x27;: title,</span><br><span class="line">                &#x27;时间&#x27;: time,</span><br><span class="line">                &#x27;标签&#x27;: tag,</span><br><span class="line">                &#x27;简介&#x27;: introduce,</span><br><span class="line">                &#x27;链接&#x27;: link</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">    return datalist</span><br><span class="line"></span><br><span class="line">def askURL(url):</span><br><span class="line">    head = &#123;  # 模拟浏览器头部信息，向豆瓣服务器发送消息</span><br><span class="line">        &quot;User-Agent&quot;: &quot;Mozilla / 5.0(Windows NT 10.0; Win64; x64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 80.0.3987.122  Safari / 537.36&quot;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    request = urllib.request.Request(url, headers=head)</span><br><span class="line">    html = &quot;&quot;</span><br><span class="line">    try:</span><br><span class="line">        response = urllib.request.urlopen(request)</span><br><span class="line">        html = response.read().decode(&quot;utf-8&quot;)</span><br><span class="line">    except urllib.error.URLError as e:</span><br><span class="line">        if hasattr(e, &quot;code&quot;):</span><br><span class="line">            print(e.code)</span><br><span class="line">        if hasattr(e, &quot;reason&quot;):</span><br><span class="line">            print(e.reason)</span><br><span class="line">    return html</span><br><span class="line"></span><br><span class="line">def save_to_excel(datalist):</span><br><span class="line">    # 使用pandas将数据保存为Excel文件</span><br><span class="line">    df = pd.DataFrame(datalist)</span><br><span class="line">    df.to_excel(&#x27;articles.xlsx&#x27;, index=False)</span><br><span class="line">    print(&quot;数据已保存为 articles.xlsx&quot;)</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>过程并不算难但需要注意以下几点：</p>
+<ol>
+<li>可以用re，也可以直接用pd</li>
+<li>必须是连接自己最近的标签名</li>
+<li>熟悉网站和考虑多种情况</li>
+</ol>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2024/12/15/%E3%80%8A%E5%A4%A9%E6%89%8D%E5%9F%BA%E6%9C%AC%E6%B3%95%E3%80%8B/"
+      title="《天才基本法》"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        《天才基本法》
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/12/14/2024-12-14/"
+      title="11月总结"
+     >
+
+    <p class="title-text">
+      
+        11月总结
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+
+
+  <script src="https://cdn.staticfile.org/twikoo/1.6.26/twikoo.all.min.js"></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="tcomment"></div>
+  </div>
+  <script>
+      twikoo.init({
+          envId: 'https://sucarrie.netlify.app/.netlify/functions/twikoo',
+          el: '#tcomment',
+          region: 'ap-guangzhou',
+          path: 'location.pathname',
+          lang: 'zh-CN',
+      })
+  </script>
+  
+
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Carrie<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

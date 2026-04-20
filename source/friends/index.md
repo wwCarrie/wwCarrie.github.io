@@ -15,7 +15,7 @@ layout: page
 <div class="friend-card">
   <a href="https://panda-l1.github.io/" target="_blank">
     <div class="friend-avatar">
-      <img src="/PandaLi.jpg"/>
+      <img src="https://github.com/Panda-L1.png" />
     </div>
     <div class="friend-info">
       <div class="friend-name">PandaLi</div>

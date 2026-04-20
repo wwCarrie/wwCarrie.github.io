@@ -2,6 +2,7 @@
 title: 关于我
 date: 2026-04-20 16:30:00
 layout: page
+comments: false
 ---
 
 <div class="about-container">

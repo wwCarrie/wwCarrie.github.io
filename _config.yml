@@ -59,10 +59,10 @@ include: null
 exclude: null
 ignore: null
 theme: vivia
-deploy:
-  type: git
-  repo: https://github.com/wwCarrie/wwCarrie.github.io.git
-  branch: main
+# deploy:
+#   type: git
+#   repo: https://github.com/wwCarrie/wwCarrie.github.io.git
+#   branch: main
 archive_generator:
   per_page: 0
 

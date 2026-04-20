@@ -1,6 +1,7 @@
 ---
 title: note_3 深度学习
 date: 2024-08-11 21:05:04
+categories: [科研笔记]
 tags: WIFI感知
 ---
 

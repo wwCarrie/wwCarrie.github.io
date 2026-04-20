@@ -1,6 +1,7 @@
 ---
 title: 收发硬件配置
 tags: WIFI感知
+categories: [科研笔记]
 date: 2024-07-15 19:46:14
 ---
 

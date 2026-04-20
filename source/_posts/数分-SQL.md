@@ -1,6 +1,7 @@
 ---
 title: SQL
 date: 2024-07-28 09:18:16
+categories: [学习笔记]
 tags: 数据分析
 ---
 

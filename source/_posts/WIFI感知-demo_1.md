@@ -4,6 +4,7 @@ date: 2024-08-06 15:12:33
 tags: WIFI感知
 password: 785425
 abstract: 速率demo
+categories: [科研笔记]
 message: 您好, 该文章仅供博主阅览。
 theme: flip
 wrong_pass_message: 抱歉，还在改进，不便查看。

@@ -1,7 +1,8 @@
 ---
 title: Python
 date: 2024-09-13 20:47:42
-tags:
+categories: [学习笔记]
+tags: Python
 ---
 
 ### Python_note

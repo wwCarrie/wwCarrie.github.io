@@ -1,6 +1,7 @@
 ---
 title: Django-数分平台
 date: 2024-12-11 20:32:42
+categories: [项目笔记]
 tags: Django
 ---
 

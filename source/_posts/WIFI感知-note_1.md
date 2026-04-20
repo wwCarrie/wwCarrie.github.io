@@ -1,6 +1,7 @@
 ---
 title: note_1 概念
 date: 2024-08-08 00:36:04
+categories: [科研笔记]
 tags: WIFI感知
 ---
 

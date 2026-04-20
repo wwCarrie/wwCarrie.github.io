@@ -1,6 +1,7 @@
 ---
 title: Vue 笔记
 date: 2024-10-13 17:35:01
+categories: [学习笔记]
 tags: Vue
 
 ---

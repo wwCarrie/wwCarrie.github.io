@@ -1,8 +1,8 @@
 ---
 title: 初识-新闻
 date: 2024-09-28 21:16:04
+categories: [学习笔记]
 tags: Django
-
 ---
 
 ### 启动

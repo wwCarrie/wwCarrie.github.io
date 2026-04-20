@@ -1,6 +1,7 @@
 ---
 title: Excel学习
 tags: 数据分析
+categories: [学习笔记]
 date: 2024-07-22 14:49:45
 ---
 

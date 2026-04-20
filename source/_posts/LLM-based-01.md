@@ -1,5 +1,6 @@
 ---
 title: LLM_based_01
+categories: [学习笔记]
 tags: LLM
 date: 2026-04-20 15:15:06
 ---

@@ -58,7 +58,7 @@ pagination_dir: page
 include: null
 exclude: null
 ignore: null
-theme: vivia
+theme: hexo-theme-vivia
 deploy:
   type: git
   repo: https://github.com/wwCarrie/wwCarrie.github.io.git

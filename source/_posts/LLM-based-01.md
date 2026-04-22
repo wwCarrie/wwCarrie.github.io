@@ -36,14 +36,7 @@ date: 2026-04-20 15:15:06
 
 #### 过程
 
-```mermaid
-graph TD
-    A[开始] --> B[分词（次元化文本]
-    B --> C[词元ID]
-    C --> D[词元嵌入]
-    D --> E[位置嵌入]
-    E --> F[输入嵌入（词元+位置）]
-```
+![image-3](./LLM-based-01/image-3.png)
 
 ![image-20260419152056783](./LLM-based-01/image-1.png)
 

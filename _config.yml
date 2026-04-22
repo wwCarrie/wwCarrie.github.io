@@ -5,6 +5,16 @@ keywords: Carrie,Blog
 author: Carrie
 language: zh-CN
 timezone: Asia/Shanghai
+# 修复公式问题
+math:
+  enable: true
+  katex: true
+markdown:
+  render:
+    html: true
+    breaks: true
+    linkify: true
+    typographer: true
 url: https://wwCarrie.github.io
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null

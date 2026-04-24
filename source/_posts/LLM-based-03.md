@@ -33,6 +33,12 @@ date: 2026-04-24 13:08:02
 import torch
 import torch.nn as nn
 
+import tiktoken
+from torch.utils.data import Dataset, DataLoader
+
+"""
+GPTModel
+"""
 class GPTModel(nn.Module):
     """
     一个可用的 GPT 模型骨架：
@@ -84,6 +90,9 @@ class GPTModel(nn.Module):
         logits=self.out_head(x)
         return logits
 
+"""
+TransformerBlock
+"""
 class TransformerBlock(nn.Module):
     def __init__(self,cfg):
         super().__init__()
@@ -115,17 +124,20 @@ class TransformerBlock(nn.Module):
 
         return x
 
-# 简化版LayerNorm
 """
-1. 对每个样本在特征维度上标准化
-2. 用两个可学习参数把标准化后结果：缩放和平移
-
-- eps:很小的常熟，用于后续计算时避免除零
-- scale:缩放
-- shift:平移
+LayerNorm
 """
-# 使用可学习参数，在需要时调整
 class LayerNorm(nn.Module):
+    # 简化版LayerNorm
+    """
+    1. 对每个样本在特征维度上标准化
+    2. 用两个可学习参数把标准化后结果：缩放和平移
+    
+    - eps:很小的常熟，用于后续计算时避免除零
+    - scale:缩放
+    - shift:平移
+    """
+    # 使用可学习参数，在需要时调整
     def __init__(self,emb_dim):
         super().__init__()
         self.eps=1e-5
@@ -139,14 +151,17 @@ class LayerNorm(nn.Module):
         return self.scale * norm_x + self.shift
     
 """
-具有GRLU激活函数的前馈神经网络
-
-- 传统的ReLU
-
-* - GELU:融合了高斯分布相关的平滑非线性（在负值区间保留非零梯度）
-  - SwiGLU:引入了基于sigmoid的门控机制
+GRLU
 """
 class GELU(nn.Module):
+    """
+    具有GRLU激活函数的前馈神经网络
+    
+    - 传统的ReLU
+    
+    * - GELU:融合了高斯分布相关的平滑非线性（在负值区间保留非零梯度）
+      - SwiGLU:引入了基于sigmoid的门控机制
+    """
     def __init__(self):
         super().__init__()
 
@@ -160,24 +175,27 @@ class GELU(nn.Module):
             torch.sqrt(torch.tensor(2.0/torch.pi))*
             (x+0.044715*torch.pow(x,3))
         ))
-    
+
+"""
+FeedForward
+"""
 # 小型神经网络 FeedForward，用于大模型的 Block 组成部分
-"""
-Sequential:
-按顺序把多个层串起来，前一层的输出自动作为下一层的输入
-
-不用的话，需要自己写：
-layer1 = nn.Linear(10, 20)
-layer2 = nn.ReLU()
-layer3 = nn.Linear(20, 5)
-
-def forward(self, x):
-    x = layer1(x)
-    x = layer2(x)
-    x = layer3(x)
-    return x
-"""
 class FeedForward(nn.Module):
+    """
+    Sequential:
+    按顺序把多个层串起来，前一层的输出自动作为下一层的输入
+    
+    不用的话，需要自己写：
+    layer1 = nn.Linear(10, 20)
+    layer2 = nn.ReLU()
+    layer3 = nn.Linear(20, 5)
+    
+    def forward(self, x):
+        x = layer1(x)
+        x = layer2(x)
+        x = layer3(x)
+        return x
+    """
     def __init__(self,cfg):
         super().__init__()
         self.layers=nn.Sequential(
@@ -191,6 +209,132 @@ class FeedForward(nn.Module):
 
     def forward(self,x):
         return self.layers(x)
+
+
+"""
+掩码多头注意力机制
+"""
+class GPTDatasetV1(Dataset):
+    def __init__(self, txt, tokenizer, max_length, stride):
+        self.input_ids = []
+        self.target_ids = []
+
+        # Tokenize the entire text
+        token_ids = tokenizer.encode(txt, allowed_special={"<|endoftext|>"})
+
+        # Use a sliding window to chunk the book into overlapping sequences of max_length
+        for i in range(0, len(token_ids) - max_length, stride):
+            input_chunk = token_ids[i:i + max_length]
+            target_chunk = token_ids[i + 1: i + max_length + 1]
+            self.input_ids.append(torch.tensor(input_chunk))
+            self.target_ids.append(torch.tensor(target_chunk))
+
+    def __len__(self):
+        return len(self.input_ids)
+
+    def __getitem__(self, idx):
+        return self.input_ids[idx], self.target_ids[idx]
+
+
+def create_dataloader_v1(txt, batch_size=4, max_length=256,
+                         stride=128, shuffle=True, drop_last=True, num_workers=0):
+    # Initialize the tokenizer
+    tokenizer = tiktoken.get_encoding("gpt2")
+
+    # Create dataset
+    dataset = GPTDatasetV1(txt, tokenizer, max_length, stride)
+
+    # Create dataloader
+    dataloader = DataLoader(
+        dataset, batch_size=batch_size, shuffle=shuffle, drop_last=drop_last, num_workers=num_workers)
+
+    return dataloader
+
+
+class MultiHeadAttention(nn.Module):
+    def __init__(self, d_in, d_out, context_length, dropout, num_heads, qkv_bias=False):
+        super().__init__()
+        assert d_out % num_heads == 0, "d_out must be divisible by num_heads"
+
+        self.d_out = d_out
+        self.num_heads = num_heads
+        self.head_dim = d_out // num_heads  # Reduce the projection dim to match desired output dim
+
+        self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)
+        self.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)
+        self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)
+        self.out_proj = nn.Linear(d_out, d_out)  # Linear layer to combine head outputs
+        self.dropout = nn.Dropout(dropout)
+        self.register_buffer("mask", torch.triu(torch.ones(context_length, context_length), diagonal=1))
+
+    def forward(self, x):
+        b, num_tokens, d_in = x.shape
+
+        keys = self.W_key(x)  # Shape: (b, num_tokens, d_out)
+        queries = self.W_query(x)
+        values = self.W_value(x)
+
+        # We implicitly split the matrix by adding a `num_heads` dimension
+        # Unroll last dim: (b, num_tokens, d_out) -> (b, num_tokens, num_heads, head_dim)
+        keys = keys.view(b, num_tokens, self.num_heads, self.head_dim)
+        values = values.view(b, num_tokens, self.num_heads, self.head_dim)
+        queries = queries.view(b, num_tokens, self.num_heads, self.head_dim)
+
+        # Transpose: (b, num_tokens, num_heads, head_dim) -> (b, num_heads, num_tokens, head_dim)
+        keys = keys.transpose(1, 2)
+        queries = queries.transpose(1, 2)
+        values = values.transpose(1, 2)
+
+        # Compute scaled dot-product attention (aka self-attention) with a causal mask
+        attn_scores = queries @ keys.transpose(2, 3)  # Dot product for each head
+
+        # Original mask truncated to the number of tokens and converted to boolean
+        mask_bool = self.mask.bool()[:num_tokens, :num_tokens]
+
+        # Use the mask to fill attention scores
+        attn_scores.masked_fill_(mask_bool, -torch.inf)
+
+        attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)
+        attn_weights = self.dropout(attn_weights)
+
+        # Shape: (b, num_tokens, num_heads, head_dim)
+        context_vec = (attn_weights @ values).transpose(1, 2)
+
+        # Combine heads, where self.d_out = self.num_heads * self.head_dim
+        context_vec = context_vec.contiguous().view(b, num_tokens, self.d_out)
+        context_vec = self.out_proj(context_vec)  # optional projection
+
+        return context_vec
+
+
+"""
+生成文本函数
+"""
+def generate_text_simple(model,idx,max_new_tokens,context_size):
+    """
+    使用“贪心解码（greedy decoding）”生成文本的简化函数。
+
+    参数：
+    - model: 已构建好的 GPT 模型，输入 token id 序列，输出每个位置的 logits
+    - idx: 初始上下文的 token id，形状 (batch_size, seq_len)
+    - max_new_tokens: 要生成的新 token 数量
+    - context_size: 模型允许的最大上下文长度（超出时只截取最后 context_size 个 token）
+    """
+    for _ in range(max_new_tokens):
+        # 截取模型可用的上下文
+        idx_cond=idx[:,-context_size:]
+        # 向前推理得到 logits，不计算梯度
+        with torch.no_grad():
+            logits=model(idx_cond)
+        # 只取最后一个位置
+        logits=logits[:,-1,:]
+        # 通过 softmax 转成概率分布
+        probas=torch.softmax(logits,dim=-1)
+        # 贪心解码
+        idx_next=torch.argmax(probas,dim=-1,keepdim=True)
+        # 新的拼接上去
+        idx=torch.cat((idx,idx_next),dim=1)
+    return idx
 ```
 
 ### 生成文本`demo`
@@ -594,101 +738,108 @@ class FeedForward(nn.Module):
 ### 补充：上一chapter，掩码多头注意力机制
 
 ```python
+# Copyright (c) Sebastian Raschka under Apache License 2.0 (see LICENSE.txt).
+# Source for "Build a Large Language Model From Scratch"
+#   - https://www.manning.com/books/build-a-large-language-model-from-scratch
+# Code: https://github.com/rasbt/LLMs-from-scratch
+
+import tiktoken
 import torch
 import torch.nn as nn
+from torch.utils.data import Dataset, DataLoader
+
+
+class GPTDatasetV1(Dataset):
+    def __init__(self, txt, tokenizer, max_length, stride):
+        self.input_ids = []
+        self.target_ids = []
+
+        # Tokenize the entire text
+        token_ids = tokenizer.encode(txt, allowed_special={"<|endoftext|>"})
+
+        # Use a sliding window to chunk the book into overlapping sequences of max_length
+        for i in range(0, len(token_ids) - max_length, stride):
+            input_chunk = token_ids[i:i + max_length]
+            target_chunk = token_ids[i + 1: i + max_length + 1]
+            self.input_ids.append(torch.tensor(input_chunk))
+            self.target_ids.append(torch.tensor(target_chunk))
+
+    def __len__(self):
+        return len(self.input_ids)
+
+    def __getitem__(self, idx):
+        return self.input_ids[idx], self.target_ids[idx]
+
+
+def create_dataloader_v1(txt, batch_size=4, max_length=256,
+                         stride=128, shuffle=True, drop_last=True, num_workers=0):
+    # Initialize the tokenizer
+    tokenizer = tiktoken.get_encoding("gpt2")
+
+    # Create dataset
+    dataset = GPTDatasetV1(txt, tokenizer, max_length, stride)
+
+    # Create dataloader
+    dataloader = DataLoader(
+        dataset, batch_size=batch_size, shuffle=shuffle, drop_last=drop_last, num_workers=num_workers)
+
+    return dataloader
+
 
 class MultiHeadAttention(nn.Module):
-    """
-    一次性用大矩阵生成所有头的 Q/K/V，再 reshape+transpose 拆成多个头并行计算
-    最后把所有头的结果拼回 (b, num_tokens, d_out)
-    """
-
     def __init__(self, d_in, d_out, context_length, dropout, num_heads, qkv_bias=False):
         super().__init__()
-        # 断言条件必须成立否则报错
-        assert(d_out % num_heads == 0)
+        assert d_out % num_heads == 0, "d_out must be divisible by num_heads"
 
-        self.d_out = d_out # 总输出维度
-        self.num_heads = num_heads # 头数
-        self.head_dim=d_out // num_heads
+        self.d_out = d_out
+        self.num_heads = num_heads
+        self.head_dim = d_out // num_heads  # Reduce the projection dim to match desired output dim
 
         self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)
         self.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)
         self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)
-        self.out_proj=nn.Linear(d_out,d_out)
-        self.dropout=nn.Dropout(dropout)
-        self.register_buffer(
-            "mask",
-            torch.triu(torch.ones(context_length,context_length),
-                        diagonal=1)
-        )
+        self.out_proj = nn.Linear(d_out, d_out)  # Linear layer to combine head outputs
+        self.dropout = nn.Dropout(dropout)
+        self.register_buffer("mask", torch.triu(torch.ones(context_length, context_length), diagonal=1))
 
-    def forward(self,x):
+    def forward(self, x):
         b, num_tokens, d_in = x.shape
-        keys = self.W_key(x) 
+
+        keys = self.W_key(x)  # Shape: (b, num_tokens, d_out)
         queries = self.W_query(x)
         values = self.W_value(x)
 
-        # keys.view 改变张量形状，不改变数据本身
-        """
-        拆分多头，把最后一维 d_out 拆分为(num_heads,head_dim)
-        形状变为(b,num_tokens,num_heads,head_dim)
-        """
-        keys=keys.view(b,num_tokens,self.num_heads,self.head_dim)
-        queries=queries.view(b,num_tokens,self.num_heads,self.head_dim)
-        values=values.view(b,num_tokens,self.num_heads,self.head_dim)
+        # We implicitly split the matrix by adding a `num_heads` dimension
+        # Unroll last dim: (b, num_tokens, d_out) -> (b, num_tokens, num_heads, head_dim)
+        keys = keys.view(b, num_tokens, self.num_heads, self.head_dim)
+        values = values.view(b, num_tokens, self.num_heads, self.head_dim)
+        queries = queries.view(b, num_tokens, self.num_heads, self.head_dim)
 
-        """
-        交换维度,num_heads提到前面，并行计算注意力
-        形状变为(b,num_heads,num_tokens,head_dim)
+        # Transpose: (b, num_tokens, num_heads, head_dim) -> (b, num_heads, num_tokens, head_dim)
+        keys = keys.transpose(1, 2)
+        queries = queries.transpose(1, 2)
+        values = values.transpose(1, 2)
 
-        head1:
-            token1 [1,2]
-            token2 [3,4]
-            token3 [5,6]
-        
-        head2:
-            token1 [7,8]
-            token2 [9,10]
-            token3 [11,12]
-        """
-        keys=keys.transpose(1,2)
-        queries=queries.transpose(1,2)
-        values=values.transpose(1,2)
+        # Compute scaled dot-product attention (aka self-attention) with a causal mask
+        attn_scores = queries @ keys.transpose(2, 3)  # Dot product for each head
 
-        attn_scores=queries @ keys.transpose(2,3)
-        mask_bool=self.mask.bool()[:num_tokens,:num_tokens]
+        # Original mask truncated to the number of tokens and converted to boolean
+        mask_bool = self.mask.bool()[:num_tokens, :num_tokens]
 
+        # Use the mask to fill attention scores
         attn_scores.masked_fill_(mask_bool, -torch.inf)
-        attn_weights=torch.softmax(attn_scores/keys.shape[-1]**0.5,dim=-1)
-        attn_weigths=self.dropout(attn_weights)
-        # 更换回维度
-        """
-        transpose → 调整顺序
-        view → 拼接头
 
-        但transpose只改变查看数据的方式,数据在内存里可能不连续
-        view要求内存必须连续
-        contiguous重新整理成连续内存
+        attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)
+        attn_weights = self.dropout(attn_weights)
 
-        token1:
-            head1 [1,2]
-            head2 [7,8]
-        
-        token2:
-            head1 [3,4]
-            head2 [9,10]
-        
-        token3:
-            head1 [5,6]
-            head2 [11,12] 
-        """
-        context_vec=(attn_weights @ values).transpose(1,2)
-        # h 和 hd 合并回 d_out
-        context_vec=context_vec.contiguous().view(b,num_tokens,self.d_out)
-        context_vec=self.out_proj(context_vec)
+        # Shape: (b, num_tokens, num_heads, head_dim)
+        context_vec = (attn_weights @ values).transpose(1, 2)
 
-        return context_vec[]()
+        # Combine heads, where self.d_out = self.num_heads * self.head_dim
+        context_vec = context_vec.contiguous().view(b, num_tokens, self.d_out)
+        context_vec = self.out_proj(context_vec)  # optional projection
+
+        return context_vec
 ```
 
 需要强调的是，这里模型还没有训练，所以预测未必合理；真正让“正确的下一个 token”概率变高的训练过程，会在下一章完成。

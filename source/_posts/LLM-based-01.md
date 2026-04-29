@@ -38,6 +38,16 @@ date: 2026-04-20 15:15:06
 
 ![image-3](./LLM-based-01/image-3.png)
 
+- 分词（encode）
+  - **标准化：**读取文本，处理标点符号
+  - **拆分 (Split)：**使用 正则表达式将文本切分为列表
+  - **去重与排序：**提取所有唯一的单词
+  - **构建映射表：**词 —— ID
+    - 引入特殊上下文词元
+      - 未知单词
+      - 文档分隔符
+  - 反过来（decode）
+
 ![image-20260419152056783](./LLM-based-01/image-1.png)
 
 ### 输入文本
@@ -52,7 +62,7 @@ with open("the-verdict.txt", "r", encoding="utf-8") as f:
 
 ### 词元化文本（分词）
 
-分词`（tokenize)`后嵌入`(embedding)`
+分词`(tokenize)`后嵌入`(embedding)`
 
 分词：用正规表达式来进行分割为词元（token）---> 构建一个词表
 ### 词元ID
@@ -130,7 +140,7 @@ tokenizer.decode(tokenizer.encode(text))
 
 #### BPE分词
 
-PPE（Byte Pair Encoding，字节对编码）：把不在词表的单词拆成更小的子词单元，处理词表外词
+BPE（Byte Pair Encoding，字节对编码）：把不在词表的单词拆成更小的子词单元，处理词表外词
 
 ```python
 import tiktoken
@@ -217,6 +227,10 @@ class GPTDatasetV1(Dataset):
 - batch_size：一次给大模型喂几个样本，一次训练输入4条序列
 - max_length：每个样本序列长度，每个输入样本有256个token
 - stride：滑动窗口步长
+  - =1：最大化数据利用率，但计算量大，数据高度重叠
+  - =Context Length：可能丢失跨边界的语义
+  - 最佳实践：通常 Stride 设置这就等于 Context Length 以避免过拟合，但在数据稀缺时可减小 Stride
+
 
 常见设置：stride < max_length，为了重叠，使得上下文具有连续性
 
@@ -263,8 +277,8 @@ inputs, targets = next(data_iter)
 
 ### 词元嵌入
 
-ID通过嵌入层转换成连续的向量表示
-要设置每个词的嵌入向量维度
+可训练的查找表：ID通过嵌入层转换成连续的向量表示，要设置每个词的嵌入向量维度
+表示**是什么词**，给定一个Token ID，层直接返回对应的行向量
 
 `embedding_layer = torch.nn.Embedding(vocab_size,output_dim)`
 
@@ -289,7 +303,7 @@ token_embeddings.shape
 ### 位置嵌入
 
 `gpt-2` 使用绝对位置嵌入，为序列每一个位置分配一个固定的“位置编号”，编号通过嵌入层映射为向量。
-告知谁在前，谁在后。
+告知**在哪个位置**，谁在前，谁在后。
 
 每个位置也有自己的向量
 
@@ -312,17 +326,4 @@ pos_embeddings = pos_embedding_layer(torch.arange(context_length))
 input_embeddings = token_embeddings + pos_embeddings 
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![image-4](./LLM-based-01/image-4.png)

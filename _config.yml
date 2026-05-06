@@ -75,6 +75,7 @@ deploy:
   branch: main
 archive_generator:
   per_page: 0
+  order_by: '-top -date'
 
 # hexo-admin authentification
 admin:

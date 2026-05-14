@@ -260,6 +260,8 @@ trainer = RLOOTrainer(
     processing_class=tokenizer,
 )
 
+trainer.train()
+
 # 评估
 evaluate_model("After Training")
 ```
@@ -410,7 +412,11 @@ print("After Training:")
 evaluate_model("After")
 ```
 
+#### 训练前
+![image-6](./LLM-based-07/image-6.png)
 
+#### 训练后
+![image-5](./LLM-based-07/image-5.png)
 
 
 

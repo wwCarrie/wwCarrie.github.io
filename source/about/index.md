@@ -6,14 +6,14 @@ comments: false
 ---
 
 <div class="about-container">
-
 <div class="about-content">
   <div class="about-section">
     <h2>📖 个人简介</h2>
-    <p>Hi, 我是 SuCarrie👋 TJU研0，是一名热爱学习的计算机小白。在这个博客里，我记录着学习过程中的点点滴滴，分享技术知识和生活感悟。日常喜欢看书、跑步和打乒乓球。</p>
+    <p>Hi, 我是 SuCarrie👋 TJU研0，是一名热爱学习的计算机专业研究生。在这个博客里，我记录着学习过程中的点点滴滴，分享技术知识和生活感悟。日常喜欢看书、跑步和打乒乓球。</p>
     <p>梦想是成为领域专家，养一只猫，在喜欢的城市定居。</p>
     <p>相信通过持续的学习和实践，可以在技术的道路上走得更远。</p>
   </div>
+
 
   <div class="about-section">
     <h2>🎯 兴趣领域</h2>

@@ -3,7 +3,9 @@ title: tool
 tags: 常见工具使用
 categories:
   - 学习笔记
+date: 2026-06-07 19:03:27
 ---
+
 
 # 常用指令记录
 

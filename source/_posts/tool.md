@@ -48,3 +48,7 @@ date: 2026-06-07 19:03:27
 
 开发分支：dev
 主分支：main
+
+[PR](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+
+[Git基操](https://www.runoob.com/git/git-basic-operations.html)

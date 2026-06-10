@@ -2,6 +2,7 @@
 title: 友情链接
 date: 2026-04-20 16:20:00
 layout: page
+comments: false
 ---
 
 欢迎交换友情链接！如果你也想添加友链，可以在留言板留言联系我~

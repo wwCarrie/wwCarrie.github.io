@@ -30,7 +30,7 @@
     "hexo-symbols-count-time": "^0.7.1",
     "hexo-theme-landscape": "^1.0.0",
     "hexo-theme-vivia": "^0.5.0",
-    "stylus": "^0.63.0",
+    "stylus": "^0.64.0",
     "valine": "^1.5.1"
   }
 }

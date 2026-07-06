@@ -1,5 +1,5 @@
 ---
-title: LLM_based_02
+title: 注意力机制
 tags: LLM
 categories:
   - 学习笔记
@@ -7,7 +7,7 @@ date: 2026-04-22 22:05:34
 ---
 
 
-# 大模型自学记录Day2
+# 注意力机制
 
 ## 注意力机制
 

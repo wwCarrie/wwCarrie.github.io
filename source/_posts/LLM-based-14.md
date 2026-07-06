@@ -1,5 +1,5 @@
 ---
-title: LLM_based_14
+title: 多模态大模型（M-LLM）架构
 tags: LLM
 categories:
   - 学习笔记

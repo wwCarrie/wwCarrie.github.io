@@ -1,5 +1,5 @@
 ---
-title: LLM_based_07
+title: RLHF 与安全对齐	
 tags: LLM
 categories:
   - 学习笔记
@@ -8,6 +8,8 @@ date: 2026-05-06 15:54:34
 
 
 # 强化学习
+
+PPO 算法、DPO 原理
 
 ## 知识点
 

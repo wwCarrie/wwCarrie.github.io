@@ -1,5 +1,5 @@
 ---
-title: LLM_based_03
+title: 从头实现 GPT 模型	
 tags: LLM
 categories:
   - 学习笔记

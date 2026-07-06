@@ -1,5 +1,5 @@
 ---
-title: LLM_based_13
+title: 代码生成
 tags: LLM
 categories:
   - 学习笔记
@@ -8,6 +8,8 @@ date: 2026-05-29 22:12:32
 
 
 # 代码生成大模型
+
+本章构建一个最小代码生成工作台：模型自动选择与回退、任务与测试集、prompt、代码抽取、语法检查、自动执行、self-refine 与 pass@k 估计。
 
 ## 原理
 

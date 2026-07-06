@@ -1,5 +1,5 @@
 ---
-title: LLM_based_20
+title: AI for Science
 tags: LLM
 categories:
   - 学习笔记

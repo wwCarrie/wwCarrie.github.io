@@ -1,5 +1,5 @@
 ---
-title: heima_dp_3
+title: 优惠券秒杀
 tags: 黑马点评
 categories:
   - 学习笔记
@@ -7,8 +7,9 @@ categories:
 date: 2026-07-03 23:34:25
 ---
 
-
 # 优惠券秒杀
+
+![秒杀框架](./heima-dp-3/image-3.png)
 
 自增id存在问题：
 
@@ -171,7 +172,7 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
 }
 ```
 
-## 库存超卖
+## 库存超卖（客观锁+悲观锁）
 
  Jmeter 进行压力测试，并发出现安全问题
 
@@ -212,7 +213,9 @@ boolean success = seckillVoucherService.update()
         .update();
 ```
 
-## 单机一人一单
+## 一人一单
+
+### 单机一人一单
 
 同一个优惠券，一个用户只能下一单
 
@@ -382,7 +385,7 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
 
 ​	`@EnableAspectJAutoProxy(exposeProxy = true)`
 
-## 集群一人一单
+### 集群一人一单
 
 高并发，部署到多个不同机器
 
@@ -400,3 +403,14 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
 
 因此，使用分布锁。
 
+## 分布式锁
+
+解决集群下一人一单问题，在整个系统的全局中设置一个锁监视器。
+
+
+
+
+
+## 总结
+
+<img src="./heima-dp-3/image-4.png" style="max-width:80%;">

@@ -1,5 +1,5 @@
 ---
-title: LLM_based_15
+title: 量化、蒸馏、部署
 tags: LLM
 categories:
   - 学习笔记

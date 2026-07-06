@@ -1,5 +1,5 @@
 ---
-title: LLM_based_18
+title: GUI Agent
 tags: LLM
 categories:
   - 学习笔记

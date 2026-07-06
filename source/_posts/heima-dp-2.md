@@ -1,5 +1,5 @@
 ---
-title: heima_dp_2
+title: 缓存运用
 tags: 黑马点评
 categories:
   - 学习笔记
@@ -7,10 +7,11 @@ categories:
 date: 2026-07-01 23:00:47
 ---
 
-
 # 商户查询缓存
 
 缓存适用于读多写少的场景，变动频率低
+
+![缓存框架](./heima-dp/image-5.png)
 
 #### 根据id查询缓存
 

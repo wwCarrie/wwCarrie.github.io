@@ -1,5 +1,5 @@
 ---
-title: LLM_based_11
+title: 文本生成任务：机器翻译、问答等
 tags: LLM
 categories:
   - 学习笔记
@@ -8,6 +8,8 @@ date: 2026-05-26 21:15:13
 
 
 # 文本生成任务（翻译+问答）
+
+本章以机器翻译与问答为主线，构建统一的生成接口，比较 greedy 与 sampling，并使用 BLEU/EM/F1 进行评估。
 
 ## 原理
 

@@ -1,5 +1,5 @@
 ---
-title: LLM_based_06
+title: 指令微调
 tags: LLM
 categories:
   - 学习笔记

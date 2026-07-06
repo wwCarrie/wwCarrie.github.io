@@ -1,5 +1,5 @@
 ---
-title: heima_dp
+title: Redis基础
 tags: 黑马点评
 categories:
   - 学习笔记
@@ -9,6 +9,8 @@ date: 2026-06-10 22:52:20
 
 
 # Redis基础概念
+
+![概念框架](./heima-dp/image-5.png)
 
 ## 认识
 
@@ -264,3 +266,7 @@ https://spring.io/projects/spring-data-redis
         }
     }
     ```
+
+## 项目概况
+
+![项目结构图](./heima-dp/image-6.png)

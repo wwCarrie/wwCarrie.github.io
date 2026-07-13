@@ -270,3 +270,20 @@ https://spring.io/projects/spring-data-redis
 ## 项目概况
 
 ![项目结构图](./heima-dp/image-6.png)
+
+## 项目包含的类
+
+例：
+
+- FollowController：接口入口，前台接单
+- FollowService：业务规范，菜单
+- FollowServiceImpl：业务实现，厨师
+- FollowMapper：数据库操作，仓库管理员
+- Follow：数据库实体，菜品数据
+
+
+
+
+
+
+

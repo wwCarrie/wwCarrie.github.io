@@ -1,5 +1,5 @@
 ---
-title: Some need
+title: CSI相关知识
 date: 2024-08-05 14:14:22
 categories: [科研笔记]
 tags: WIFI感知

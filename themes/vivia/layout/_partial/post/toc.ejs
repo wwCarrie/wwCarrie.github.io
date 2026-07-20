@@ -1,0 +1,16 @@
+<% if (is_post()){ %>
+  <% var tocContent = toc(page.content, {list_number: false, max_depth: 4}) %>
+  <% if (tocContent && tocContent.length > 0) { %>
+    <div class="post-toc-area" id="post-toc-area">
+      <div class="toc-container">
+        <div class="toc-card">
+          <div class="toc-title"><%= __('toc') %></div>
+          <%- tocContent %>
+        </div>
+      </div>
+    </div>
+    <button class="toc-toggle" id="toc-toggle" aria-label="<%= __('toc') %>">
+      <i class="fa-solid fa-list"></i>
+    </button>
+  <% } %>
+<% } %>

@@ -1,5 +1,5 @@
 ---
-title: note_2 特征
+title: 特征
 date: 2024-08-10 18:37:34
 categories: [科研笔记]
 tags: WIFI感知

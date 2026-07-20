@@ -1,5 +1,5 @@
 ---
-title: demo_1 速率
+title: 呼吸速率demo
 date: 2024-08-06 15:12:33
 tags: WIFI感知
 password: 785425

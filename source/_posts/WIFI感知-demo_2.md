@@ -1,5 +1,5 @@
 ---
-title: demo_2 特征
+title: 呼吸特征demo
 date: 2024-08-10 15:33:45
 tags: WIFI感知
 password: 785425

@@ -10,9 +10,9 @@ date: 2026-07-15 21:58:11
 
 ## 黑马点评文档参照
 
-![image-20260715215702872](C:\Users\24583\AppData\Roaming\Typora\typora-user-images\image-20260715215702872.png)
+![image-20260715215702872](./plan-后端/image-20260715215702872.png)
 
-![image-20260715215734460](C:\Users\24583\AppData\Roaming\Typora\typora-user-images\image-20260715215734460.png)
+![image-20260715215734460](./plan-后端/image-20260715215734460.png)
 
 ## 面试考察
 

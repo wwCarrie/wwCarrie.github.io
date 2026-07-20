@@ -1,1 +1,6 @@
-<%- partial('_partial/article', {post: page, index: false}) %>
+<div class="post-content-wrapper">
+  <div class="post-article-area">
+    <%- partial('_partial/article', {post: page, index: false}) %>
+  </div>
+  <%- partial('_partial/post/toc') %>
+</div>

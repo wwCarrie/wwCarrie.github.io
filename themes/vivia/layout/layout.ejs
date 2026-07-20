@@ -44,5 +44,9 @@
     <%- partial('_partial/back-to-top') %>
   </div>
   <script src="<%- url_for("/js/light-dark-switch.js") %>"></script>
+  <% if (is_post()) { %>
+    <script>var isPost = true;</script>
+    <script src="<%- url_for("/js/toc.js") %>"></script>
+  <% } %>
 </body>
 </html>
